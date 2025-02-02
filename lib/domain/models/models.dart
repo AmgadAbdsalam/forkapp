@@ -1,5 +1,4 @@
 // onboarding models
-import 'dart:developer';
 
 import '../../presntation/common/state_render/state_render_impl.dart';
 

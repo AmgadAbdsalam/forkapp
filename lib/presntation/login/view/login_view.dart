@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/app_prefs.dart';
 import 'package:responsive/app/di.dart';
@@ -7,7 +6,6 @@ import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/presntation/base/base_view_model.dart';
 import 'package:responsive/presntation/common/state_render/state_render_impl.dart';
 import 'package:responsive/presntation/login/view_model/login_view_model.dart';
-import 'package:responsive/providers/login_provider.dart';
 
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
@@ -50,7 +48,7 @@ class LoginViewState extends ConsumerState<LoginView> {
   @override
   void initState() {
     super.initState();
-    print('initstate called');
+    debugPrint('initstate called');
     bind();
   }
   @override
@@ -93,7 +91,7 @@ class LoginViewState extends ConsumerState<LoginView> {
                         decoration: InputDecoration(
                             hintText: AppStrings.username,
                             labelText: AppStrings.username,
-                            errorText: (result.isUsernameValid ?? true)
+                            errorText: (result.isUsernameValid )
                                 ? null
                                 : AppStrings.usernameError),
                       ),

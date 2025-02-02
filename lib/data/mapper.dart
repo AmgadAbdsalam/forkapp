@@ -6,7 +6,6 @@ import 'package:responsive/data/respones/responses.dart';
 import '../domain/models/models.dart';
 import 'package:responsive/app/extension.dart';
 
-import 'network/app_api.dart';
 
 extension CustomerResponseMapper on CustomerResponse? {
   Customer toDomain() {

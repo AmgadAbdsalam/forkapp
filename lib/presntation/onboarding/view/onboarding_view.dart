@@ -3,17 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/app_prefs.dart';
 import 'package:responsive/app/di.dart';
-import 'package:responsive/presntation/resources/assets_manager.dart';
 import 'package:responsive/presntation/resources/color_manager.dart';
 import 'package:responsive/presntation/resources/values_manager.dart';
 import 'package:responsive/providers/on_boarding_provider.dart';
-import '../../../domain/models/models.dart';
 import '../../resources/constant_manager.dart';
 import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../viewmodel/onboarding_viewmodel.dart';
 
 class OnBoardingView extends ConsumerStatefulWidget {
   const OnBoardingView({super.key});

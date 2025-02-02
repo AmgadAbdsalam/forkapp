@@ -25,4 +25,12 @@ class AppStrings{
   static const loading = "loading...";
   static const retryAgain = "Retry again";
   static const ok = "Ok";
+  static const setting = "Settings";
+  static const language = "Language";
+  static const darkTheme = "Dark Theme";
+  static const showNotifications = "Show notifications";
+  static const sounds = "Sounds";
+  static const vibrations = "vibrations";
+  static const save = "Save";
+
 }

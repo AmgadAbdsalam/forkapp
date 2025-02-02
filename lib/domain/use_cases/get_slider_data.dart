@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 
 import '../../presntation/resources/assets_manager.dart';
 import '../../presntation/resources/strings_manager.dart';

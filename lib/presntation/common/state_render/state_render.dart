@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:responsive/presntation/resources/assets_manager.dart';
@@ -8,7 +8,6 @@ import 'package:responsive/presntation/resources/assets_manager.dart';
 import '../../login/view_model/login_view_model.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
-import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../../resources/values_manager.dart';
@@ -67,8 +66,7 @@ class StateRenderer extends StatelessWidget {
         return _getItemsColumn([_getAnimatedImage(JsonAssets.empty), _getMessage(message)]);
       case StateRendererType.contentState:
         return Container();
-      default:
-        return Container();
+
     }
   }
 

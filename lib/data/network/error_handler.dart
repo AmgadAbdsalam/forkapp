@@ -1,5 +1,6 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 import 'failure.dart';
 class ErrorHandler implements Exception{
