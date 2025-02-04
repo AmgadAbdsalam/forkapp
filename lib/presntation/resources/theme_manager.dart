@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive/presntation/resources/styles_manager.dart';
 import 'package:responsive/presntation/resources/values_manager.dart';
 
+import '../setting/cubit/setting_cubit.dart';
 import 'color_manager.dart';
 import 'font_manager.dart';
 
-ThemeData getApplicationTheme() {
+ThemeData getApplicationTheme(BuildContext context) {
   return ThemeData(
+    brightness: BlocProvider.of<SettingCubit>(context).darkTheme
+            ? Brightness.dark
+            : Brightness.light,
     // main colors
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.lightPrimary,

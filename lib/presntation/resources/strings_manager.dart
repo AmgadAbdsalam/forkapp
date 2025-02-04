@@ -32,5 +32,7 @@ class AppStrings{
   static const sounds = "Sounds";
   static const vibrations = "vibrations";
   static const save = "Save";
+  static const arabic = "Arabic";
+  static const english = "English";
 
 }
