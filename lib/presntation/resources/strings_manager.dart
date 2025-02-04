@@ -1,9 +1,9 @@
 class AppStrings{
   static const noRouteFound = "No Route Found";
-  static const onBoardingTitle1 = "SEE THE BEST COURSE #1";
-  static const onBoardingTitle2 = "SEE THE BEST COURSE #2";
-  static const onBoardingTitle3 = "SEE THE BEST COURSE #3";
-  static const onBoardingTitle4 = "SEE THE BEST COURSE #4";
+  static const onBoardingTitle1 = "We Hope You Will Enjoy";
+  static const onBoardingTitle2 = "We Hope You Will Enjoy";
+  static const onBoardingTitle3 = "We Hope You Will Enjoy";
+  static const onBoardingTitle4 = "We Hope You Will Enjoy";
 
   static const onBoardingSubTitle1 =
       "Tut app is an awesome flutter application using clean architecture #1";

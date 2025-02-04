@@ -1,4 +1,6 @@
- import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/presntation/common/state_render/state_render_impl.dart';
 
 import '../common/state_render/state_render.dart';
@@ -29,3 +31,5 @@ abstract class BaseViewModelInputs {
   }
  }
  final flowStateMangerProvider=StateNotifierProvider<FlowStateManger,FlowState>((ref)=>FlowStateManger());
+
+/////////////////////

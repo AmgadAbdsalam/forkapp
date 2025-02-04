@@ -26,7 +26,7 @@ class SplashViewState extends State<SplashView> {
             {
               // navigate to main screen
               if(mounted)
-              Navigator.pushReplacementNamed(context, Routes.mainRoute)
+              Navigator.pushReplacementNamed(context, Routes.onBoardingRoute)
             }
           else
             {
@@ -34,7 +34,7 @@ class SplashViewState extends State<SplashView> {
                 if(isOnBoardingScreenViewed){
                   // navigate to main screen
                   if(mounted)
-                  Navigator.pushReplacementNamed(context, Routes.settingRoute)//TODO
+                  Navigator.pushReplacementNamed(context, Routes.onBoardingRoute)//TODO
                 }else{
                   // navigate to main onBoarding
                   if(mounted)

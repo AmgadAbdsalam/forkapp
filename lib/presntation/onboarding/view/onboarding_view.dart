@@ -6,11 +6,12 @@ import 'package:responsive/app/di.dart';
 import 'package:responsive/presntation/resources/color_manager.dart';
 import 'package:responsive/presntation/resources/values_manager.dart';
 import 'package:responsive/providers/on_boarding_provider.dart';
+import '../../base/base_view_model.dart';
+import '../../common/adaptive_layout.dart';
 import '../../resources/constant_manager.dart';
 import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 
 class OnBoardingView extends ConsumerStatefulWidget {
   const OnBoardingView({super.key});
@@ -20,139 +21,165 @@ class OnBoardingView extends ConsumerStatefulWidget {
 }
 
 class OnBoardingViewState extends ConsumerState<OnBoardingView> {
+  final PageController pageController = PageController();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
- final PageController _pageController = PageController();
-final AppPreferences _appPreferences=instance<AppPreferences>();
-
- @override
+  @override
   void initState() {
-   Future.microtask(()=>ref.read(onBoardingHelperProvider).onBoardingAccessMethod().start());
-   _appPreferences.setOnBoardingScreenViewed();
-   super.initState();
+    Future.microtask(() =>
+        ref.read(onBoardingHelperProvider).onBoardingAccessMethod().start());
+    _appPreferences.setOnBoardingScreenViewed();
+    super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
-    _pageController.dispose();
+    pageController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.white,
-      appBar: AppBar(
-      elevation: 0,
         backgroundColor: ColorManager.white,
-        systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: ColorManager.white,
-        statusBarIconBrightness: Brightness.dark,
-      ),),
-      body: PageView.builder(
-        controller: _pageController,
-        onPageChanged: (index){
-          ref.watch(onBoardingHelperProvider).onBoardingAccessMethod().onPageChanged(index);
-        },
-        itemCount:ref.watch(onBoardingHelperProvider).onBoardingReadState().numOfSlides,
-        itemBuilder: (context,index){
-          return OnBoardingPage(_pageController);
-        },
-      ),
+        body: AdaptiveLayout(
+          mobileLayout: (BuildContext context) =>  DeskTopOnBoardingPage(pageController),
+          tabletLayout: (BuildContext context) =>  DeskTopOnBoardingPage(pageController),
+          desktopLayout: (BuildContext context) =>
+              DeskTopOnBoardingPage(pageController),
+        ));
+  }
+}
 
+class DeskTopOnBoardingPage extends ConsumerWidget {
+  final PageController pageController;
+
+  const DeskTopOnBoardingPage(this.pageController, {super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final onBoardingHelper = ref.watch(onBoardingHelperProvider);
+    return Column(
+      children: [
+        Expanded(
+          child: PageView.builder(
+              controller: pageController,
+              onPageChanged: (index) {
+                ref
+                    .watch(onBoardingHelperProvider)
+                    .onBoardingAccessMethod()
+                    .onPageChanged(index);
+              },
+              itemCount: ref
+                  .watch(onBoardingHelperProvider)
+                  .onBoardingReadState()
+                  .numOfSlides,
+              itemBuilder: (context, index) =>
+                  getPage(context, ref, pageController)),
+        ),
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                IconButton(
+                    onPressed: () {
+                      pageController.animateToPage(
+                          onBoardingHelper.onBoardingAccessMethod().goPrevious(),
+                          duration: const Duration(
+                              milliseconds: ConstantManager.sliderAnimationTime),
+                          curve: Curves.bounceInOut);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_new)),
+                // ...[0,1,2,3].map((e) => (currentIndex==e?const Icon(Icons.star):buildContainer())),
+                for (int i = 0;
+                    i < onBoardingHelper.onBoardingWatchState().numOfSlides;
+                    i++)
+                  onBoardingHelper.onBoardingWatchState().currentIndex == i
+                      ? buildContainer(ColorManager.primary)
+                      : buildContainer(ColorManager.grey),
+
+                IconButton(
+                    onPressed: () {
+                      pageController.animateToPage(
+                          onBoardingHelper.onBoardingAccessMethod().goNext(),
+                          duration: const Duration(
+                              milliseconds: ConstantManager.sliderAnimationTime),
+                          curve: Curves.bounceInOut);
+                    },
+                    icon: const Icon(Icons.arrow_forward_ios_rounded)),
+              ]),
+            ),
+            getElevatedButton(context,'get started'),
+            Padding(
+              padding: const EdgeInsets.all(AppPadding.p8),
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(Routes.loginRoute);
+                  },
+                  child: Text(
+                    AppStrings.skip,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  )),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
 
-class OnBoardingPage extends ConsumerWidget{
-
-  final  PageController _pageController;
-    const OnBoardingPage( this._pageController,{super.key});
-
-  @override
-  Widget build(BuildContext context,WidgetRef ref) {
-
-    double height=MediaQuery.of(context).size.height;
-    double width=MediaQuery.of(context).size.width;
-    final onBoardingHelper=ref.watch(onBoardingHelperProvider);
-   return Column(
-     children: [
-       Text(
-         onBoardingHelper.onBoardingWatchState().sliderObject.title,
-         style: Theme.of(context).textTheme.displayLarge,
-       ),
-       Padding(
-         padding: EdgeInsets.all(height *.1/8),
-         child: Text(
-           textAlign: TextAlign.center,
-           onBoardingHelper.onBoardingWatchState().sliderObject.subTitle,
-           style: Theme.of(context).textTheme.displayMedium,
-         ),
-       ),
-       Flexible(child: SizedBox(height: height* 1/4,),),
-       SvgPicture.asset(onBoardingHelper.onBoardingWatchState().sliderObject.image,),
-       Flexible(child: SizedBox(height: height* 1/5)),
-       Container(
-         width: width,
-         color: ColorManager.white,
-         child: Column(
-           mainAxisAlignment: MainAxisAlignment.end,
-       crossAxisAlignment: CrossAxisAlignment.end,
-       children: [
-         Padding(
-           padding: const EdgeInsets.all(AppPadding.p8),
-           child: TextButton(onPressed: (){
-             Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
-           }, child:  Text(AppStrings.skip,style: Theme.of(context).textTheme.bodySmall,)),
-         ),
-         Container(
-           height: height*1/18,
-           width: width,
-           color: ColorManager.primary,
-           child: Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-             children: [
-               IconButton(
-                   onPressed: (){
-                     _pageController.animateToPage(onBoardingHelper.onBoardingAccessMethod().goPrevious(),
-                         duration: const Duration(
-                             milliseconds: ConstantManager.sliderAnimationTime),
-                         curve: Curves.bounceInOut);
-                   },
-                   icon: const Icon(Icons.arrow_back_ios_new)
-               ),
-              // ...[0,1,2,3].map((e) => (currentIndex==e?const Icon(Icons.star):buildContainer())),
-               for(int i=0;i<onBoardingHelper.onBoardingWatchState().numOfSlides;i++)
-                 onBoardingHelper.onBoardingWatchState().currentIndex==i?const Icon(Icons.star):buildContainer(),
-
-               IconButton(
-                   onPressed: (){
-                     _pageController.animateToPage(onBoardingHelper.onBoardingAccessMethod().goNext(), duration: const Duration(
-                         milliseconds: ConstantManager.sliderAnimationTime), curve:  Curves.bounceInOut);
-                   },
-                   icon: const Icon(Icons.arrow_forward_ios_rounded)),
-             ]
-           ),
-         ),
-       ],
-         ),
-       )
-
-     ],
-   );
-  }
-
-}
-
-Widget buildContainer(){
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: AppPadding.p10),
-    child: Container(
-      height: AppSize.s15,
-      width: AppSize.s15,
-      decoration: BoxDecoration(
-          color: ColorManager.grey,
-        borderRadius: BorderRadius.circular(AppSize.s12)
+    Widget getPage(
+    BuildContext context, WidgetRef ref, PageController pageController) {
+  final onBoardingHelper = ref.watch(onBoardingHelperProvider);
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      SvgPicture.asset(
+        onBoardingHelper.onBoardingWatchState().sliderObject.image,
       ),
-    ),
+      Text(
+        textAlign: TextAlign.center,
+        onBoardingHelper.onBoardingWatchState().sliderObject.title,
+        style: Theme.of(context).textTheme.displayLarge,
+      ),
+      Text(
+        textAlign: TextAlign.center,
+        onBoardingHelper.onBoardingWatchState().sliderObject.subTitle,
+        style: Theme.of(context).textTheme.displayMedium,
+      ),
+      // Flexible(child: SizedBox(height: height* 1/4,),),
+      //  Flexible(child: SizedBox(height: height* 1/5)),
+    ],
   );
 }
 
+Widget buildContainer(Color color) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: AppPadding.p10,),
+    child: Container(
+      height: AppSize.s12,
+      width: AppSize.s12,
+      decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(AppSize.s12)),
+    ),
+  );
+}
+Widget getElevatedButton(BuildContext context,String text){
+  return      ElevatedButton(
+      style: ButtonStyle(
+          shape: WidgetStateProperty.all(const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                  Radius.circular(AppSize.s16),
+                 ))),
+          minimumSize: WidgetStateProperty.all(
+              Size(MediaQuery.sizeOf(context).width * 3 / 7, 50)),
+          maximumSize: WidgetStateProperty.all(
+              Size(MediaQuery.sizeOf(context).width*3/5, 82)),
+          foregroundColor:
+          WidgetStateProperty.all(ColorManager.white)),
+      onPressed: () {},
+      child:  Text(text));
+}
