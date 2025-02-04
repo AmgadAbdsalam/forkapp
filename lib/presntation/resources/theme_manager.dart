@@ -8,10 +8,10 @@ import 'color_manager.dart';
 import 'font_manager.dart';
 
 ThemeData getApplicationTheme(BuildContext context) {
+  bool darkTheme = BlocProvider.of<SettingCubit>(context).darkTheme;
+  Color textColor = darkTheme ? ColorManager.white : ColorManager.black;
   return ThemeData(
-    brightness: BlocProvider.of<SettingCubit>(context).darkTheme
-            ? Brightness.dark
-            : Brightness.light,
+    brightness: darkTheme ? Brightness.dark : Brightness.light,
     // main colors
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.lightPrimary,
@@ -29,7 +29,7 @@ ThemeData getApplicationTheme(BuildContext context) {
         elevation: AppSize.s4,
         shadowColor: ColorManager.lightPrimary,
         titleTextStyle:
-            getRegularStyle(fontSize: FontSize.s16, color: ColorManager.white)),
+            getRegularStyle(fontSize: FontSize.s16, color: textColor)),
     // button theme
     buttonTheme: ButtonThemeData(
         shape: const StadiumBorder(),
@@ -39,26 +39,25 @@ ThemeData getApplicationTheme(BuildContext context) {
     // text theme
     textTheme: TextTheme(
         displayLarge: //used do not edit it
-            getMediumStyle(color: ColorManager.black, fontSize: FontSize.s32),
-        displayMedium: getRegularStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s14),
+            getMediumStyle(color: textColor, fontSize: FontSize.s32),
+        displayMedium:
+            getRegularStyle(color: textColor, fontSize: FontSize.s14),
         displaySmall: getMediumStyle(
             //subtitle1
-            color: ColorManager.lightGrey,
+            color: textColor,
             fontSize: FontSize.s14),
-        bodySmall:
-            getBoldStyle(color: ColorManager.primary, fontSize: FontSize.s16),
-        bodyLarge: getRegularStyle(color: ColorManager.grey),
+        bodySmall: getBoldStyle(color: textColor, fontSize: FontSize.s16),
+        bodyLarge: getRegularStyle(color: textColor),
         bodyMedium: getRegularStyle(
-            color: ColorManager.black,
+            color: textColor,
             fontSize: FontSize.s17,
             fontStyle: FontStyle.italic) //used do not edit it
         ),
     // elevated button them
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-            textStyle: getRegularStyle(
-                color: ColorManager.white, fontSize: FontSize.s17),
+            textStyle:
+                getRegularStyle(color: textColor, fontSize: FontSize.s17),
             backgroundColor: ColorManager.primary,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSize.s12)))),
@@ -68,11 +67,9 @@ ThemeData getApplicationTheme(BuildContext context) {
       // content padding
       contentPadding: const EdgeInsets.all(AppPadding.p8),
       // hint style
-      hintStyle:
-          getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+      hintStyle: getRegularStyle(color: textColor, fontSize: FontSize.s14),
       // label style
-      labelStyle:
-          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+      labelStyle: getMediumStyle(color: textColor, fontSize: FontSize.s14),
       // error style
       errorStyle: getRegularStyle(color: ColorManager.error),
       // enabled border style

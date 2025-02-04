@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'font_manager.dart';
 
-
-TextStyle _getTextStyle (double fontSize,FontWeight fontWeigh,Color color,{FontStyle fontStyle=FontStyle.normal}){
+TextStyle _getTextStyle(double fontSize, FontWeight fontWeigh, Color color,
+    {FontStyle fontStyle = FontStyle.normal}) {
   return TextStyle(
-    fontSize: fontSize,
-    fontFamily: FontConstant.fontFamily,
-    fontStyle: fontStyle,
-    fontWeight: fontWeigh,
-    color: color
-  );
+      fontSize: fontSize,
+      fontFamily: FontConstant.fontFamily,
+      fontStyle: fontStyle,
+      fontWeight: fontWeigh,
+      color: color);
 }
+
 // regular style
-TextStyle getRegularStyle ({double fontSize=FontSize.s12,required Color color,FontStyle fontStyle=FontStyle.normal}){
-  return _getTextStyle(fontSize,FontWeightManager.regular,color,fontStyle: fontStyle);
+TextStyle getRegularStyle(
+    {double fontSize = FontSize.s12,
+    required Color color,
+    FontStyle fontStyle = FontStyle.normal}) {
+  return _getTextStyle(fontSize, FontWeightManager.regular, color,
+      fontStyle: fontStyle);
 }
 // medium style
 
@@ -32,8 +36,7 @@ TextStyle getLightStyle(
 
 // bold style
 
-TextStyle getBoldStyle(
-    {double fontSize = FontSize.s12, required Color color}) {
+TextStyle getBoldStyle({double fontSize = FontSize.s12, required Color color}) {
   return _getTextStyle(fontSize, FontWeightManager.bold, color);
 }
 
