@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/di.dart';
 import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/presntation/base/base_view_model.dart';
-import 'package:responsive/presntation/common/state_render/state_render_impl.dart';
 
 import '../../../domain/use_cases/login_usecase.dart';
 import '../../common/freezed_data_classes.dart';
@@ -82,9 +81,6 @@ class LoginViewModel extends StateNotifier<LoginStateModel> implements BaseViewM
        _isUserNameValid(loginObject.useName);
      state=state.copyWith(isPasswordAndUserNameValid:result );
     return result;
-  }
-  getContentState(){
-    state=state.copyWith(flowState: ContentState());
   }
 
 }

@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:responsive/presntation/resources/assets_manager.dart';
 
-import '../../login/view_model/login_view_model.dart';
+import '../../base/base_view_model.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/strings_manager.dart';
@@ -133,7 +133,8 @@ class StateRenderer extends StatelessWidget {
                           StateRendererType.fullScreenErrorState) {
                         retryActionFunction.call();
                       } else {
-                       ref.read(loginViewModelProvider.notifier).getContentState();
+
+                       ref.read(flowStateMangerProvider.notifier).setContent();
                       }
                     },
                     child: Text(buttonTitle)

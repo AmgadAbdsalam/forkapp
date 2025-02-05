@@ -1,6 +1,5 @@
 // onboarding models
 
-import '../../presntation/common/state_render/state_render_impl.dart';
 
 class SliderObject {
   String title;
@@ -57,7 +56,7 @@ class LoginStateModel {
     bool? isUsernameValid,
     bool? isPasswordAndUserNameValid,
     bool? isUserSuccessfulLogin,
-    FlowState? flowState,
+
 
   }) {
     return LoginStateModel(
