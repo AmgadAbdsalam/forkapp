@@ -57,10 +57,13 @@ class LoginViewState extends ConsumerState<LoginView> {
   }
 
   Widget _getContentWidget() {
+
     final result = ref.watch(loginViewModelProvider);
     return
        LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
+          double buttonWidth=constraints.maxWidth*.8;
+          double textFormFiled=constraints.maxWidth*.9;
           return Container(
             padding: const EdgeInsets.only(top: AppPadding.p100),
             color: ColorManager.white,
@@ -69,11 +72,9 @@ class LoginViewState extends ConsumerState<LoginView> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    Center(
+                     Center(
                       child: SizedBox(
-                        width: constraints.maxWidth * 0.5,
-                        // Adjust image width based on screen size
-                        height: constraints.maxWidth * 0.5,
+                        height:constraints.maxHeight*.15 ,
                         // Adjust image height based on screen size
                         child: const Image(
                             image: AssetImage(ImageAssets.splashLogo)),
@@ -85,32 +86,18 @@ class LoginViewState extends ConsumerState<LoginView> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: AppPadding.p28, right: AppPadding.p28),
-                      child: TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        controller: userNameController,
-                        decoration: InputDecoration(
-                            hintText: AppStrings.username,
-                            labelText: AppStrings.username,
-                            errorText: (result.isUsernameValid )
-                                ? null
-                                : AppStrings.usernameError),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: AppSize.s28,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: AppPadding.p28, right: AppPadding.p28),
-                      child: TextFormField(
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: uerPasswordController,
-                        decoration: InputDecoration(
-                            hintText: AppStrings.password,
-                            labelText: AppStrings.password,
-                            errorText: result.isPasswordValid
-                                ? null
-                                : AppStrings.passwordError),
+                      child: SizedBox(
+                        width: textFormFiled.clamp(220, 840),
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          controller: userNameController,
+                          decoration: InputDecoration(
+                              hintText: AppStrings.id,
+                              labelText: AppStrings.id,
+                              errorText: (result.isUsernameValid )
+                                  ? null
+                                  : AppStrings.usernameError),
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -120,7 +107,34 @@ class LoginViewState extends ConsumerState<LoginView> {
                       padding: const EdgeInsets.only(
                           left: AppPadding.p28, right: AppPadding.p28),
                       child: SizedBox(
-                        width: constraints.maxWidth * 0.8,
+                        width: textFormFiled.clamp(220, 840),
+                        child: TextFormField(
+                          keyboardType: TextInputType.visiblePassword,
+                          controller: uerPasswordController,
+                          decoration: InputDecoration(
+                              hintText: AppStrings.password,
+                              labelText: AppStrings.password,
+                              errorText: result.isPasswordValid
+                                  ? null
+                                  : AppStrings.passwordError),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.s8,
+                    ),
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.end,
+                       children: [
+                         TextButton(child:const Text(AppStrings.forgetPassword), onPressed: () {  },),
+                         textFormFiled < 840? const SizedBox(width: 15,):const SizedBox(width: 0,),
+                       ],
+                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: AppPadding.p28, right: AppPadding.p28,top: AppPadding.p_5),
+                      child: SizedBox(
+                        width: buttonWidth.clamp(200, 800),
                         // Adjust button width based on screen size
                         child: ElevatedButton(
                           onPressed: result.isPasswordAndUserNameValid
@@ -133,41 +147,6 @@ class LoginViewState extends ConsumerState<LoginView> {
                               : null,
                           child: const Text(AppStrings.login),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: AppPadding.p8,
-                          left: AppPadding.p10,
-                          right: AppPadding.p28),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            // Use Flexible for better responsiveness
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.forgotPasswordRoute);
-                              },
-                              child: Text(AppStrings.forgetPassword,
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium),
-                            ),
-                          ),
-                          Flexible(
-                            // Use Flexible for better responsiveness
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.registerRoute);
-                              },
-                              child: Text(AppStrings.registerText,
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium),
-                            ),
-                          ),
-                        ],
                       ),
                     ),
                   ],

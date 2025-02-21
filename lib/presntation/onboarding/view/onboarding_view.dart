@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/app_prefs.dart';
 import 'package:responsive/app/di.dart';
 import 'package:responsive/presntation/resources/color_manager.dart';
