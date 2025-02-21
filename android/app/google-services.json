@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "619825057353",
+    "project_id": "fork-app-2200b",
+    "storage_bucket": "fork-app-2200b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619825057353:android:e1c0ec2f3d36e37ea7b998",
+        "android_client_info": {
+          "package_name": "com.example.responsive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk-vmbwWcQsE_4zojA8JIkFluOHa3H4Ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
