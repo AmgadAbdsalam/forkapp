@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // onboarding models
 
 
@@ -68,4 +69,28 @@ class LoginStateModel {
 
     );
   }
+}
+
+
+//man models
+
+//node model
+class NodeModel {
+  String nodeId;
+  List<String> neighborsList;
+  String nodeType;
+  DateTime updatedTime;
+  int xAxis;
+  int yAxis;
+  NodeModel({
+    required this.nodeId,
+    required this.neighborsList,
+    required this.nodeType,
+    required this.updatedTime,
+    required this.xAxis,
+    required this.yAxis,
+  });
+
+  
+
 }

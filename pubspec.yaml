@@ -30,6 +30,7 @@ environment:
 dependencies:
   analyzer: ^6.6.0
   build_runner: ^2.4.13
+  cloud_firestore: ^5.6.4
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.7.0

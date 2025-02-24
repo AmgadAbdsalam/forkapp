@@ -1,11 +1,14 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:responsive/app/constant.dart';
 import 'package:responsive/data/mapper.dart';
 import 'package:responsive/data/network/error_handler.dart';
 import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/data/network/requests.dart';
+import 'package:responsive/data/respones/nodes_response.dart';
 import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/domain/repository/repository.dart';
 
@@ -62,12 +65,37 @@ class RepositoryImpl implements Repository {
     }
     return Left(Failure(2, 'error!! please try again'));
   }
-  
+
   @override
- void signOut() async {
-  await FirebaseAuth.instance.signOut();
+  Future<Either<Failure, String>> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return const Right('Success');
+    } catch (e) {
+      return Left(Failure(0, 'error!! please try again'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<NodeModel>>> getMap() async {
+    try {
+      List<NodeModel> nodes = await _fetchMapData();
+
+      return Right(nodes);
+    } catch (e) {
+      return Left(Failure(0, "Error fetching map data: $e"));
+    }
+  }
+
+  Future<List<NodeModel>> _fetchMapData() async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection(Constant.mapCollection)
+        .doc(Constant.mapDoc) // ID الخاص بالخريطة
+        .get();
+
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
+    List<dynamic> nodeList = data['nodes'] ?? [];
+    return nodeList.map((node) => NodeResponse.fromMap(node)).toList();
+  }
 }
-
-}
-
-
