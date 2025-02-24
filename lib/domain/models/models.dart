@@ -2,6 +2,8 @@
 // onboarding models
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class SliderObject {
   String title;
   String subTitle;
@@ -79,7 +81,7 @@ class NodeModel {
   String nodeId;
   List<String> neighborsList;
   String nodeType;
-  DateTime updatedTime;
+  Timestamp updatedTime;
   int xAxis;
   int yAxis;
   NodeModel({
@@ -91,6 +93,15 @@ class NodeModel {
     required this.yAxis,
   });
 
-  
+   Map<String, dynamic> toMap() {
+    return {
+      'id': nodeId,
+      'neighbors': neighborsList,
+      'type': nodeType,
+      'updated_at': updatedTime,
+      'x': xAxis,
+      'y': yAxis,
+    };
+  }
 
 }

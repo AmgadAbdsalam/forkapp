@@ -9,4 +9,5 @@ abstract class Repository {
   Future<Either<Failure, String>> sugnIn(String address, String password);
   Future<Either<Failure, String>> signOut();
   Future<Either<Failure, List<NodeModel>>> getMap();
+  Future<Either<Failure, String>> addNode(NodeModel node);
 }

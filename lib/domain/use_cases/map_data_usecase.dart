@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/domain/models/models.dart';

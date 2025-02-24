@@ -53,7 +53,7 @@ class RepositoryImpl implements Repository {
       // ignore: unused_local_variable
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: address, password: password);
-      return const Right('Success');
+      return const Right(Constant.success);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         log('No user found for that email.');
@@ -70,7 +70,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, String>> signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
-      return const Right('Success');
+      return const Right(Constant.success);
     } catch (e) {
       return Left(Failure(0, 'error!! please try again'));
     }
@@ -78,12 +78,18 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, List<NodeModel>>> getMap() async {
-    try {
-      List<NodeModel> nodes = await _fetchMapData();
+    if (await _networkInfo.isConnected) {
+      try {
+        List<NodeModel> nodes = await _fetchMapData();
 
-      return Right(nodes);
-    } catch (e) {
-      return Left(Failure(0, "Error fetching map data: $e"));
+        return Right(nodes);
+      } catch (e) {
+        return Left(Failure(0, "Error fetching map data: $e"));
+      }
+    } else {
+      // return internet connection error
+      // return either left
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 
@@ -97,5 +103,30 @@ class RepositoryImpl implements Repository {
 
     List<dynamic> nodeList = data['nodes'] ?? [];
     return nodeList.map((node) => NodeResponse.fromMap(node)).toList();
+  }
+
+  @override
+  Future<Either<Failure, String>> addNode(NodeModel node) async {
+    if (await _networkInfo.isConnected) {
+       try {
+      List<NodeModel> nodes = await _fetchMapData();
+
+      nodes.add(NodeResponse.fromMap(node.toMap()));
+      print('object');
+      log(nodes.toString());
+      List<Map<String, dynamic>> nodesData =
+          nodes.map((node) => node.toMap()).toList();
+      await FirebaseFirestore.instance
+          .collection(Constant.mapCollection)
+          .doc(Constant.mapDoc)
+          .update({"nodes": FieldValue.arrayUnion(nodesData)});
+      return const Right(Constant.success);
+    } catch (e) {
+      log("Error loading node: $e");
+      return Left(Failure(0, "Error loading node: $e"));
+    }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
   }
 }

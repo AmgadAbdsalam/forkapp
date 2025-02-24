@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/application_class.dart';
 import 'package:responsive/app/di.dart';
-
-import 'package:responsive/domain/use_cases/map_data_usecase.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -15,7 +12,5 @@ void main() async {
   );
 
   await initAppModule();
-
-
   runApp(ProviderScope(child: MyApp()));
 }

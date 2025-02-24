@@ -4,6 +4,7 @@ class Constant {
   static const String token = "SEND TOKEN HERE";
   static const String mapDoc = "3ZYN9VrfiTP3meJ8M6Ua";
   static const String mapCollection = 'map';
+  static const String success = 'success';
   static const int zero = 0;
   static const int apiTimeOut = 60000;
 }

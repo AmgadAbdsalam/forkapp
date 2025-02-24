@@ -5,7 +5,7 @@ class NodeResponse extends NodeModel {
   String id;
   List<String> neighbors;
   String type;
-  DateTime updatedAt;
+  Timestamp updatedAt;
   int x;
   int y;
 
@@ -29,20 +29,11 @@ class NodeResponse extends NodeModel {
       id: map['id'] ?? '',
       neighbors: List<String>.from(map['neighbors'] ?? []),
       type: map['type'] ?? '',
-      updatedAt: (map['updated_at'] as Timestamp).toDate(),
+      updatedAt: (map['updated_at'] as Timestamp),
       x: map['x'] ?? 0,
       y: map['y'] ?? 0,
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'neighbors': neighbors,
-      'type': type,
-      'updated_at': updatedAt,
-      'x': x,
-      'y': y,
-    };
-  }
+
 }
