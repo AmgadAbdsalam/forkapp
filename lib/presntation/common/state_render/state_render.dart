@@ -79,7 +79,7 @@ class StateRenderer extends StatelessWidget {
       child: Container(
         height: 250,
         decoration: BoxDecoration(
-            color: ColorManager.white,
+            color: ColorManager.lightOnPrimary,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(AppSize.s14),
             boxShadow: const [BoxShadow(color: Colors.black26)]),
@@ -115,7 +115,7 @@ class StateRenderer extends StatelessWidget {
   Widget _getMessage(String message) {
     return Text(
       message,
-      style: getRegularStyle(color: ColorManager.black, fontSize: FontSize.s18),
+      style: getRegularStyle(color: ColorManager.darkOnPrimary, fontSize: FontSize.s18),
     );
   }
 

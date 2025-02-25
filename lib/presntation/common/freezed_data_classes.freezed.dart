@@ -159,3 +159,150 @@ abstract class _LoginObject implements LoginObject {
   _$$LoginObjectImplCopyWith<_$LoginObjectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$ConfigObject {
+  String get mapWidth => throw _privateConstructorUsedError;
+  String get mapLength => throw _privateConstructorUsedError;
+
+  /// Create a copy of ConfigObject
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ConfigObjectCopyWith<ConfigObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ConfigObjectCopyWith<$Res> {
+  factory $ConfigObjectCopyWith(
+          ConfigObject value, $Res Function(ConfigObject) then) =
+      _$ConfigObjectCopyWithImpl<$Res, ConfigObject>;
+  @useResult
+  $Res call({String mapWidth, String mapLength});
+}
+
+/// @nodoc
+class _$ConfigObjectCopyWithImpl<$Res, $Val extends ConfigObject>
+    implements $ConfigObjectCopyWith<$Res> {
+  _$ConfigObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ConfigObject
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? mapWidth = null,
+    Object? mapLength = null,
+  }) {
+    return _then(_value.copyWith(
+      mapWidth: null == mapWidth
+          ? _value.mapWidth
+          : mapWidth // ignore: cast_nullable_to_non_nullable
+              as String,
+      mapLength: null == mapLength
+          ? _value.mapLength
+          : mapLength // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ConfigObjectImplCopyWith<$Res>
+    implements $ConfigObjectCopyWith<$Res> {
+  factory _$$ConfigObjectImplCopyWith(
+          _$ConfigObjectImpl value, $Res Function(_$ConfigObjectImpl) then) =
+      __$$ConfigObjectImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String mapWidth, String mapLength});
+}
+
+/// @nodoc
+class __$$ConfigObjectImplCopyWithImpl<$Res>
+    extends _$ConfigObjectCopyWithImpl<$Res, _$ConfigObjectImpl>
+    implements _$$ConfigObjectImplCopyWith<$Res> {
+  __$$ConfigObjectImplCopyWithImpl(
+      _$ConfigObjectImpl _value, $Res Function(_$ConfigObjectImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ConfigObject
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? mapWidth = null,
+    Object? mapLength = null,
+  }) {
+    return _then(_$ConfigObjectImpl(
+      null == mapWidth
+          ? _value.mapWidth
+          : mapWidth // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == mapLength
+          ? _value.mapLength
+          : mapLength // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ConfigObjectImpl implements _ConfigObject {
+  _$ConfigObjectImpl(this.mapWidth, this.mapLength);
+
+  @override
+  final String mapWidth;
+  @override
+  final String mapLength;
+
+  @override
+  String toString() {
+    return 'ConfigObject(mapWidth: $mapWidth, mapLength: $mapLength)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ConfigObjectImpl &&
+            (identical(other.mapWidth, mapWidth) ||
+                other.mapWidth == mapWidth) &&
+            (identical(other.mapLength, mapLength) ||
+                other.mapLength == mapLength));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, mapWidth, mapLength);
+
+  /// Create a copy of ConfigObject
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ConfigObjectImplCopyWith<_$ConfigObjectImpl> get copyWith =>
+      __$$ConfigObjectImplCopyWithImpl<_$ConfigObjectImpl>(this, _$identity);
+}
+
+abstract class _ConfigObject implements ConfigObject {
+  factory _ConfigObject(final String mapWidth, final String mapLength) =
+      _$ConfigObjectImpl;
+
+  @override
+  String get mapWidth;
+  @override
+  String get mapLength;
+
+  /// Create a copy of ConfigObject
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ConfigObjectImplCopyWith<_$ConfigObjectImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

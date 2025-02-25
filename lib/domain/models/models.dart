@@ -73,6 +73,29 @@ class LoginStateModel {
   }
 }
 
+// config state model
+class ConfigStateModel{
+  final bool isWidthValid;
+  final bool isLengthValid;
+  final bool isWidthAndLengthValid;
+
+
+  ConfigStateModel(this.isWidthValid, this.isLengthValid,
+      this.isWidthAndLengthValid,);
+
+  ConfigStateModel copyWith({bool? isWidthValid,
+    bool? isLengthValid,
+    bool? isWidthAndLengthValid,
+  }) {
+    return ConfigStateModel(
+      isWidthValid ?? this.isWidthValid,
+      isLengthValid ?? this.isLengthValid,
+      isWidthAndLengthValid ??this.isWidthAndLengthValid,
+    );
+  }
+}
+
+
 
 //man models
 

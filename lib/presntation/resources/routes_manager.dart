@@ -3,6 +3,7 @@ import 'package:responsive/presntation/resources/strings_manager.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
 import '../../app/di.dart';
+import '../configration/config_view/config_view.dart';
 import '../login/view/login_view.dart';
 import '../main/main_view.dart';
 
@@ -17,8 +18,10 @@ class Routes {
   static const String registerRoute = "/register";
   static const String forgotPasswordRoute = "/forgotPassword";
   static const String mainRoute = "/main";
+  static const String homeRoute = "/home";
   static const String storeDetailsRoute = "/storeDetails";
   static const String settingRoute = "/setting";
+  static const String configuration = "/configuration";
 }
 
 class RouteGenerator {
@@ -37,6 +40,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
       case Routes.settingRoute:
         return MaterialPageRoute(builder: (_) => const SettingView());
+      case Routes.configuration:
+        return MaterialPageRoute(builder: (_)=>const ConfigView());
       default:
         return unDefinedRoute();
     }

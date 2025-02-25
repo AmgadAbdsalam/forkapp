@@ -39,7 +39,7 @@ class OnBoardingViewState extends ConsumerState<OnBoardingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorManager.white,
+
         body: AdaptiveLayout(
           mobileLayout: (BuildContext context) =>  DeskTopOnBoardingPage(pageController),
           tabletLayout: (BuildContext context) =>  DeskTopOnBoardingPage(pageController),
@@ -94,8 +94,8 @@ class DeskTopOnBoardingPage extends ConsumerWidget {
                     i < onBoardingHelper.onBoardingWatchState().numOfSlides;
                     i++)
                   onBoardingHelper.onBoardingWatchState().currentIndex == i
-                      ? buildContainer(ColorManager.primary)
-                      : buildContainer(ColorManager.grey),
+                      ? buildContainer(ColorManager.darkError)
+                      : buildContainer(ColorManager.darkGrey),
 
                 IconButton(
                     onPressed: () {
@@ -108,7 +108,6 @@ class DeskTopOnBoardingPage extends ConsumerWidget {
                     icon: const Icon(Icons.arrow_forward_ios_rounded)),
               ]),
             ),
-            getElevatedButton(context,'get started'),
             Padding(
               padding: const EdgeInsets.all(AppPadding.p8),
               child: TextButton(
@@ -177,7 +176,7 @@ Widget getElevatedButton(BuildContext context,String text){
           maximumSize: WidgetStateProperty.all(
               Size(MediaQuery.sizeOf(context).width*3/5, 82)),
           foregroundColor:
-          WidgetStateProperty.all(ColorManager.white)),
+          WidgetStateProperty.all(ColorManager.lightOnPrimary)),
       onPressed: () {},
       child:  Text(text));
 }

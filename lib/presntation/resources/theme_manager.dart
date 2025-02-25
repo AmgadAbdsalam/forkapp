@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive/presntation/resources/styles_manager.dart';
@@ -9,88 +10,123 @@ import 'font_manager.dart';
 
 ThemeData getApplicationTheme(BuildContext context) {
   bool darkTheme = BlocProvider.of<SettingCubit>(context).darkTheme;
-  Color textColor = darkTheme ? ColorManager.white : ColorManager.black;
+
+// Dynamic colors based on theme
+  Color primary =
+      darkTheme ? ColorManager.darkPrimary : ColorManager.lightPrimary;
+  Color primaryVariant = darkTheme
+      ? ColorManager.darkPrimaryVariant
+      : ColorManager.lightPrimaryVariant;
+  Color secondary =
+      darkTheme ? ColorManager.darkSecondary : ColorManager.lightSecondary;
+  Color secondaryVariant = darkTheme
+      ? ColorManager.darkSecondaryVariant
+      : ColorManager.lightSecondaryVariant;
+  Color background =
+      darkTheme ? ColorManager.darkBackground : ColorManager.lightBackground;
+  Color surface =
+      darkTheme ? ColorManager.darkSurface : ColorManager.lightSurface;
+  Color error = darkTheme ? ColorManager.darkError : ColorManager.lightError;
+  Color onPrimary =
+      darkTheme ? ColorManager.darkOnPrimary : ColorManager.lightOnPrimary;
+  Color onSecondary =
+      darkTheme ? ColorManager.darkOnSecondary : ColorManager.lightOnSecondary;
+  Color onBackground = darkTheme
+      ? ColorManager.darkOnBackground
+      : ColorManager.lightOnBackground;
+  Color onSurface =
+      darkTheme ? ColorManager.darkOnSurface : ColorManager.lightOnSurface;
+  Color onError =
+      darkTheme ? ColorManager.darkOnError : ColorManager.lightOnError;
+  Color grey = darkTheme ? ColorManager.darkGrey : ColorManager.lightGrey;
+  Color lightGrey =
+      darkTheme ? ColorManager.darkLightGrey : ColorManager.lightLightGrey;
+  Color darkGrey =
+      darkTheme ? ColorManager.darkDarkGrey : ColorManager.lightDarkGrey;
+
   return ThemeData(
     brightness: darkTheme ? Brightness.dark : Brightness.light,
-    // main colors
-    primaryColor: ColorManager.primary,
-    primaryColorLight: ColorManager.lightPrimary,
-    primaryColorDark: ColorManager.darkPrimary,
-    disabledColor: ColorManager.grey1,
-    // card view theme
+    primaryColor: primary,
+    primaryColorDark: primaryVariant,
+    primaryColorLight: secondary,
+    colorScheme: ColorScheme(
+      primary: primary,
+      secondary: secondary,
+      surface: surface,
+      error: error,
+      onPrimary: onPrimary,
+      onSecondary: onSecondary,
+      onSurface: onSurface,
+      onError: onError,
+      brightness: darkTheme ? Brightness.dark : Brightness.light,
+    ),
+    scaffoldBackgroundColor: background,
+    disabledColor: grey,
     cardTheme: CardTheme(
-        color: ColorManager.grey,
-        shadowColor: ColorManager.grey,
-        elevation: AppSize.s4),
-    // app bar theme
+      color: surface,
+      shadowColor: darkGrey,
+      elevation: AppSize.s4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSize.s8),
+      ),
+    ),
     appBarTheme: AppBarTheme(
-        centerTitle: true,
-        color: ColorManager.primary,
-        elevation: AppSize.s4,
-        shadowColor: ColorManager.lightPrimary,
-        titleTextStyle:
-            getRegularStyle(fontSize: FontSize.s16, color: textColor)),
-    // button theme
+      centerTitle: true,
+      color: primary,
+      elevation: AppSize.s4,
+      shadowColor: primaryVariant,
+      titleTextStyle: getRegularStyle(fontSize: FontSize.s16, color: onPrimary),
+    ),
     buttonTheme: ButtonThemeData(
-        shape: const StadiumBorder(),
-        disabledColor: ColorManager.grey1,
-        buttonColor: ColorManager.primary,
-        splashColor: ColorManager.lightPrimary),
-    // text theme
+      shape: const StadiumBorder(),
+      disabledColor: grey,
+      buttonColor: primary,
+      splashColor: secondary,
+    ),
     textTheme: TextTheme(
-        displayLarge: //used do not edit it
-            getMediumStyle(color: textColor, fontSize: FontSize.s32),
-        displayMedium:
-            getRegularStyle(color: textColor, fontSize: FontSize.s14),
-        displaySmall: getMediumStyle(
-            //subtitle1
-            color: textColor,
-            fontSize: FontSize.s14),
-        bodySmall: getBoldStyle(color: textColor, fontSize: FontSize.s16),
-        bodyLarge: getRegularStyle(color: textColor),
-        bodyMedium: getRegularStyle(
-            color: textColor,
-            fontSize: FontSize.s17,
-            fontStyle: FontStyle.italic) //used do not edit it
-        ),
-    // elevated button them
+      displayLarge: getMediumStyle(color: onBackground, fontSize: FontSize.s32),
+      displayMedium:
+          getRegularStyle(color: onBackground, fontSize: FontSize.s14),
+      displaySmall: getMediumStyle(color: onBackground, fontSize: FontSize.s14),
+      bodySmall: getBoldStyle(color: onBackground, fontSize: FontSize.s16),
+      bodyLarge: getRegularStyle(color: onBackground),
+      bodyMedium: getRegularStyle(
+          color: onBackground,
+          fontSize: FontSize.s17,
+          fontStyle: FontStyle.italic),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            textStyle:
-                getRegularStyle(color: textColor, fontSize: FontSize.s17),
-            backgroundColor: ColorManager.primary,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSize.s12)))),
-
-    // input decoration theme (text form field)
+      style: ElevatedButton.styleFrom(
+        textStyle: getRegularStyle(color: onPrimary, fontSize: FontSize.s17),
+        backgroundColor: primary,
+        foregroundColor: onPrimary,
+        disabledForegroundColor: onPrimary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSize.s12),
+        ),
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
-      // content padding
       contentPadding: const EdgeInsets.all(AppPadding.p8),
-      // hint style
-      hintStyle: getRegularStyle(color: textColor, fontSize: FontSize.s14),
-      // label style
-      labelStyle: getMediumStyle(color: textColor, fontSize: FontSize.s14),
-      // error style
-      errorStyle: getRegularStyle(color: ColorManager.error),
-      // enabled border style
+      hintStyle: getRegularStyle(color: grey, fontSize: FontSize.s14),
+      labelStyle: getMediumStyle(color: onBackground, fontSize: FontSize.s14),
+      errorStyle: getRegularStyle(color: error),
       enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorManager.grey, width: AppSize.s1_5),
-          borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
-      // focused border style
+        borderSide: BorderSide(color: grey, width: AppSize.s1_5),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+      ),
       focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-          borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
-      // error border style
+        borderSide: BorderSide(color: primary, width: AppSize.s1_5),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+      ),
       errorBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: ColorManager.error, width: AppSize.s1_5),
-          borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
-      // focused error border style
+        borderSide: BorderSide(color: error, width: AppSize.s1_5),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+      ),
       focusedErrorBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-          borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))),
+        borderSide: BorderSide(color: primary, width: AppSize.s1_5),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+      ),
     ),
   );
 }

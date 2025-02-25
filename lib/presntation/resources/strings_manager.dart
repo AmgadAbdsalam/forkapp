@@ -34,5 +34,10 @@ class AppStrings{
   static const save = "Save";
   static const arabic = "Arabic";
   static const english = "English";
+  static const mapWidth = " enter your width of map";
+  static const mapLength = " enter length of map";
+  static const configError = "Please enter valid number";
+  static const summit = "summit";
+
 
 }

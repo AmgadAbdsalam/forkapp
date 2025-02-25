@@ -26,7 +26,7 @@ class SplashViewState extends State<SplashView> {
             {
               // navigate to main screen
               if(mounted)
-              Navigator.pushReplacementNamed(context, Routes.onBoardingRoute)
+              Navigator.pushReplacementNamed(context, Routes.mainRoute)
             }
           else
             {
@@ -34,7 +34,7 @@ class SplashViewState extends State<SplashView> {
                 if(isOnBoardingScreenViewed){
                   // navigate to main screen
                   if(mounted)
-                  Navigator.pushReplacementNamed(context, Routes.onBoardingRoute)//TODO
+                  Navigator.pushReplacementNamed(context, Routes.loginRoute)//TODO
                 }else{
                   // navigate to main onBoarding
                   if(mounted)
@@ -63,10 +63,9 @@ class SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.primary,
+    return const Scaffold(
       body:
-          const Center(child: Image(image: AssetImage(ImageAssets.splashLogo))),
+          Center(child: Image(image: AssetImage(ImageAssets.splashLogo))),
     );
   }
 }

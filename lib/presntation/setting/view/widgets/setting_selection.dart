@@ -46,9 +46,9 @@ class SettingSelection extends StatelessWidget {
                       icon: Container(
                         height: double.infinity,
                         width: 40,
-                        color: ColorManager.primary,
+                        color: ColorManager.darkOnPrimary,
                         child: Icon(
-                          color: ColorManager.white,
+                          color: ColorManager.lightOnPrimary,
                           Icons.keyboard_arrow_down_sharp,
                         ),
                       ),

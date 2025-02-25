@@ -18,7 +18,7 @@ class SaveButton extends StatelessWidget {
                     topRight: Radius.circular(AppSize.s16)))),
             fixedSize: WidgetStateProperty.all(
                 Size(MediaQuery.sizeOf(context).width, 92)),
-            foregroundColor: WidgetStateProperty.all(ColorManager.white)),
+            foregroundColor: WidgetStateProperty.all(ColorManager.lightOnPrimary)),
         onPressed: () {},
         child: const Text(AppStrings.save));
   }
