@@ -108,25 +108,42 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, String>> addNode(NodeModel node) async {
     if (await _networkInfo.isConnected) {
-       try {
-      List<NodeModel> nodes = await _fetchMapData();
+      try {
+        List<NodeModel> nodes = await _fetchMapData();
 
-      nodes.add(NodeResponse.fromMap(node.toMap()));
-      print('object');
-      log(nodes.toString());
-      List<Map<String, dynamic>> nodesData =
-          nodes.map((node) => node.toMap()).toList();
-      await FirebaseFirestore.instance
-          .collection(Constant.mapCollection)
-          .doc(Constant.mapDoc)
-          .update({"nodes": FieldValue.arrayUnion(nodesData)});
-      return const Right(Constant.success);
-    } catch (e) {
-      log("Error loading node: $e");
-      return Left(Failure(0, "Error loading node: $e"));
-    }
+        nodes.add(NodeResponse.fromMap(node.toMap()));
+        List<Map<String, dynamic>> nodesData =
+            nodes.map((node) => node.toMap()).toList();
+        await FirebaseFirestore.instance
+            .collection(Constant.mapCollection)
+            .doc(Constant.mapDoc)
+            .update({"nodes": FieldValue.arrayUnion(nodesData)});
+        return const Right(Constant.success);
+      } catch (e) {
+        return Left(Failure(0, "Error loading node: $e"));
+      }
     } else {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> updateMap(List<NodeModel> notesList) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        List<Map<String, dynamic>> nodesData =
+            notesList.map((node) => node.toMap()).toList();
+
+        await FirebaseFirestore.instance
+            .collection(Constant.mapCollection)
+            .doc(Constant.mapDoc)
+            .update({"nodes": FieldValue.arrayUnion(nodesData)});
+            return const Right(Constant.success);
+      } catch (e) {
+        return Left(Failure(0, "Error loading node: $e"));
+      }
+    } else {
+            return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }

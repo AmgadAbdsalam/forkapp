@@ -12,7 +12,7 @@ class LoadNodeToFirebaseUsecase implements BaseUseCase<NodeModel, String> {
   LoadNodeToFirebaseUsecase(this._repository);
 
   @override
-  Future<Either<Failure, String>> execute(NodeModel input) {
+  Future<Either<Failure, String>const> execute(NodeModel input) {
     return _repository.addNode(input);
   }
 }

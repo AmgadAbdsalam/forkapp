@@ -6,7 +6,6 @@ import 'package:responsive/app/di.dart';
 import 'package:responsive/presntation/resources/assets_manager.dart';
 import 'package:responsive/presntation/resources/routes_manager.dart';
 
-import '../resources/color_manager.dart';
 import '../resources/constant_manager.dart';
 
 class SplashView extends StatefulWidget {
