@@ -2,7 +2,6 @@
 // onboarding models
 
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SliderObject {
   String title;
@@ -93,38 +92,4 @@ class ConfigStateModel{
       isWidthAndLengthValid ??this.isWidthAndLengthValid,
     );
   }
-}
-
-
-
-//man models
-
-//node model
-class NodeModel {
-  String nodeId;
-  List<String> neighborsList;
-  String nodeType;
-  Timestamp updatedTime;
-  int xAxis;
-  int yAxis;
-  NodeModel({
-    required this.nodeId,
-    required this.neighborsList,
-    required this.nodeType,
-    required this.updatedTime,
-    required this.xAxis,
-    required this.yAxis,
-  });
-
-   Map<String, dynamic> toMap() {
-    return {
-      'id': nodeId,
-      'neighbors': neighborsList,
-      'type': nodeType,
-      'updated_at': updatedTime,
-      'x': xAxis,
-      'y': yAxis,
-    };
-  }
-
 }

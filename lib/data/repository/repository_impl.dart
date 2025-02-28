@@ -10,6 +10,7 @@ import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/data/network/requests.dart';
 import 'package:responsive/data/respones/nodes_response.dart';
 import 'package:responsive/domain/models/models.dart';
+import 'package:responsive/domain/models/node_model.dart';
 import 'package:responsive/domain/repository/repository.dart';
 
 import '../data_source/remote_data_source.dart';

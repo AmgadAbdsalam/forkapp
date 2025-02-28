@@ -1,0 +1,39 @@
+//this is a temperory file has a code may be removed or add in another time don't delete it
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+Future<void> addTask(String robotID, List<String> path) async {
+  DatabaseReference ref = FirebaseDatabase.instance.ref('tasks/$robotID');
+  await ref.set({"id": robotID, "path": path});
+}
+//to delete use remove() or set() with null value
+signUp() async {
+  try {
+    final userCredential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: 'khaled@gmail.com',
+      password: '12345678',
+    );
+
+    log('User created: ${userCredential.user!.email}');
+  } on FirebaseAuthException catch (e) {
+    log('FirebaseAuthException: ${e.code} - ${e.message}');
+  } catch (e) {
+    log('Error: $e');
+  }
+}
+
+
+Future<void> readRealTimeDataOnce() async {
+  DatabaseReference ref =
+        FirebaseDatabase.instance.ref();
+        final snapshot = await ref.child('').get();
+  if (snapshot.exists) {
+    print(snapshot.value);
+  } else {
+    print('No data available.');
+  }
+}
+
