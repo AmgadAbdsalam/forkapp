@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:responsive/app/constant.dart';
 import 'package:responsive/data/mapper.dart';
 import 'package:responsive/data/network/error_handler.dart';
@@ -12,6 +13,7 @@ import 'package:responsive/data/respones/nodes_response.dart';
 import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/domain/models/node_model.dart';
 import 'package:responsive/domain/repository/repository.dart';
+import 'package:responsive/domain/use_cases/access_robot_usecase.dart';
 
 import '../data_source/remote_data_source.dart';
 import '../network/network_info.dart';
@@ -139,12 +141,28 @@ class RepositoryImpl implements Repository {
             .collection(Constant.mapCollection)
             .doc(Constant.mapDoc)
             .update({"nodes": FieldValue.arrayUnion(nodesData)});
-            return const Right(Constant.success);
+        return const Right(Constant.success);
       } catch (e) {
         return Left(Failure(0, "Error loading node: $e"));
       }
     } else {
-            return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, RobotRequest>> robotAccess() async {
+    try {
+      DatabaseReference ref =
+          FirebaseDatabase.instance.ref("/robots"); // حدد المسار فقط
+
+      DataSnapshot snapshot = await ref.get();
+      Map<String, dynamic> data =
+          Map<String, dynamic>.from(snapshot.value as Map);
+      RobotRequest robot = RobotRequest.fromJson(data);
+      return Right(robot);
+    } catch (e) {
+      return Left(Failure(1, 'there wase an error in cathing robots requests: $e'));
     }
   }
 }

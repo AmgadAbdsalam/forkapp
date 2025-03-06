@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive/presntation/add_robot/add_robot_view/add_robot_view.dart';
+import 'package:responsive/presntation/add_robot/cubit/add_robot_cubit.dart';
 import 'package:responsive/presntation/resources/strings_manager.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
@@ -22,6 +25,7 @@ class Routes {
   static const String storeDetailsRoute = "/storeDetails";
   static const String settingRoute = "/setting";
   static const String configuration = "/configuration";
+  static const String addRobot = "/addRobot";
 }
 
 class RouteGenerator {
@@ -41,7 +45,14 @@ class RouteGenerator {
       case Routes.settingRoute:
         return MaterialPageRoute(builder: (_) => const SettingView());
       case Routes.configuration:
-        return MaterialPageRoute(builder: (_)=>const ConfigView());
+        return MaterialPageRoute(builder: (_) => const ConfigView());
+      case Routes.addRobot:
+        return MaterialPageRoute(builder: (_) {
+          return BlocProvider(
+            create: (context) => AddRobotCubit(),
+            child: const AddRobotView(),
+          );
+        });
       default:
         return unDefinedRoute();
     }

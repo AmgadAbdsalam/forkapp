@@ -38,6 +38,7 @@ class AppStrings{
   static const mapLength = " enter length of map";
   static const configError = "Please enter valid number";
   static const summit = "summit";
+  static const robotCollection = "robot";
 
 
 }

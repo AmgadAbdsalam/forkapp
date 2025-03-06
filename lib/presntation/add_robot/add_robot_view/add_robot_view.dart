@@ -1,47 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FirebaseReadScreen extends StatefulWidget {
-  const FirebaseReadScreen({super.key});
+import 'package:responsive/presntation/add_robot/add_robot_view/widgets/robot_item.dart';
+import 'package:responsive/presntation/add_robot/cubit/add_robot_cubit.dart';
+import 'package:responsive/presntation/resources/values_manager.dart';
+
+class AddRobotView extends StatefulWidget {
+  const AddRobotView({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _FirebaseReadScreenState createState() => _FirebaseReadScreenState();
+  State<AddRobotView> createState() => _AddRobotViewState();
 }
 
-class _FirebaseReadScreenState extends State<FirebaseReadScreen> {
-  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref().child("robots");
-  Map<String, dynamic> robotsData = {};
-
+class _AddRobotViewState extends State<AddRobotView> {
   @override
   void initState() {
+    getRobots();
     super.initState();
-    // جلب البيانات عند التحديث
-    _dbRef.onValue.listen((event) {
-      if (event.snapshot.value != null) {
-        setState(() {
-          robotsData = Map<String, dynamic>.from(event.snapshot.value as Map);
-        });
-      }
-    });
+  }
+
+  Future<void> getRobots() async {
+    var cubit = BlocProvider.of<AddRobotCubit>(context);
+    await cubit.accessRobots();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("📡 بيانات الروبوتات")),
-      body: robotsData.isEmpty
-          ? Center(child: Text("لا توجد بيانات في قاعدة البيانات."))
-          : ListView(
-              children: robotsData.entries.map((entry) {
-                String robotId = entry.key;
-                Map data = entry.value;
-                return ListTile(
-                  title: Text("🤖 $robotId"),
-                  subtitle: Text("بيانات: ${data.toString()}"),
-                );
-              }).toList(),
-            ),
-    );
+    return Padding(
+        padding: const EdgeInsets.only(
+            top: AppPadding.p16, left: AppPadding.p8, right: AppPadding.p8),
+        child: BlocBuilder<AddRobotCubit, AddRobotState>(
+          builder: (context, state) {
+            return RefreshIndicator(
+              triggerMode: RefreshIndicatorTriggerMode.anywhere,
+              onRefresh: () async {
+                await getRobots(); // محاكاة تحميل البيانات
+              },
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: AppSize.s16,
+                ),
+                itemCount:
+                    BlocProvider.of<AddRobotCubit>(context).robots.length,
+                itemBuilder: (context, index) => RobotItem(
+                    robot:
+                        BlocProvider.of<AddRobotCubit>(context).robots[index]),
+              ),
+            );
+          },
+        ));
   }
 }
