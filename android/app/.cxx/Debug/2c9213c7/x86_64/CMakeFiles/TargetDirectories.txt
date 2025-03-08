@@ -1,0 +1,2 @@
+C:/Users/AMGAD/StudioProjects/fork/android/app/.cxx/Debug/2c9213c7/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/AMGAD/StudioProjects/fork/android/app/.cxx/Debug/2c9213c7/x86_64/CMakeFiles/rebuild_cache.dir
