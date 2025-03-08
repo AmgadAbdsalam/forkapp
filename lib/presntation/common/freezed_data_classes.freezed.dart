@@ -306,3 +306,168 @@ abstract class _ConfigObject implements ConfigObject {
   _$$ConfigObjectImplCopyWith<_$ConfigObjectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$HomeStateModel {
+  bool get isFree => throw _privateConstructorUsedError;
+  bool get isCharge => throw _privateConstructorUsedError;
+  bool get isBlocked => throw _privateConstructorUsedError;
+
+  /// Create a copy of HomeStateModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $HomeStateModelCopyWith<HomeStateModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HomeStateModelCopyWith<$Res> {
+  factory $HomeStateModelCopyWith(
+          HomeStateModel value, $Res Function(HomeStateModel) then) =
+      _$HomeStateModelCopyWithImpl<$Res, HomeStateModel>;
+  @useResult
+  $Res call({bool isFree, bool isCharge, bool isBlocked});
+}
+
+/// @nodoc
+class _$HomeStateModelCopyWithImpl<$Res, $Val extends HomeStateModel>
+    implements $HomeStateModelCopyWith<$Res> {
+  _$HomeStateModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of HomeStateModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isFree = null,
+    Object? isCharge = null,
+    Object? isBlocked = null,
+  }) {
+    return _then(_value.copyWith(
+      isFree: null == isFree
+          ? _value.isFree
+          : isFree // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCharge: null == isCharge
+          ? _value.isCharge
+          : isCharge // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBlocked: null == isBlocked
+          ? _value.isBlocked
+          : isBlocked // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$HomeStateModelImplCopyWith<$Res>
+    implements $HomeStateModelCopyWith<$Res> {
+  factory _$$HomeStateModelImplCopyWith(_$HomeStateModelImpl value,
+          $Res Function(_$HomeStateModelImpl) then) =
+      __$$HomeStateModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool isFree, bool isCharge, bool isBlocked});
+}
+
+/// @nodoc
+class __$$HomeStateModelImplCopyWithImpl<$Res>
+    extends _$HomeStateModelCopyWithImpl<$Res, _$HomeStateModelImpl>
+    implements _$$HomeStateModelImplCopyWith<$Res> {
+  __$$HomeStateModelImplCopyWithImpl(
+      _$HomeStateModelImpl _value, $Res Function(_$HomeStateModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeStateModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isFree = null,
+    Object? isCharge = null,
+    Object? isBlocked = null,
+  }) {
+    return _then(_$HomeStateModelImpl(
+      null == isFree
+          ? _value.isFree
+          : isFree // ignore: cast_nullable_to_non_nullable
+              as bool,
+      null == isCharge
+          ? _value.isCharge
+          : isCharge // ignore: cast_nullable_to_non_nullable
+              as bool,
+      null == isBlocked
+          ? _value.isBlocked
+          : isBlocked // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$HomeStateModelImpl implements _HomeStateModel {
+  _$HomeStateModelImpl(this.isFree, this.isCharge, this.isBlocked);
+
+  @override
+  final bool isFree;
+  @override
+  final bool isCharge;
+  @override
+  final bool isBlocked;
+
+  @override
+  String toString() {
+    return 'HomeStateModel(isFree: $isFree, isCharge: $isCharge, isBlocked: $isBlocked)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HomeStateModelImpl &&
+            (identical(other.isFree, isFree) || other.isFree == isFree) &&
+            (identical(other.isCharge, isCharge) ||
+                other.isCharge == isCharge) &&
+            (identical(other.isBlocked, isBlocked) ||
+                other.isBlocked == isBlocked));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isFree, isCharge, isBlocked);
+
+  /// Create a copy of HomeStateModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$HomeStateModelImplCopyWith<_$HomeStateModelImpl> get copyWith =>
+      __$$HomeStateModelImplCopyWithImpl<_$HomeStateModelImpl>(
+          this, _$identity);
+}
+
+abstract class _HomeStateModel implements HomeStateModel {
+  factory _HomeStateModel(
+          final bool isFree, final bool isCharge, final bool isBlocked) =
+      _$HomeStateModelImpl;
+
+  @override
+  bool get isFree;
+  @override
+  bool get isCharge;
+  @override
+  bool get isBlocked;
+
+  /// Create a copy of HomeStateModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$HomeStateModelImplCopyWith<_$HomeStateModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

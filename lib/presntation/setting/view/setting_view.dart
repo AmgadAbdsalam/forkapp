@@ -6,9 +6,8 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: const Expanded(child: SettingSelection())
+    return const Scaffold(
+      body: SettingSelection()
     );
   }
 }

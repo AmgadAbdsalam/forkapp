@@ -28,55 +28,69 @@ class ConfigViewState extends ConsumerState<ConfigView>{
   @override
   Widget build(BuildContext context ){
     final result=ref.watch(configProvider);
-    return Form(
+    return SingleChildScrollView(
+      child: Form(
         key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.all(100.0),
-                child: customTextFormFiled(
-                    textEditingController: yLine,
-                    hintText: AppStrings.mapLength,
-                    errorText: AppStrings.configError,
-                    isValid: result.isLengthValid),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  controller: yLine,
+                  decoration: InputDecoration(
+                      hintText: AppStrings.mapLength,
+                      labelText: AppStrings.configError,
+                      errorText: (result.isLengthValid) ? null : AppStrings.configError),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 100,right: 100,left: 100),
-                child: customTextFormFiled(
-                    textEditingController: xLine,
-                    hintText: AppStrings.mapWidth,
-                    errorText: AppStrings.configError,
-                    isValid: result.isWidthValid),
-              ),
+                child:TextFormField(
+                  keyboardType: TextInputType.text,
+                  controller: xLine,
+                  decoration: InputDecoration(
+                      hintText: AppStrings.mapWidth,
+                      labelText: AppStrings.configError,
+                      errorText: (result.isWidthValid)
+                          ? null :
+                      AppStrings.configError),
+                )),
+                //   customTextFormFiled(
+              //       textEditingController: xLine,
+              //       hintText: AppStrings.mapWidth,
+              //       errorText: AppStrings.configError,
+              //       isValid: result.isWidthValid),
+              // ),
               ElevatedButton(
                 onPressed: result.isWidthAndLengthValid
                     ? () {
-                  ref.read(configProvider.notifier).summit(context);
+                  ref.watch(configProvider.notifier).summit(context);
                 }
                     : null,
                 child: const Text(AppStrings.summit),
               )
             ],
           ),
-        ),
-      );
+      ),
+    );
 
   }
-}
 
-Widget customTextFormFiled(
-    {required TextEditingController textEditingController,
-    required String hintText,
-    required String errorText,
-    required bool isValid}) {
-  return TextFormField(
-    keyboardType: TextInputType.number,
-    controller: textEditingController,
-    decoration: InputDecoration(
-        hintText: hintText,
-        labelText: hintText,
-        errorText: (isValid) ? null : AppStrings.configError),
-  );
+  Widget customTextFormFiled(
+      {required TextEditingController textEditingController,
+        required String hintText,
+        required String errorText,
+        required bool isValid}) {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      controller: textEditingController,
+      decoration: InputDecoration(
+          hintText: hintText,
+          labelText: hintText,
+          errorText: (isValid) ? null : AppStrings.configError),
+    );
+  }
+
 }
