@@ -18,7 +18,7 @@ class SettingSelection extends StatelessWidget {
       child: BlocBuilder<SettingCubit, SettingState>(
         builder: (context, state) {
           return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

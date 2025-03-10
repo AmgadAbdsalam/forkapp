@@ -161,7 +161,7 @@ class LoginViewState extends ConsumerState<LoginView> {
      ref.listen<LoginStateModel>(loginViewModelProvider, (previous,next){
       if(next.isUserSuccessfulLogin==true){
         _appPreferences.setUserLoggedIn();
-     WidgetsBinding.instance.addPostFrameCallback((_)=>Navigator.of(context).pushReplacementNamed(Routes.configuration)) ;
+     WidgetsBinding.instance.addPostFrameCallback((_)=>Navigator.of(context).pushReplacementNamed(Routes.mainRoute)) ;
       }
     });
     return  Scaffold(

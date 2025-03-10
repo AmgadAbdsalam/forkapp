@@ -23,18 +23,18 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
 
   @override
   setMapWidth(String mapWidth) {
-    configObject= configObject.copyWith(mapLength: mapWidth);
+    configObject= configObject.copyWith(mapWidth: mapWidth);
     _isMapWidthValid(mapWidth);
    _isMapLengthAndMapWidthValid();
   }
 
   @override
   summit(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(Routes.settingRoute);
+    Navigator.of(context).pushReplacementNamed(Routes.mainRoute,);
   }
 
   bool _isMapWidthValid(String mapWidth) {
-    var result=double.tryParse(mapWidth);
+   // var result=double.tryParse(mapWidth);
 
       state = state.copyWith(isWidthValid: mapWidth.isNotEmpty);
 
@@ -42,7 +42,7 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
   }
 
   bool _isMapLengthValid(String mapLength) {
-    var result=double.tryParse(mapLength);
+  //  var result=double.tryParse(mapLength);
       state = state.copyWith(isLengthValid: mapLength.isNotEmpty);
 
   return mapLength.isNotEmpty;
@@ -53,6 +53,10 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
     state=state.copyWith(isWidthAndLengthValid: result);
     return result;
   }
+  //  String  sendMapLength(WidgetRef ref){
+  //   ref.read(mapLengthProvider.notifier).state=configObject.mapLength;
+  //   return ref.read(mapLengthProvider.notifier).state;
+  // }
 
 
 }
@@ -67,3 +71,6 @@ abstract class ConfigViewModelInputs {
 
 final configProvider = StateNotifierProvider<ConfigViewModel,
     ConfigStateModel>((ref) => ConfigViewModel());
+
+//  provider used to send data to  homeScreen from configScreen
+final mapLengthProvider=StateProvider<String>((ref)=>'4');
