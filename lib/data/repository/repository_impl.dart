@@ -15,6 +15,8 @@ import 'package:responsive/domain/models/node_model.dart';
 import 'package:responsive/domain/repository/repository.dart';
 import 'package:responsive/domain/use_cases/access_robot_usecase.dart';
 
+import '../../domain/models/robot_model.dart';
+import '../../presntation/resources/strings_manager.dart';
 import '../data_source/remote_data_source.dart';
 import '../network/network_info.dart';
 
@@ -162,7 +164,34 @@ class RepositoryImpl implements Repository {
       RobotRequest robot = RobotRequest.fromJson(data);
       return Right(robot);
     } catch (e) {
-      return Left(Failure(1, 'there wase an error in cathing robots requests: $e'));
+      return Left(
+          Failure(1, 'there wase an error in cathing robots requests: $e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> addRobotToDatabase(RobotRequest robot) async {
+    String customID = robot.id;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    try {
+      await firestore.collection(AppStrings.robotCollection).doc(customID).set(
+          Robot(
+                  destination: '',
+                  hasError: false,
+                  isAvailable: true,
+                  isCarry: false,
+                  isCharging: false,
+                  location: '${robot.x}_${robot.y}',
+                  robotData: RobotData(
+                      batteryLevel: robot.batteryLevel,
+                      dimensions: Dimensions(height: 100, width: 100),
+                      macAddress: 'macAddress',
+                      maxWeight: 100))
+              .toJson());
+      await FirebaseDatabase.instance.ref("/robots").remove();
+      return const Right(Constant.success);
+    } catch (e) {
+      return Left(Failure(0, e.toString()));
     }
   }
 }

@@ -15,4 +15,5 @@ abstract class Repository {
   Future<Either<Failure, String>> updateMap(List<NodeModel> notesList);
   Future<Either<Failure, String>> addNode(NodeModel node);
   Future<Either<Failure, RobotRequest>> robotAccess();
+  Future<Either<Failure, String>> addRobotToDatabase(RobotRequest robot);
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive/presntation/add_robot/add_robot_view/add_robot_view.dart';
 import 'package:responsive/presntation/add_robot/cubit/add_robot_cubit.dart';
-import 'package:responsive/presntation/configration/config_view/config_view.dart';
 import 'package:responsive/presntation/home/home_view/home_view.dart';
 
 import '../setting/view/setting_view.dart';
@@ -17,11 +16,11 @@ class MainView extends StatefulWidget {
 class MainViewState extends State<MainView> {
   int _currentIndex = 0;
   final List<Widget> _screens =  [
-    HomeView(),
-    SettingView(),
+    const HomeView(),
+    const SettingView(),
     BlocProvider(
       create: (context) => AddRobotCubit(),
-      child: AddRobotView(),
+      child: const AddRobotView(),
     ),
   ];
   static const List<String> appBarText = [
