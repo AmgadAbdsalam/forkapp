@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive/presntation/add_robot/add_robot_view/add_robot_view.dart';
 import 'package:responsive/presntation/add_robot/cubit/add_robot_cubit.dart';
+import 'package:responsive/presntation/home/home_view/home_view.dart';
 import 'package:responsive/presntation/resources/strings_manager.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
@@ -38,8 +39,10 @@ class RouteGenerator {
       case Routes.loginRoute:
         initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
-      case Routes.mainRoute:
+      case Routes.mainRoute: 
         return MaterialPageRoute(builder: (_) => const MainView());
+      case Routes.homeRoute:
+        return MaterialPageRoute(builder: (_) => const HomeView());
       case Routes.storeDetailsRoute:
         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
       case Routes.settingRoute:
