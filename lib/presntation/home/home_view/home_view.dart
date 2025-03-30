@@ -1,7 +1,12 @@
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive/presntation/home/home_view/widget/custom_dialog.dart';
 import 'package:responsive/presntation/home/home_view_model/home_view_model.dart';
+import 'package:responsive/presntation/resources/assets_manager.dart';
+
+import '../../../domain/models/models.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
@@ -15,8 +20,8 @@ class HomeViewState extends ConsumerState<HomeView> {
   TransformationController();
 
   // User-defined number of icons in X and Y axes
-  int numIconsX = 3; // Number of columns
-  int numIconsY = 3; // Number of rows
+  int numIconsX = 5; // Number of columns
+  int numIconsY = 5; // Number of rows
 
   // Spacing and icon size
   double spacing = 150.0;
@@ -26,13 +31,15 @@ class HomeViewState extends ConsumerState<HomeView> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => ref.read(homeProvider.notifier).start(3, 3));
+    Future.microtask(() => ref.read(homeProvider.notifier).start(3, 5));
   }
+
 
   @override
   Widget build(BuildContext context) {
     double containerWidth = (numIconsX * spacing) + iconSize;
     double containerHeight = (numIconsY * spacing) + iconSize;
+    var nodes =ref.watch(homeProvider);
 
     return CustomScrollView(
       slivers: [
@@ -64,7 +71,8 @@ class HomeViewState extends ConsumerState<HomeView> {
                   color: Colors.white,
                   child: Stack(
                       children: [
-                      ...ref.watch(homeProvider).map((node) =>
+                        Positioned.fill(child: CustomPaint(painter: DottedLinePainter(nodes, spacing),)),
+                      ...nodes.map((node) =>
                       Positioned(
                           left: node.xAxis * spacing,
                           top: node.yAxis * spacing,
@@ -75,7 +83,7 @@ class HomeViewState extends ConsumerState<HomeView> {
                            });
                           },
                               icon:node.isFree ?
-                              const Icon(Icons.abc)  :node.isCharged ==  true? const Icon(Icons.access_alarm):const Icon(Icons.ac_unit_rounded)
+                              SvgPicture.asset(ImageAssets.freeImage,width: 50,height: 50,)  :node.isCharged ==  true? SvgPicture.asset(ImageAssets.chargedImage,width: 50,height: 50,):SvgPicture.asset(ImageAssets.blockedImage,width: 50,height: 50,)
                           )
                       ))
                     ],
@@ -89,4 +97,73 @@ class HomeViewState extends ConsumerState<HomeView> {
     );
   }
 }
+/*icon:node.isFree ?  SvgPicture.asset(ImageAssets.freeImage)  :node.isCharged ==  true? SvgPicture.asset(ImageAssets.chargedImage):SvgPicture.asset(ImageAssets.blockedImage)*/
+class DottedLinePainter extends CustomPainter {
+  final List<NodeModel> nodes;
+  final double spacing;
 
+  DottedLinePainter(this.nodes, this.spacing);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    final double dashWidth = 10;
+    final double dashSpace = 5;
+
+    for (var node in nodes) {
+      for (var otherNode in nodes) {
+        if ((node.xAxis - otherNode.xAxis).abs() == 1 &&
+            node.yAxis == otherNode.yAxis) {
+          // رسم الخط الأفقي
+          drawDottedLine(
+              canvas,
+              Offset(node.xAxis * spacing + 25, node.yAxis * spacing + 25),
+              Offset(otherNode.xAxis * spacing + 25,
+                  otherNode.yAxis * spacing + 25),
+              paint,
+              dashWidth,
+              dashSpace);
+        }
+
+        if ((node.yAxis - otherNode.yAxis).abs() == 1 &&
+            node.xAxis == otherNode.xAxis) {
+          // رسم الخط العمودي
+          drawDottedLine(
+              canvas,
+              Offset(node.xAxis * spacing + 25, node.yAxis * spacing + 25),
+              Offset(otherNode.xAxis * spacing + 25,
+                  otherNode.yAxis * spacing + 25),
+              paint,
+              dashWidth,
+              dashSpace);
+        }
+      }
+    }
+  }
+
+  void drawDottedLine(Canvas canvas, Offset start, Offset end, Paint paint,
+      double dashWidth, double dashSpace) {
+    double distance = (end - start).distance;
+    double dx = (end.dx - start.dx) / distance;
+    double dy = (end.dy - start.dy) / distance;
+    double startX = start.dx, startY = start.dy;
+
+    while (distance > 0) {
+      double currentDashWidth = distance < dashWidth ? distance : dashWidth;
+      canvas.drawLine(
+          Offset(startX, startY),
+          Offset(startX + dx * currentDashWidth, startY + dy * currentDashWidth),
+          paint);
+      startX += dx * (currentDashWidth + dashSpace);
+      startY += dy * (currentDashWidth + dashSpace);
+      distance -= (currentDashWidth + dashSpace);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}

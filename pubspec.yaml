@@ -87,6 +87,9 @@ flutter:
     - assets/json/empty.json
     - assets/json/error.json
     - assets/json/loading.json
+    - assets/images/blocked.svg
+    - assets/images/charged.svg
+    - assets/images/free.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

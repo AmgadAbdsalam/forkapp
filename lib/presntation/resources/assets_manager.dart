@@ -8,6 +8,9 @@ class ImageAssets{
   static const String onboardingLogo3='$imagePath/onboarding_logo3.svg';
   static const String onboardingLogo4='$imagePath/onboarding_logo4.svg';
   static const String robotImmage='$imagePath/robot.svg';
+  static const String freeImage='$imagePath/free.svg';
+  static const String blockedImage='$imagePath/blocked.svg';
+  static const String chargedImage='$imagePath/charged.svg';
 
 }
 class JsonAssets{

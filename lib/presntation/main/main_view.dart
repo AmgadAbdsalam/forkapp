@@ -27,6 +27,7 @@ class MainViewState extends ConsumerState<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       // appBar: _currentIndex == 0
       //     ? AppBar(
       //         title: Text(appBarText[_currentIndex]),

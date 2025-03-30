@@ -66,7 +66,7 @@ class ConfigViewState extends ConsumerState<ConfigView>{
               ElevatedButton(
                 onPressed: result.isWidthAndLengthValid
                     ? () {
-                  ref.watch(configProvider.notifier).summit(context);
+                  ref.read(configProvider.notifier).summit(context);
                 }
                     : null,
                 child: const Text(AppStrings.summit),

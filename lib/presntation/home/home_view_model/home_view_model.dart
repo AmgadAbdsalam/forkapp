@@ -37,7 +37,7 @@ class HomeViewModel extends StateNotifier<List<NodeModel>>
       case ('blocked'):
         {
           state[index] = state[index]
-              .copyWith(isFree: false, isBlocked: false, isCharged: true);
+              .copyWith(isFree: false, isBlocked: true, isCharged: false);
         }
     }
   }

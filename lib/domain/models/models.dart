@@ -158,19 +158,3 @@ class NodeModel {
   }
 }
 
-// home state Model
-// class HomeStateModel {
-//   final List<NodeModel> nodes;
-//   final bool isFree;
-//   final bool isCharged;
-//   final bool isBlocked;
-//   HomeStateModel(this.nodes, this.isFree, this.isCharged, this.isBlocked);
-//   HomeStateModel copyWith({List<NodeModel>? nodes,bool? isFree,bool? isCharged,bool? isBlocked}){
-//     return HomeStateModel(
-//       nodes ?? this.nodes,
-//       isFree ?? this.isFree,
-//       isCharged ??this.isCharged,
-//       isBlocked ?? this.isBlocked,
-//     );
-//   }
-// }
