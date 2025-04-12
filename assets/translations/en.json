@@ -1,0 +1,12 @@
+{
+    "app_name": "ForkApp",
+    "welcome_message": "Welcome to ForkApp!",
+    "login": "Login",
+    "logout": "Logout",
+    "settings": "Settings",
+    "language": "Language",
+    "error": {
+        "network": "Network error. Please try again.",
+        "unknown": "An unknown error occurred."
+    }
+}
