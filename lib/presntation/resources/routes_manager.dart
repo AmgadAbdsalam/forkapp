@@ -32,6 +32,7 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     initLoginModule();
+    initUpdateMapModule();
     switch (settings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashView());
@@ -49,6 +50,7 @@ class RouteGenerator {
       case Routes.settingRoute:
         return MaterialPageRoute(builder: (_) => const SettingView());
       case Routes.configuration:
+        initUpdateMapModule();
         return MaterialPageRoute(builder: (_) => const ConfigView());
       case Routes.addRobot:
         return MaterialPageRoute(builder: (_) {

@@ -54,6 +54,7 @@ class LoginViewModel extends StateNotifier<LoginStateModel> implements BaseViewM
     }, (data)
     {
       // right -> data (success)
+
       ref.read(flowStateMangerProvider.notifier).setContent();
       state= state.copyWith(isUserSuccessfulLogin: true,);
       print(state.isUserSuccessfulLogin);

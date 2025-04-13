@@ -1,10 +1,10 @@
-import 'package:analyzer/dart/ast/ast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive/presntation/home/home_view/widget/custom_dialog.dart';
 import 'package:responsive/presntation/home/home_view_model/home_view_model.dart';
 import 'package:responsive/presntation/resources/assets_manager.dart';
+import 'package:responsive/presntation/resources/routes_manager.dart';
 
 import '../../../domain/models/models.dart';
 
@@ -43,10 +43,13 @@ class HomeViewState extends ConsumerState<HomeView> {
 
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
+         SliverAppBar(
+          actions: [IconButton(onPressed: (){
+            Navigator.of(context).pushNamed(Routes.configuration);
+          }, icon: const Icon(Icons.confirmation_num))],
           pinned: true,
-          title: Text(
-            'Configuration',
+          title: const Text(
+            'Home',
           ),
           centerTitle: false,
         ),
@@ -111,8 +114,8 @@ class DottedLinePainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    final double dashWidth = 10;
-    final double dashSpace = 5;
+    const double dashWidth = 10;
+    const double dashSpace = 5;
 
     for (var node in nodes) {
       for (var otherNode in nodes) {

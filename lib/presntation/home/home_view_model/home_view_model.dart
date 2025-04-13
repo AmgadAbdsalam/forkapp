@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../app/di.dart';
 import '../../../domain/models/models.dart';
 
 class HomeViewModel extends StateNotifier<List<NodeModel>>
@@ -9,6 +10,8 @@ class HomeViewModel extends StateNotifier<List<NodeModel>>
 
   @override
   void start(int numIconsX, int numIconsY) {
+
+    initUpdateMapModule();
     state = List.generate(numIconsX * numIconsY, (index) {
       return NodeModel(
           nodeId: index,

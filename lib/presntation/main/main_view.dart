@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:responsive/presntation/configration/config_view/config_view.dart';
 import 'package:responsive/presntation/home/home_view/home_view.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
+
+import '../add_robot/add_robot_view/add_robot_view.dart';
 
 class MainView extends ConsumerStatefulWidget {
   const MainView({super.key});
@@ -16,12 +17,12 @@ class MainViewState extends ConsumerState<MainView> {
   final List<Widget> _screens = const [
     HomeView(),
     SettingView(),
-    ConfigView(),
+    AddRobotView(),
   ];
   static const List<String> appBarText = [
     'Home',
     'Setting',
-    'Configuration',
+    'Add Robot',
   ];
 
   @override
@@ -55,7 +56,7 @@ class MainViewState extends ConsumerState<MainView> {
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Settings'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.control_point), label: 'Configuration'),
+              icon: Icon(Icons.control_point), label: 'Add Robot'),
         ],
         currentIndex: _currentIndex,
       ),
