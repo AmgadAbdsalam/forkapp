@@ -38,7 +38,5 @@ static const Map<String,dynamic> _en = {
     "unknown": "An unknown error occurred."
   }
 };
-
-
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }
