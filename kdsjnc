@@ -1,0 +1,211 @@
+[33mcommit 8b8f7cb13fcebb4989fad80e3d4049ede88cdd59[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sun Apr 13 15:45:03 2025 +0200
+
+    add logic map screen and upload data to firebase
+
+[33mcommit 8129f196d8aa2888e23ea1f6243880640038e99d[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sun Mar 30 15:23:18 2025 +0200
+
+    edit map screen and change icon
+
+[33mcommit 7d4af1cd8f77b0623c2fa39ae0e45ff0a717fb55[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Tue Mar 11 02:06:51 2025 +0200
+
+    fix a bug
+
+[33mcommit 765aeeb13ce2a67afe33c7b860ec873bd91f42cf[m
+Merge: ed1cbdc e93e95e
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Mon Mar 10 13:47:46 2025 +0200
+
+    merge code
+
+[33mcommit ed1cbdcd770de6ac3b5752aa1e10b11c2430a119[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Mon Mar 10 13:36:42 2025 +0200
+
+    add robot to database
+
+[33mcommit e93e95ef2ce6d2dbbcd1d0f90a157edf68a75c52[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sun Mar 9 13:13:46 2025 +0200
+
+    add map screen 1
+
+[33mcommit 8c36a25553e99ca1937628b89763fdcbe797f904[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sat Mar 8 22:50:12 2025 +0200
+
+    add map screen
+
+[33mcommit 8bddebd2638212166068f7360e6de3d8a653337a[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sat Mar 8 22:43:13 2025 +0200
+
+    add map screen
+
+[33mcommit 6416d52cd5e48a82c551af0376ff2ab0472de0da[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Thu Mar 6 03:49:22 2025 +0200
+
+    create add_robot_view
+
+[33mcommit 596c38d61f7519a440352b3dd00b4e71c06f6d9a[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Sat Mar 1 01:53:49 2025 +0200
+
+    refactor code
+
+[33mcommit 3ea1a68b21906bdc1fb71aeccdd6277d980abe92[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Thu Feb 27 17:10:24 2025 +0200
+
+    add UpdateMapUsecase
+
+[33mcommit c78a0b148e8df151c9f984e2cbc4b5dd373da47e[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Tue Feb 25 19:16:56 2025 +0200
+
+    add theme
+
+[33mcommit 43518419d43142835ae4db0ccc1936a5700235d8[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Mon Feb 24 22:57:38 2025 +0200
+
+    create add node usecase
+
+[33mcommit efc1b6ba5ec694abeab49d9b69270ce20eed3f7b[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Mon Feb 24 17:34:39 2025 +0200
+
+    create nodes data logic
+
+[33mcommit 0bec331c2f8de55771ac87b70c2da693b0db02f2[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Sun Feb 23 14:43:53 2025 +0200
+
+    fix pug
+
+[33mcommit 854ca7ed47cb7f5fb17336dcfacba3edaff5e5bd[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Fri Feb 21 20:00:01 2025 +0200
+
+    add firebase auth
+
+[33mcommit 0109cc4e439292c25fe93099c8f6e0408caeb2a1[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Fri Feb 21 16:29:24 2025 +0200
+
+    fix login
+
+[33mcommit 910a9203d8455a1f288b227872c672c52cfcc1d3[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Fri Feb 21 15:36:54 2025 +0200
+
+    add firebase
+
+[33mcommit 7c4a1035db2de8c68fda75c42a1d47418960f567[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Wed Feb 5 15:23:24 2025 +0200
+
+    fix fix
+
+[33mcommit e7d1e53e6ea5e5340dd11cd7c0d55c092848d79f[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Wed Feb 5 15:16:02 2025 +0200
+
+    fix fix
+
+[33mcommit c55597c21096a52f8e36cf831f699d563d3daff1[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Wed Feb 5 00:30:22 2025 +0200
+
+    edit setting view
+
+[33mcommit ede16d0f8d3387a20ffd8e8c073421b63c5f3c9f[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Wed Feb 5 00:27:44 2025 +0200
+
+    fix dark theme text color
+
+[33mcommit 43660e4e321b059bd836753fd631564db17f7ab8[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Wed Feb 5 00:13:57 2025 +0200
+
+    control setting screen by cubit and make dark theme code
+
+[33mcommit 49213846ebf6e9bec62bb8364fa7f4d5f475106e[m
+Merge: f4a8598 74cf5ff
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Tue Feb 4 13:00:55 2025 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit f4a8598cd3518828fd0b4e27a21609df8764859a[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Tue Feb 4 12:58:30 2025 +0200
+
+    change onBoarding 1
+
+[33mcommit 74cf5ffb71578328df4bf4478a04ad9927302f94[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Mon Feb 3 01:23:57 2025 +0200
+
+    refactor setiing
+
+[33mcommit 13e7eff7e9fc3a7b34079dbcd90fe6e96a48959e[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sun Feb 2 15:02:06 2025 +0200
+
+    fix splash
+
+[33mcommit 5759f645d015b81587592acea81fd341d91ce778[m
+Author: khaledgomah <khaledgomah10@gmail.com>
+Date:   Sun Feb 2 02:05:58 2025 +0200
+
+    add setting screen and make some edits
+
+[33mcommit e5f76e853f53730f823fd1d9b821e726817aacc5[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sat Feb 1 14:06:24 2025 +0200
+
+    first commit
+
+[33mcommit 9bf6fb58011cec5aa8c761fd0f22b4baeff8f7f4[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sat Feb 1 14:04:07 2025 +0200
+
+    initial commit
+
+[33mcommit 189c27b505f4dfcf724dc756b5f5b6d1bc210a8c[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sat Feb 1 13:59:54 2025 +0200
+
+    first commit
+
+[33mcommit 399cacd63292bfb6de28b0487de95d345a103cb8[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sat Feb 1 13:57:51 2025 +0200
+
+    first commit
+
+[33mcommit 4210691d83a92b9986768f19ea4011d29c5d8059[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sat Feb 1 13:56:17 2025 +0200
+
+    first commit
+
+[33mcommit 2a734bca6124db5cec668f57fda650cfcea95068[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Sat Feb 1 13:37:40 2025 +0200
+
+    first commit
+
+[33mcommit 899f9b477e50c116211061db7e77cefa1f71cda3[m
+Author: Amgad <amgadabdsalam2002@gmail.com>
+Date:   Wed Jan 29 19:44:49 2025 +0200
+
+    ok
