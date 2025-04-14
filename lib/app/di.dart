@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
-import 'package:responsive/domain/use_cases/add_robot_to_database_usecase.dart';
 import 'package:responsive/domain/use_cases/login_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

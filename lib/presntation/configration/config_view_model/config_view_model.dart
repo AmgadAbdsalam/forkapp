@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/di.dart';
-import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/domain/use_cases/update_map_usecase.dart';
 import 'package:responsive/presntation/resources/routes_manager.dart';
