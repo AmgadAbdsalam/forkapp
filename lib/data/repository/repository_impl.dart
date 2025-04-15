@@ -142,7 +142,7 @@ class RepositoryImpl implements Repository {
         await FirebaseFirestore.instance
             .collection(Constant.mapCollection)
             .doc(Constant.mapDoc)
-            .update({"nodes": FieldValue.arrayUnion(nodesData)});
+            .set({"nodes": FieldValue.arrayUnion(nodesData)});
         return const Right(Constant.success);
       } catch (e) {
         return Left(Failure(0, "Error loading node: $e"));
@@ -193,5 +193,41 @@ class RepositoryImpl implements Repository {
     } catch (e) {
       return Left(Failure(0, e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, String>> editNode(NodeModel target) async {
+    try {
+      int targetIndex = -1;
+      List<NodeModel> nodes = await _fetchMapData();
+      targetIndex = _findTargetNode(nodes, target, targetIndex);
+      List<NodeModel> editedMap = _editNodeList(nodes, target, targetIndex);
+      await updateMap(editedMap);
+      return const Right(Constant.success);
+    } catch (e) {
+      return Left(Failure(0, "Error Editing node: $e"));
+    }
+  }
+
+  List<NodeModel> _editNodeList(
+      List<NodeModel> nodes, NodeModel target, int targetIndex) {
+    List<Map<String, dynamic>> mapData =
+        nodes.map((node) => node.toMap()).toList();
+    Map<String, dynamic> nodeData = target.toMap();
+    mapData[targetIndex] = nodeData;
+    List<NodeModel> editedMap =
+        mapData.map((node) => NodeResponse.fromMap(node)).toList();
+    return editedMap;
+  }
+
+  int _findTargetNode(
+      List<NodeModel> nodes, NodeModel target, int targetIndex) {
+    for (int i = 0; i < nodes.length; i++) {
+      if (nodes[i].xAxis == target.xAxis && nodes[i].yAxis == target.yAxis) {
+        targetIndex = i;
+        break;
+      }
+    }
+    return targetIndex;
   }
 }
