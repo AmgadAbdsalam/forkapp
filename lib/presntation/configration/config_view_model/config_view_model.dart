@@ -11,10 +11,18 @@ import '../../base/base_view_model.dart';
 import '../../common/freezed_data_classes.dart';
 
 class ConfigViewModel extends StateNotifier<ConfigStateModel>
-    implements ConfigViewModelInputs {
+    implements ConfigViewModelInputs,BaseViewModel {
   ConfigViewModel(this._updateMapUsecase) :super(ConfigStateModel(true, true, false));
   var configObject = ConfigObject('1', '1');
 final UpdateMapUsecase _updateMapUsecase;
+
+
+  @override
+  void start() {
+   state=state.copyWith(isWidthAndLengthValid: false);
+  }
+
+
   @override
   setMapLength(String mapLength) {
     configObject= configObject.copyWith(mapLength: mapLength);
@@ -34,9 +42,9 @@ final UpdateMapUsecase _updateMapUsecase;
 
   @override
   summit(BuildContext context,WidgetRef ref) async{
-  int mapWidth=double.tryParse(configObject.mapWidth)!.round() ;
+    ref.read(flowStateMangerProvider.notifier).setLoading();
+    int mapWidth=double.tryParse(configObject.mapWidth)!.round() ;
   int mapLength=double.tryParse(configObject.mapLength)!.round() ;
-  ref.read(flowStateMangerProvider.notifier).setLoading();
    List<NodeModel> nodes= List.generate(mapWidth* mapLength, (index) {
       return NodeModel(
           nodeId: index,
@@ -53,7 +61,8 @@ final UpdateMapUsecase _updateMapUsecase;
     print(failure.message);
     print('errrrrrrrrrrrrorrrrr');
   }, (data){
-    Navigator.of(context).pushReplacementNamed(Routes.mainRoute,);
+   ref.read(flowStateMangerProvider.notifier).setContent();
+   WidgetsBinding.instance.addPostFrameCallback((_)=>Navigator.of(context).pop(Routes.mainRoute)) ;
     print('amggggggggggggggggggad');
   });
 
@@ -63,16 +72,16 @@ final UpdateMapUsecase _updateMapUsecase;
   bool _isMapWidthValid(String mapWidth) {
     var result=double.tryParse(mapWidth);
 
-      state = state.copyWith(isWidthValid: mapWidth.isNotEmpty && result!=null);
+      state = state.copyWith(isWidthValid: mapWidth.isNotEmpty );
 
-    return  mapWidth.isNotEmpty && result!=null;
+    return(  mapWidth.isNotEmpty && result!=null);
   }
 
   bool _isMapLengthValid(String mapLength) {
     var result=double.tryParse(mapLength);
       state = state.copyWith(isLengthValid: mapLength.isNotEmpty && result!=null);
 
-  return mapLength.isNotEmpty&& result!=null;
+  return (mapLength.isNotEmpty && result!=null);
   }
 
   bool _isMapLengthAndMapWidthValid() {
@@ -80,6 +89,9 @@ final UpdateMapUsecase _updateMapUsecase;
     state=state.copyWith(isWidthAndLengthValid: result);
     return result;
   }
+
+
+
   //  String  sendMapLength(WidgetRef ref){
   //   ref.read(mapLengthProvider.notifier).state=configObject.mapLength;
   //   return ref.read(mapLengthProvider.notifier).state;
@@ -89,6 +101,7 @@ final UpdateMapUsecase _updateMapUsecase;
 }
 
 abstract class ConfigViewModelInputs {
+
   setMapWidth(String mapWidth);
 
   setMapLength(String mapLength);
@@ -100,4 +113,3 @@ final configProvider = StateNotifierProvider<ConfigViewModel,
     ConfigStateModel>((ref) => ConfigViewModel(instance<UpdateMapUsecase>()));
 
 //  provider used to send data to  homeScreen from configScreen
-final mapLengthProvider=StateProvider<String>((ref)=>'4');

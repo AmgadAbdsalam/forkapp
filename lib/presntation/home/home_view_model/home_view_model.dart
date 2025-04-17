@@ -1,32 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:responsive/domain/use_cases/map_data_usecase.dart';
+import 'package:responsive/presntation/base/base_view_model.dart';
 
 import '../../../app/di.dart';
 import '../../../domain/models/models.dart';
 
-class HomeViewModel extends StateNotifier<List<NodeModel>>
+class HomeViewModel extends StateNotifier<HomeState>
     implements HomeViewInputs {
-  HomeViewModel() : super([]);
+  HomeViewModel(this.ref, this.mapDataUseCase) : super(HomeState.initial());
+  final Ref ref;
+  final MapDataUseCase mapDataUseCase;
 
   @override
   void start(int numIconsX, int numIconsY) {
 
-    initUpdateMapModule();
-    state = List.generate(numIconsX * numIconsY, (index) {
-      return NodeModel(
-          nodeId: index,
-          updatedTime: Timestamp.now(),
-          xAxis: index % numIconsX,
-          yAxis: index ~/ numIconsX,
-          isFree: true,
-          isCharged: false,
-          isBlocked: false);
-    });
+    getNodesFromFireBase();
   }
+
 
   @override
   updateIcon(int index, String dialogNodeText) {
-    switch (dialogNodeText) {
+    /*switch (dialogNodeText) {
       case ('free'):
         {
           state[index] = state[index]
@@ -42,15 +37,36 @@ class HomeViewModel extends StateNotifier<List<NodeModel>>
           state[index] = state[index]
               .copyWith(isFree: false, isBlocked: true, isCharged: false);
         }
-    }
+    }*/
   }
-}
 
-abstract class HomeViewInputs {
+  @override
+ void getNodesFromFireBase() async{
+    void dummy;
+    state = HomeState.loading();
+    final result = await mapDataUseCase.execute(dummy);
+
+    result.fold(
+          (failure) {
+        state = HomeState.error(failure.message);
+      },
+          (data) {
+        if (data.isEmpty) {
+          state = HomeState.empty('No data');
+        } else {
+          state = HomeState.success(data);
+        }
+      },
+    );
+  }
+ }
+
+  abstract class HomeViewInputs {
   void start(int numIconsX, int numIconsY);
+  getNodesFromFireBase();
 
   updateIcon(int index, String dialogNodeText);
 }
 
-final homeProvider = StateNotifierProvider<HomeViewModel, List<NodeModel>>(
-    (ref) => HomeViewModel());
+final homeProvider = StateNotifierProvider<HomeViewModel, HomeState>(
+    (ref) => HomeViewModel(ref,instance<MapDataUseCase>()));

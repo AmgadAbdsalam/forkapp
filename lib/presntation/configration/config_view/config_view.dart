@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/presntation/common/state_render/state_render_impl.dart';
 import 'package:responsive/presntation/configration/config_view_model/config_view_model.dart';
 
+import '../../../domain/models/models.dart';
 import '../../base/base_view_model.dart';
 import '../../resources/strings_manager.dart';
 
@@ -19,6 +20,9 @@ class ConfigViewState extends ConsumerState<ConfigView>{
   bind(){
     yLine.addListener(() => ref.read(configProvider.notifier).setMapLength(yLine.text));
     xLine.addListener(() => ref.read(configProvider.notifier).setMapWidth(xLine.text));
+    Future.microtask(()=>ref.read(flowStateMangerProvider.notifier).setContent()) ;
+    Future.microtask(()=>ref.read(configProvider.notifier).start()) ;
+
   }
 
   @override
@@ -79,7 +83,7 @@ class ConfigViewState extends ConsumerState<ConfigView>{
 
   @override
   Widget build(BuildContext context ){
-   
+
     return Scaffold(
       body: ref.watch(flowStateMangerProvider).getScreenWidget(context, _getContentWidget(), () {
         ref.read(configProvider.notifier).summit(context, ref);

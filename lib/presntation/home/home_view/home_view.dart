@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:responsive/presntation/base/base_view_model.dart';
+import 'package:responsive/presntation/common/state_render/state_render_impl.dart';
 import 'package:responsive/presntation/home/home_view/widget/custom_dialog.dart';
 import 'package:responsive/presntation/home/home_view_model/home_view_model.dart';
 import 'package:responsive/presntation/resources/assets_manager.dart';
@@ -34,29 +37,10 @@ class HomeViewState extends ConsumerState<HomeView> {
     Future.microtask(() => ref.read(homeProvider.notifier).start(3, 5));
   }
 
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _contentHomeWidget(List <NodeModel> nodes){
     double containerWidth = (numIconsX * spacing) + iconSize;
     double containerHeight = (numIconsY * spacing) + iconSize;
-    var nodes =ref.watch(homeProvider);
-
-    return CustomScrollView(
-      slivers: [
-         SliverAppBar(
-          actions: [IconButton(onPressed: (){
-            Navigator.of(context).pushNamed(Routes.configuration);
-          }, icon: const Icon(Icons.confirmation_num))],
-          pinned: true,
-          title: const Text(
-            'Home',
-          ),
-          centerTitle: false,
-        ),
-        const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 10,
-            )),
+    return
         SliverFillRemaining(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -73,33 +57,66 @@ class HomeViewState extends ConsumerState<HomeView> {
                   height: containerHeight,
                   color: Colors.white,
                   child: Stack(
-                      children: [
-                        Positioned.fill(child: CustomPaint(painter: DottedLinePainter(nodes, spacing),)),
+                    children: [
+                      Positioned.fill(child: CustomPaint(painter: DottedLinePainter(nodes, spacing),)),
                       ...nodes.map((node) =>
-                      Positioned(
-                          left: node.xAxis * spacing,
-                          top: node.yAxis * spacing,
-                          child: IconButton(onPressed: () {
-                           showDialog(context: context, builder: (BuildContext context)=>CustomDialog(nodeModel: node,)).then((_){
-                             setState(() {
-                             });
-                           });
-                          },
-                              icon:node.isFree ?
-                              SvgPicture.asset(ImageAssets.freeImage,width: 50,height: 50,)  :node.isCharged ==  true? SvgPicture.asset(ImageAssets.chargedImage,width: 50,height: 50,):SvgPicture.asset(ImageAssets.blockedImage,width: 50,height: 50,)
-                          )
-                      ))
+                          Positioned(
+                              left: node.xAxis * spacing,
+                              top: node.yAxis * spacing,
+                              child: IconButton(onPressed: () {
+                                showDialog(context: context, builder: (BuildContext context)=>CustomDialog(nodeModel: node,)).then((_){
+                                  setState(() {
+                                  });
+                                });
+                              },
+                                  icon:node.isFree ?
+                                  SvgPicture.asset(ImageAssets.freeImage,width: 50,height: 50,)  :node.isCharged ==  true? SvgPicture.asset(ImageAssets.chargedImage,width: 50,height: 50,):SvgPicture.asset(ImageAssets.blockedImage,width: 50,height: 50,)
+                              )
+                          ))
                     ],
                   ),
                 ),
               ),
             ),
           ),
+            );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    final homeState= ref.watch(homeProvider);
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          actions: [IconButton(onPressed: (){
+            Navigator.of(context).pushNamed(Routes.configuration);
+          }, icon: const Icon(Icons.confirmation_num))],
+          pinned: true,
+          title: const Text(
+            'Home',
+          ),
+          centerTitle: false,
         ),
+        const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 10,
+            )),
+        homeState.isLoading
+            ? const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()))
+            : homeState.isEmpty
+            ? const Center(child: Text('No data available'))
+            : homeState.errorMessage.isNotEmpty
+            ? Center(child: Text(homeState.errorMessage))
+            : _contentHomeWidget(homeState.nodes)
       ],
-    );
+    )
+    ;
   }
 }
+
+
+
 /*icon:node.isFree ?  SvgPicture.asset(ImageAssets.freeImage)  :node.isCharged ==  true? SvgPicture.asset(ImageAssets.chargedImage):SvgPicture.asset(ImageAssets.blockedImage)*/
 class DottedLinePainter extends CustomPainter {
   final List<NodeModel> nodes;
@@ -170,3 +187,4 @@ class DottedLinePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
+

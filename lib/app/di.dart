@@ -10,6 +10,7 @@ import '../data/network/dio_factory.dart';
 import '../data/network/network_info.dart';
 import '../data/repository/repository_impl.dart';
 import '../domain/repository/repository.dart';
+import '../domain/use_cases/map_data_usecase.dart';
 import '../domain/use_cases/update_map_usecase.dart';
 import 'app_prefs.dart';
 
@@ -25,6 +26,7 @@ Future<void> initAppModule() async {
 
   // app prefs instance
   instance.registerLazySingleton<AppPreferences>(() => AppPreferences(instance<SharedPreferences>()));
+
 
   // network info
   instance.registerLazySingleton<NetworkInfo>(
@@ -56,6 +58,13 @@ Future<void> initLoginModule() async {
 Future<void> initUpdateMapModule() async {
   if(!GetIt.I.isRegistered<UpdateMapUsecase>()){
     instance.registerFactory<UpdateMapUsecase>(()=>UpdateMapUsecase(instance<Repository>()));
+
+  }
+}
+
+Future<void> initMapDataModule() async {
+  if(!GetIt.I.isRegistered<MapDataUseCase>()){
+    instance.registerFactory<MapDataUseCase>(()=>MapDataUseCase(instance<Repository>()));
 
   }
 }

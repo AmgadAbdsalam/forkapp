@@ -12,7 +12,7 @@ final NodeModel nodeModel;
   Widget build(BuildContext context,WidgetRef ref) {
     return  ListTile(
       leading: TextButton(onPressed: () {
-       ref.read(homeProvider.notifier).updateIcon(nodeModel.nodeId, textNodeType);
+      // ref.read(homeProvider.notifier).updateIcon(nodeModel.nodeId, textNodeType);
        Navigator.of(context).pop();
       }, child:  Text(textNodeType)),
       trailing:(nodeModel.isFree==true && textNodeType =='free')||

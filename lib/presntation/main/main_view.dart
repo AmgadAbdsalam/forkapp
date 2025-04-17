@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/presntation/home/home_view/home_view.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
+import '../../app/di.dart';
 import '../add_robot/add_robot_view/add_robot_view.dart';
 
 class MainView extends ConsumerStatefulWidget {
@@ -13,6 +14,12 @@ class MainView extends ConsumerStatefulWidget {
 }
 
 class MainViewState extends ConsumerState<MainView> {
+  @override
+  void initState() {
+    initMapDataModule();
+    initUpdateMapModule();
+    super.initState();
+  }
   int _currentIndex = 0;
   final List<Widget> _screens = const [
     HomeView(),

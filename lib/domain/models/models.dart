@@ -158,3 +158,76 @@ class NodeModel {
   }
 }
 
+// home state model
+class HomeState {
+  final List<NodeModel> nodes;
+  final bool isLoading;
+  final String errorMessage;
+  final bool isEmpty;
+
+  HomeState({
+    required this.nodes,
+    required this.isLoading,
+    required this.errorMessage,
+    required this.isEmpty,
+  });
+
+  factory HomeState.initial() {
+    return HomeState(
+      nodes: [],
+      isLoading: false,
+      errorMessage: '',
+      isEmpty: false,
+    );
+  }
+
+  factory HomeState.loading() {
+    return HomeState(
+      nodes: [],
+      isLoading: true,
+      errorMessage: '',
+      isEmpty: false,
+    );
+  }
+
+  factory HomeState.success(List<NodeModel> nodes) {
+    return HomeState(
+      nodes: nodes,
+      isLoading: false,
+      errorMessage: '',
+      isEmpty: false,
+    );
+  }
+
+  factory HomeState.error(String message) {
+    return HomeState(
+      nodes: [],
+      isLoading: false,
+      errorMessage: message,
+      isEmpty: false,
+    );
+  }
+
+  factory HomeState.empty(String message) {
+    return HomeState(
+      nodes: [],
+      isLoading: false,
+      errorMessage: '',
+      isEmpty: true,
+    );
+  }
+
+  HomeState copyWith({
+    List<NodeModel>? nodes,
+    bool? isLoading,
+    String? errorMessage,
+    bool? isEmpty,
+  }) {
+    return HomeState(
+      nodes: nodes ?? this.nodes,
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: errorMessage ?? this.errorMessage,
+      isEmpty: isEmpty ?? this.isEmpty,
+    );
+  }
+}

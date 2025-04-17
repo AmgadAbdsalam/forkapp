@@ -169,7 +169,7 @@ class LoginViewState extends ConsumerState<LoginView> {
       body:ref
           .watch(flowStateMangerProvider)
           .getScreenWidget(context, _getContentWidget(), () {
-        ref.watch(loginViewModelProvider.notifier).login();
+        ref.read(loginViewModelProvider.notifier).login();
       }),
     );
   }
