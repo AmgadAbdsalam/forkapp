@@ -10,7 +10,7 @@ class LoginObject with _$LoginObject{
 // map parameter
 @freezed
 class ConfigObject with _$ConfigObject{
-  factory ConfigObject (String  mapWidth ,String mapLength)=_ConfigObject;
+  factory ConfigObject (String?  mapWidth ,String? mapLength)=_ConfigObject;
 }
 
 // map icon state

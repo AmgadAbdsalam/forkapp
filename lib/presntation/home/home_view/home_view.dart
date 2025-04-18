@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:responsive/presntation/base/base_view_model.dart';
-import 'package:responsive/presntation/common/state_render/state_render_impl.dart';
+
 import 'package:responsive/presntation/home/home_view/widget/custom_dialog.dart';
 import 'package:responsive/presntation/home/home_view_model/home_view_model.dart';
 import 'package:responsive/presntation/resources/assets_manager.dart';
@@ -105,9 +103,9 @@ class HomeViewState extends ConsumerState<HomeView> {
         homeState.isLoading
             ? const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()))
             : homeState.isEmpty
-            ? const Center(child: Text('No data available'))
+            ? const SliverToBoxAdapter(child: Text('No data available'))
             : homeState.errorMessage.isNotEmpty
-            ? Center(child: Text(homeState.errorMessage))
+            ? SliverToBoxAdapter(child: Center(child: Text(homeState.errorMessage)))
             : _contentHomeWidget(homeState.nodes)
       ],
     )

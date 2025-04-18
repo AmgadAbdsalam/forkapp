@@ -12,9 +12,9 @@ import '../../common/freezed_data_classes.dart';
 
 class ConfigViewModel extends StateNotifier<ConfigStateModel>
     implements ConfigViewModelInputs,BaseViewModel {
-  ConfigViewModel(this._updateMapUsecase) :super(ConfigStateModel(true, true, false));
-  var configObject = ConfigObject('1', '1');
-final UpdateMapUsecase _updateMapUsecase;
+  ConfigViewModel(this._updateMapUseCase) :super(ConfigStateModel(true, true, false));
+  var configObject = ConfigObject('0', '0');
+final UpdateMapUsecase _updateMapUseCase;
 
 
   @override
@@ -24,39 +24,37 @@ final UpdateMapUsecase _updateMapUsecase;
 
 
   @override
-  setMapLength(String mapLength) {
-    configObject= configObject.copyWith(mapLength: mapLength);
-
-    _isMapLengthValid(mapLength);
+  setMapLength(String? mapLength) {
+    _isMapLengthValid(mapLength)== false? state = state.copyWith(isLengthValid: false ) : state = state.copyWith(isLengthValid: true );
     _isMapLengthAndMapWidthValid();
 
   }
 
   @override
-  setMapWidth(String mapWidth) {
-    configObject= configObject.copyWith(mapWidth: mapWidth);
-    _isMapWidthValid(mapWidth);
-   _isMapLengthAndMapWidthValid();
+  setMapWidth(String? mapWidth) {
+    _isMapWidthValid(mapWidth)== false? state = state.copyWith(isWidthValid: false ) : state = state.copyWith(isWidthValid: true );
+    _isMapLengthAndMapWidthValid();
+
   }
 
 
   @override
   summit(BuildContext context,WidgetRef ref) async{
     ref.read(flowStateMangerProvider.notifier).setLoading();
-    int mapWidth=double.tryParse(configObject.mapWidth)!.round() ;
-  int mapLength=double.tryParse(configObject.mapLength)!.round() ;
+    int mapWidth=5;
+  int mapLength=4 ;
    List<NodeModel> nodes= List.generate(mapWidth* mapLength, (index) {
       return NodeModel(
           nodeId: index,
           updatedTime: Timestamp.now(),
           xAxis: index % mapWidth,
-          yAxis: index ~/ mapLength,
+          yAxis: index ~/ mapWidth,
           isFree: true,
           isCharged: false,
           isBlocked: false);
     });
 
-  ( await _updateMapUsecase.execute(nodes)).fold((failure){
+  ( await _updateMapUseCase.execute(nodes)).fold((failure){
     ref.read(flowStateMangerProvider.notifier).setError(failure.message);
     print(failure.message);
     print('errrrrrrrrrrrrorrrrr');
@@ -69,19 +67,36 @@ final UpdateMapUsecase _updateMapUsecase;
   }
 
 
-  bool _isMapWidthValid(String mapWidth) {
-    var result=double.tryParse(mapWidth);
+  bool _isMapWidthValid(String? mapWidth) {
+    configObject= configObject.copyWith(mapWidth: mapWidth);
+    if(mapWidth ==null  || mapWidth.trim().isEmpty )return false;
+    final positiveIntRegex = RegExp(r'^\d+$');
 
-      state = state.copyWith(isWidthValid: mapWidth.isNotEmpty );
-
-    return(  mapWidth.isNotEmpty && result!=null);
+    if (!positiveIntRegex.hasMatch(mapWidth)) return false;
+    try{
+      int value= int.parse(mapWidth) ;
+      state = state.copyWith(isWidthValid: true );
+      return value >= 0;
+    }catch(_){
+      state = state.copyWith(isWidthValid: false );
+      return false;
+    }
   }
 
-  bool _isMapLengthValid(String mapLength) {
-    var result=double.tryParse(mapLength);
-      state = state.copyWith(isLengthValid: mapLength.isNotEmpty && result!=null);
+  bool _isMapLengthValid(String? mapLength) {
+    configObject= configObject.copyWith(mapLength: mapLength);
+    if(mapLength == null  || mapLength.trim().isEmpty )return false;
+    final positiveIntRegex = RegExp(r'^\d+$');
 
-  return (mapLength.isNotEmpty && result!=null);
+    if (!positiveIntRegex.hasMatch(mapLength)) return false;
+    try{
+      int value= int.parse(mapLength) ;
+      state = state.copyWith(isLengthValid: true );
+      return value >= 0;
+    }catch(_){
+      state = state.copyWith(isLengthValid: false );
+      return false;
+    }
   }
 
   bool _isMapLengthAndMapWidthValid() {
@@ -91,20 +106,13 @@ final UpdateMapUsecase _updateMapUsecase;
   }
 
 
-
-  //  String  sendMapLength(WidgetRef ref){
-  //   ref.read(mapLengthProvider.notifier).state=configObject.mapLength;
-  //   return ref.read(mapLengthProvider.notifier).state;
-  // }
-
-
 }
 
 abstract class ConfigViewModelInputs {
 
-  setMapWidth(String mapWidth);
+  setMapWidth(String? mapWidth);
 
-  setMapLength(String mapLength);
+  setMapLength(String? mapLength);
 
   summit(BuildContext context,WidgetRef ref);
 }

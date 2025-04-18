@@ -162,8 +162,8 @@ abstract class _LoginObject implements LoginObject {
 
 /// @nodoc
 mixin _$ConfigObject {
-  String get mapWidth => throw _privateConstructorUsedError;
-  String get mapLength => throw _privateConstructorUsedError;
+  String? get mapWidth => throw _privateConstructorUsedError;
+  String? get mapLength => throw _privateConstructorUsedError;
 
   /// Create a copy of ConfigObject
   /// with the given fields replaced by the non-null parameter values.
@@ -178,7 +178,7 @@ abstract class $ConfigObjectCopyWith<$Res> {
           ConfigObject value, $Res Function(ConfigObject) then) =
       _$ConfigObjectCopyWithImpl<$Res, ConfigObject>;
   @useResult
-  $Res call({String mapWidth, String mapLength});
+  $Res call({String? mapWidth, String? mapLength});
 }
 
 /// @nodoc
@@ -196,18 +196,18 @@ class _$ConfigObjectCopyWithImpl<$Res, $Val extends ConfigObject>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? mapWidth = null,
-    Object? mapLength = null,
+    Object? mapWidth = freezed,
+    Object? mapLength = freezed,
   }) {
     return _then(_value.copyWith(
-      mapWidth: null == mapWidth
+      mapWidth: freezed == mapWidth
           ? _value.mapWidth
           : mapWidth // ignore: cast_nullable_to_non_nullable
-              as String,
-      mapLength: null == mapLength
+              as String?,
+      mapLength: freezed == mapLength
           ? _value.mapLength
           : mapLength // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -220,7 +220,7 @@ abstract class _$$ConfigObjectImplCopyWith<$Res>
       __$$ConfigObjectImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String mapWidth, String mapLength});
+  $Res call({String? mapWidth, String? mapLength});
 }
 
 /// @nodoc
@@ -236,18 +236,18 @@ class __$$ConfigObjectImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? mapWidth = null,
-    Object? mapLength = null,
+    Object? mapWidth = freezed,
+    Object? mapLength = freezed,
   }) {
     return _then(_$ConfigObjectImpl(
-      null == mapWidth
+      freezed == mapWidth
           ? _value.mapWidth
           : mapWidth // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == mapLength
+              as String?,
+      freezed == mapLength
           ? _value.mapLength
           : mapLength // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -258,9 +258,9 @@ class _$ConfigObjectImpl implements _ConfigObject {
   _$ConfigObjectImpl(this.mapWidth, this.mapLength);
 
   @override
-  final String mapWidth;
+  final String? mapWidth;
   @override
-  final String mapLength;
+  final String? mapLength;
 
   @override
   String toString() {
@@ -291,13 +291,13 @@ class _$ConfigObjectImpl implements _ConfigObject {
 }
 
 abstract class _ConfigObject implements ConfigObject {
-  factory _ConfigObject(final String mapWidth, final String mapLength) =
+  factory _ConfigObject(final String? mapWidth, final String? mapLength) =
       _$ConfigObjectImpl;
 
   @override
-  String get mapWidth;
+  String? get mapWidth;
   @override
-  String get mapLength;
+  String? get mapLength;
 
   /// Create a copy of ConfigObject
   /// with the given fields replaced by the non-null parameter values.
