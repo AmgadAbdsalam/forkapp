@@ -33,6 +33,7 @@ dependencies:
   cloud_firestore: ^5.6.4
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
+  device_preview: ^1.2.0
   dio: ^5.7.0
   easy_localization: ^3.0.7+1
   firebase_auth: ^5.5.0
@@ -55,12 +56,6 @@ dependencies:
   shared_preferences: ^2.3.3
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
@@ -106,10 +101,9 @@ flutter:
         - asset: assets/fonts/ABeeZee-Regular.ttf
         - asset: assets/fonts/ABeeZee-Italic.ttf
     - family: Montserrat
-      fonts:             
-        - asset: assets/fonts/Inter-Italic.ttf        
+      fonts:
+        - asset: assets/fonts/Inter-Italic.ttf
         - asset: assets/fonts/Inter.ttf
-
 
 # For details regarding fonts from package dependencies,
 # see https://flutter.dev/to/font-from-package

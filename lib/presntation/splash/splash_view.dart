@@ -24,22 +24,29 @@ class SplashViewState extends State<SplashView> {
           if (isUserLoggedIn)
             {
               // navigate to main screen
-              if(mounted)
-              Navigator.pushReplacementNamed(context, Routes.mainRoute)
+              if (mounted)
+                Navigator.pushReplacementNamed(context, Routes.mainRoute)
             }
           else
             {
-              _appPreferences.isOnBoardingScreenViewed().then((isOnBoardingScreenViewed)=>{
-                if(isOnBoardingScreenViewed){
-                  // navigate to main screen
-                  if(mounted)
-                  Navigator.pushReplacementNamed(context, Routes.loginRoute)//TODO
-                }else{
-                  // navigate to main onBoarding
-                  if(mounted)
-                  Navigator.pushReplacementNamed(context, Routes.onBoardingRoute)
-                }
-              })
+              _appPreferences
+                  .isOnBoardingScreenViewed()
+                  .then((isOnBoardingScreenViewed) => {
+                        if (isOnBoardingScreenViewed)
+                          {
+                            // navigate to main screen
+                            if (mounted)
+                              Navigator.pushReplacementNamed(
+                                  context, Routes.loginRoute)
+                          }
+                        else
+                          {
+                            // navigate to main onBoarding
+                            if (mounted)
+                              Navigator.pushReplacementNamed(
+                                  context, Routes.onBoardingRoute)
+                          }
+                      })
             }
         });
   }
@@ -63,8 +70,7 @@ class SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body:
-          Center(child: Image(image: AssetImage(ImageAssets.splashLogo))),
+      body: Center(child: Image(image: AssetImage(ImageAssets.splashLogo))),
     );
   }
 }
