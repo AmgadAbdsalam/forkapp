@@ -12,19 +12,23 @@ import '../../common/freezed_data_classes.dart';
 
 class ConfigViewModel extends StateNotifier<ConfigStateModel>
     implements ConfigViewModelInputs,BaseViewModel {
-  ConfigViewModel(this._updateMapUseCase) :super(ConfigStateModel(true, true, false));
-  var configObject = ConfigObject('0', '0');
+  ConfigViewModel(this._updateMapUseCase,) :super(ConfigStateModel(true, true, false));
+  var configObject = ConfigObject('', '');
+  HomeStateFinalResult homeStateFinalResult=HomeStateFinalResult(width: 0, length: 0);
 final UpdateMapUsecase _updateMapUseCase;
 
 
   @override
   void start() {
+
    state=state.copyWith(isWidthAndLengthValid: false);
+
   }
 
 
   @override
   setMapLength(String? mapLength) {
+    configObject= configObject.copyWith(mapLength: mapLength);
     _isMapLengthValid(mapLength)== false? state = state.copyWith(isLengthValid: false ) : state = state.copyWith(isLengthValid: true );
     _isMapLengthAndMapWidthValid();
 
@@ -32,6 +36,7 @@ final UpdateMapUsecase _updateMapUseCase;
 
   @override
   setMapWidth(String? mapWidth) {
+    configObject= configObject.copyWith(mapWidth: mapWidth);
     _isMapWidthValid(mapWidth)== false? state = state.copyWith(isWidthValid: false ) : state = state.copyWith(isWidthValid: true );
     _isMapLengthAndMapWidthValid();
 
@@ -41,8 +46,8 @@ final UpdateMapUsecase _updateMapUseCase;
   @override
   summit(BuildContext context,WidgetRef ref) async{
     ref.read(flowStateMangerProvider.notifier).setLoading();
-    int mapWidth=5;
-  int mapLength=4 ;
+    int mapWidth=homeStateFinalResult.width;
+  int mapLength=homeStateFinalResult.length ;
    List<NodeModel> nodes= List.generate(mapWidth* mapLength, (index) {
       return NodeModel(
           nodeId: index,
@@ -68,13 +73,13 @@ final UpdateMapUsecase _updateMapUseCase;
 
 
   bool _isMapWidthValid(String? mapWidth) {
-    configObject= configObject.copyWith(mapWidth: mapWidth);
     if(mapWidth ==null  || mapWidth.trim().isEmpty )return false;
     final positiveIntRegex = RegExp(r'^\d+$');
 
     if (!positiveIntRegex.hasMatch(mapWidth)) return false;
     try{
       int value= int.parse(mapWidth) ;
+      homeStateFinalResult=homeStateFinalResult.copyWith(width: value);
       state = state.copyWith(isWidthValid: true );
       return value >= 0;
     }catch(_){
@@ -84,13 +89,13 @@ final UpdateMapUsecase _updateMapUseCase;
   }
 
   bool _isMapLengthValid(String? mapLength) {
-    configObject= configObject.copyWith(mapLength: mapLength);
     if(mapLength == null  || mapLength.trim().isEmpty )return false;
     final positiveIntRegex = RegExp(r'^\d+$');
 
     if (!positiveIntRegex.hasMatch(mapLength)) return false;
     try{
       int value= int.parse(mapLength) ;
+      homeStateFinalResult=homeStateFinalResult.copyWith(length: value);
       state = state.copyWith(isLengthValid: true );
       return value >= 0;
     }catch(_){

@@ -17,9 +17,9 @@ class ConfigViewState extends ConsumerState<ConfigView>{
   final TextEditingController xLine = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bind(){
-    Future.microtask(()=>ref.read(configProvider.notifier).start()) ;
     yLine.addListener(() => ref.read(configProvider.notifier).setMapLength(yLine.text));
     xLine.addListener(() => ref.read(configProvider.notifier).setMapWidth(xLine.text));
+    Future.microtask(()=>ref.read(configProvider.notifier).start()) ;
 
 
   }

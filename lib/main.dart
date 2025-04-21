@@ -15,7 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  var x = await EditNodeUsecase(instance()).execute(NodeModel(
+  var x = await EditNodeUseCase(instance()).execute(NodeModel(
       nodeId: 2,
       updatedTime: Timestamp.now(),
       xAxis: 22,

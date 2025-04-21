@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:responsive/domain/use_cases/edit_node_usecase.dart';
 import 'package:responsive/domain/use_cases/map_data_usecase.dart';
 import 'package:responsive/presntation/base/base_view_model.dart';
 
@@ -8,36 +10,43 @@ import '../../../domain/models/models.dart';
 
 class HomeViewModel extends StateNotifier<HomeState>
     implements HomeViewInputs {
-  HomeViewModel(this.ref, this.mapDataUseCase) : super(HomeState.initial());
+  HomeViewModel(this.ref, this.mapDataUseCase, this.editNodeUseCase) : super(HomeState.initial());
   final Ref ref;
   final MapDataUseCase mapDataUseCase;
+  final EditNodeUseCase editNodeUseCase;
 
   @override
   void start(int numIconsX, int numIconsY) {
-
     getNodesFromFireBase();
+
   }
 
 
   @override
-  updateIcon(int index, String dialogNodeText) {
-    /*switch (dialogNodeText) {
+  updateIcon(NodeModel node,String text,BuildContext context) async{
+    switch (text) {
       case ('free'):
         {
-          state[index] = state[index]
-              .copyWith(isFree: true, isBlocked: false, isCharged: false);
+      node=   node.copyWith(isFree: true, isBlocked: false, isCharged: false);
         }
       case ('charged'):
         {
-          state[index] = state[index]
-              .copyWith(isFree: false, isBlocked: false, isCharged: true);
+        node=  node.copyWith(isFree: false, isBlocked: false, isCharged: true);
         }
       case ('blocked'):
         {
-          state[index] = state[index]
-              .copyWith(isFree: false, isBlocked: true, isCharged: false);
+        node= node.copyWith(isFree: false, isBlocked: true, isCharged: false);
         }
-    }*/
+    }
+    state=HomeState.loading();
+    (await editNodeUseCase.execute(node)).fold((failure){
+      state=HomeState.error(failure.message);
+    }, (data)async{
+  Navigator.of(context).pop();
+ getNodesFromFireBase();
+
+    });
+
   }
 
   @override
@@ -65,8 +74,8 @@ class HomeViewModel extends StateNotifier<HomeState>
   void start(int numIconsX, int numIconsY);
   getNodesFromFireBase();
 
-  updateIcon(int index, String dialogNodeText);
+  updateIcon(NodeModel node,String text,BuildContext context);
 }
 
 final homeProvider = StateNotifierProvider<HomeViewModel, HomeState>(
-    (ref) => HomeViewModel(ref,instance<MapDataUseCase>()));
+    (ref) => HomeViewModel(ref,instance<MapDataUseCase>(),instance<EditNodeUseCase>()));

@@ -17,6 +17,7 @@ class MainViewState extends ConsumerState<MainView> {
   @override
   void initState() {
     initMapDataModule();
+    initEditNodeModule();
     initUpdateMapModule();
     super.initState();
   }

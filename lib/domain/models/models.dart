@@ -231,3 +231,17 @@ class HomeState {
     );
   }
 }
+class HomeStateFinalResult {
+final int width;
+final int length;
+HomeStateFinalResult({ required this.width,required this.length});
+  HomeStateFinalResult copyWith({
+      int? width,
+      int? length,
+  }) {
+    return HomeStateFinalResult(
+    width:   width ?? this.width,
+    length:    length ?? this.length,
+    );
+  }
+}
