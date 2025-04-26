@@ -16,4 +16,5 @@ abstract class Repository {
   Future<Either<Failure, List<RobotRequest>>> robotsAccess();
   Future<Either<Failure, String>> addRobotToDatabase(RobotRequest robot);
   Future<Either<Failure, String>> editNode(NodeModel node);
+  Future<Either<Failure, List<RobotRequest>>> getRobots();
 }

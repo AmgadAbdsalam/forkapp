@@ -238,4 +238,32 @@ class RepositoryImpl implements Repository {
     }
     return targetIndex;
   }
+
+  @override
+  Future<Either<Failure, List<RobotRequest>>> getRobots() async {
+    List<RobotRequest> robotsList = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection(Constant.robotsCollection)
+          .get();
+
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic> data = doc.data();
+        String location = data['location'];
+        int x = int.parse(location.split('_')[0]);
+        int y = int.parse(location.split('_')[1]);
+        robotsList.add(RobotRequest(
+            id: doc.id,
+            x: x,
+            y: y,
+            batteryLevel: data['robotData']['battryLevel']));
+      }
+      log('fitched robots: ${robotsList.length}');
+      return Right(robotsList);
+    } catch (e) {
+      log("Error fetching robots: $e");
+      return Left(Failure(0, "Error fetching robots: $e"));
+    }
+  }
 }
