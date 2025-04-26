@@ -3,7 +3,7 @@ import 'package:responsive/domain/models/models.dart';
 
 import '../../../resources/color_manager.dart';
 import '../../../resources/values_manager.dart';
-import 'custom_dialog_Listile.dart';
+import 'custom_dialog_listile.dart';
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key, required this.nodeModel});

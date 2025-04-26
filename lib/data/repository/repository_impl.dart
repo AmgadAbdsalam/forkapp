@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,7 +13,7 @@ import 'package:responsive/data/network/requests.dart';
 import 'package:responsive/data/respones/nodes_response.dart';
 import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/domain/repository/repository.dart';
-import 'package:responsive/domain/use_cases/access_robot_usecase.dart';
+import 'package:responsive/domain/use_cases/access_robots_usecase.dart';
 
 import '../../domain/models/robot_model.dart';
 import '../../presntation/resources/strings_manager.dart';
@@ -153,16 +154,23 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, RobotRequest>> robotAccess() async {
+  Future<Either<Failure, List<RobotRequest>>> robotsAccess() async {
     try {
-      DatabaseReference ref =
-          FirebaseDatabase.instance.ref("/robots"); // حدد المسار فقط
-
+      List<RobotRequest> robotsList = [];
+      DatabaseReference ref = FirebaseDatabase.instance.ref("robots");
       DataSnapshot snapshot = await ref.get();
-      Map<String, dynamic> data =
-          Map<String, dynamic>.from(snapshot.value as Map);
-      RobotRequest robot = RobotRequest.fromJson(data);
-      return Right(robot);
+      Map<String, dynamic> data = Map<String, dynamic>.from(
+          snapshot.value as LinkedHashMap<Object?, Object?>);
+      List<String> robots = data.keys.toList();
+      for (var robot in robots) {
+        robotsList.add(RobotRequest(
+            id: robot,
+            x: data[robot]['x'],
+            y: data[robot]['y'],
+            batteryLevel: data[robot]['batteryLevel']));
+      }
+
+      return Right(robotsList);
     } catch (e) {
       return Left(
           Failure(1, 'there wase an error in cathing robots requests: $e'));

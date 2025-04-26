@@ -13,10 +13,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Future.delayed(const Duration(milliseconds: 500));
 
-  runApp(
- 
-    ProviderScope(child: DevicePreview(
-    enabled: true,
-    builder: (context) =>  MyApp())));
+
+  runApp(ProviderScope(
+      child: DevicePreview(enabled: true, builder: (context) => MyApp())));
 }

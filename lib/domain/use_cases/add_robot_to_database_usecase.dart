@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/domain/repository/repository.dart';
-import 'package:responsive/domain/use_cases/access_robot_usecase.dart';
+import 'package:responsive/domain/use_cases/access_robots_usecase.dart';
 import 'package:responsive/domain/use_cases/base_usecase.dart';
 
 class AddRobotToDatabaseUsecase implements BaseUseCase<RobotRequest, String> {

@@ -5,14 +5,14 @@ import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/domain/repository/repository.dart';
 import 'package:responsive/domain/use_cases/base_usecase.dart';
 
-class AccessRobotUsecase implements BaseUseCase<void, RobotRequest> {
+class AccessRobotUsecase implements BaseUseCase<void, List<RobotRequest>> {
   Repository repositry;
-  AccessRobotUsecase( {
+  AccessRobotUsecase({
     required this.repositry,
   });
   @override
-  Future<Either<Failure, RobotRequest>> execute(input) async {
-    return await repositry.robotAccess();
+  Future<Either<Failure, List<RobotRequest>>> execute(input) async {
+    return await repositry.robotsAccess();
   }
 }
 
@@ -30,7 +30,7 @@ class RobotRequest {
 
   factory RobotRequest.fromJson(Map<String, dynamic> json) {
     return RobotRequest(
-      batteryLevel: json['batteryLevel']??0,
+      batteryLevel: json['batteryLevel'] ?? 0,
       id: json['id'] ?? '',
       x: json['x'] ?? 0,
       y: json['y'] ?? 0,

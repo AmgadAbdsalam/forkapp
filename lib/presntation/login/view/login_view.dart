@@ -65,7 +65,7 @@ class LoginViewState extends ConsumerState<LoginView> {
           userNameController: userNameController,
           result: result,
           uerPasswordController: uerPasswordController,
-          ref: ref), // TODO: implement tabletLayout
+          ref: ref),
       mobileLayout: (context) => LoginMobileLayout(
           formKey: _formKey,
           userNameController: userNameController,

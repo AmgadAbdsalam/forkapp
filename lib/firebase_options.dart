@@ -48,6 +48,8 @@ class DefaultFirebaseOptions {
     authDomain: 'fork-app-2200b.firebaseapp.com',
     storageBucket: 'fork-app-2200b.firebasestorage.app',
     measurementId: 'G-R9678WSNGT',
+    databaseURL:
+        'https://fork-app-2200b-default-rtdb.firebaseio.com', // <<< هنا كمان
   );
 
   static const FirebaseOptions android = FirebaseOptions(
