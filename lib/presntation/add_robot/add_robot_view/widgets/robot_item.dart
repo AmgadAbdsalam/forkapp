@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive/domain/models/robot_model.dart';
 import 'package:responsive/domain/use_cases/access_robots_usecase.dart';
 import 'package:responsive/presntation/add_robot/cubit/add_robot_cubit.dart';
 import 'package:responsive/presntation/resources/assets_manager.dart';
@@ -11,6 +12,8 @@ class RobotItem extends StatelessWidget {
     required this.robot,
     super.key,
   });
+
+
   final RobotRequest robot;
   @override
   Widget build(BuildContext context) {
@@ -18,8 +21,18 @@ class RobotItem extends StatelessWidget {
       trailing: IconButton(
         icon: const Icon(Icons.add),
         onPressed: () {
-          BlocProvider.of<AddRobotCubit>(context).addRobotToDatabase(robot);
-         
+          BlocProvider.of<AddRobotCubit>(context).addRobotToDatabase(Robot(
+              destination: "",
+              hasError: false,
+              isAvailable: true,
+              isCarry: false,
+              isCharging: false,
+              location: '${robot.x}_${robot.y}',
+              robotData: RobotData(
+                  batteryLevel: robot.batteryLevel,
+                  dimensions: Dimensions(height: 100, width: 100),
+                  id: robot.id,
+                  maxWeight: 100)));
         },
       ),
       tileColor: ColorManager.lightLightGrey,

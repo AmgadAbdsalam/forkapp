@@ -45,13 +45,13 @@ class Robot {
 class RobotData {
   int batteryLevel;
   Dimensions dimensions;
-  String macAddress;
+  String id;
   int maxWeight;
 
   RobotData({
     required this.batteryLevel,
     required this.dimensions,
-    required this.macAddress,
+    required this.id,
     required this.maxWeight,
   });
 
@@ -59,7 +59,7 @@ class RobotData {
     return RobotData(
       batteryLevel: json['battryLevel'] ?? 0,
       dimensions: Dimensions.fromJson(json['dimensions'] ?? {}),
-      macAddress: json['mac_address'] ?? '',
+      id: json['mac_address'] ?? '',
       maxWeight: json['maxWeight'] ?? 0,
     );
   }
@@ -68,7 +68,7 @@ class RobotData {
     return {
       'battryLevel': batteryLevel,
       'dimensions': dimensions.toJson(),
-      'mac_address': macAddress,
+      'mac_address': id,
       'maxWeight': maxWeight,
     };
   }
@@ -82,7 +82,7 @@ class Dimensions {
 
   factory Dimensions.fromJson(Map<String, dynamic> json) {
     return Dimensions(
-      height: json['hieght'] ?? 0, 
+      height: json['hieght'] ?? 0,
       width: json['width'] ?? 0,
     );
   }

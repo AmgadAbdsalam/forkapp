@@ -178,8 +178,8 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, String>> addRobotToDatabase(RobotRequest robot) async {
-    String customID = robot.id;
+  Future<Either<Failure, String>> addRobotToDatabase(Robot robot) async {
+    String customID = robot.robotData.id;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     try {
       await firestore.collection(AppStrings.robotCollection).doc(customID).set(
@@ -189,11 +189,11 @@ class RepositoryImpl implements Repository {
                   isAvailable: true,
                   isCarry: false,
                   isCharging: false,
-                  location: '${robot.x}_${robot.y}',
+                  location: robot.location,
                   robotData: RobotData(
-                      batteryLevel: robot.batteryLevel,
+                      batteryLevel: robot.robotData.batteryLevel,
                       dimensions: Dimensions(height: 100, width: 100),
-                      macAddress: 'macAddress',
+                      id: 'macAddress',
                       maxWeight: 100))
               .toJson());
       await FirebaseDatabase.instance.ref("/robots").remove();

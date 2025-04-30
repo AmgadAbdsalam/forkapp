@@ -73,10 +73,11 @@ class RobotRequest {
             neighbor.y >= rows) {
           continue;
         }
-        if (grid[neighbor.y][neighbor.x] == 1) continue; // obstacle
+        if (grid[neighbor.y][neighbor.x] == 1) continue; 
 
-        if (closedSet.contains(neighbor))
-          continue; // لو النقطة دي خلصناها، تجاهلها
+        if (closedSet.contains(neighbor)) {
+          continue;
+        }
 
         final tentativeG = gScore[current]! + 1;
 
