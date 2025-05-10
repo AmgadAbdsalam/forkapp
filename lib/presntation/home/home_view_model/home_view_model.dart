@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/domain/use_cases/edit_node_usecase.dart';
 import 'package:responsive/domain/use_cases/map_data_usecase.dart';
-import 'package:responsive/presntation/base/base_view_model.dart';
 
 import '../../../app/di.dart';
 import '../../../domain/models/models.dart';

@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,7 +13,7 @@ import 'package:responsive/data/network/requests.dart';
 import 'package:responsive/data/respones/nodes_response.dart';
 import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/domain/repository/repository.dart';
-import 'package:responsive/domain/use_cases/access_robot_usecase.dart';
+import 'package:responsive/domain/use_cases/access_robots_usecase.dart';
 
 import '../../domain/models/robot_model.dart';
 import '../../presntation/resources/strings_manager.dart';
@@ -153,16 +154,23 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, RobotRequest>> robotAccess() async {
+  Future<Either<Failure, List<RobotRequest>>> robotsAccess() async {
     try {
-      DatabaseReference ref =
-          FirebaseDatabase.instance.ref("/robots"); // حدد المسار فقط
-
+      List<RobotRequest> robotsList = [];
+      DatabaseReference ref = FirebaseDatabase.instance.ref("robots");
       DataSnapshot snapshot = await ref.get();
-      Map<String, dynamic> data =
-          Map<String, dynamic>.from(snapshot.value as Map);
-      RobotRequest robot = RobotRequest.fromJson(data);
-      return Right(robot);
+      Map<String, dynamic> data = Map<String, dynamic>.from(
+          snapshot.value as LinkedHashMap<Object?, Object?>);
+      List<String> robots = data.keys.toList();
+      for (var robot in robots) {
+        robotsList.add(RobotRequest(
+            id: robot,
+            x: data[robot]['x'],
+            y: data[robot]['y'],
+            batteryLevel: data[robot]['batteryLevel']));
+      }
+
+      return Right(robotsList);
     } catch (e) {
       return Left(
           Failure(1, 'there wase an error in cathing robots requests: $e'));
@@ -170,8 +178,8 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, String>> addRobotToDatabase(RobotRequest robot) async {
-    String customID = robot.id;
+  Future<Either<Failure, String>> addRobotToDatabase(Robot robot) async {
+    String customID = robot.robotData.id;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     try {
       await firestore.collection(AppStrings.robotCollection).doc(customID).set(
@@ -181,11 +189,11 @@ class RepositoryImpl implements Repository {
                   isAvailable: true,
                   isCarry: false,
                   isCharging: false,
-                  location: '${robot.x}_${robot.y}',
+                  location: robot.location,
                   robotData: RobotData(
-                      batteryLevel: robot.batteryLevel,
+                      batteryLevel: robot.robotData.batteryLevel,
                       dimensions: Dimensions(height: 100, width: 100),
-                      macAddress: 'macAddress',
+                      id: 'macAddress',
                       maxWeight: 100))
               .toJson());
       await FirebaseDatabase.instance.ref("/robots").remove();
@@ -229,5 +237,33 @@ class RepositoryImpl implements Repository {
       }
     }
     return targetIndex;
+  }
+
+  @override
+  Future<Either<Failure, List<RobotRequest>>> getRobots() async {
+    List<RobotRequest> robotsList = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection(Constant.robotsCollection)
+          .get();
+
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic> data = doc.data();
+        String location = data['location'];
+        int x = int.parse(location.split('_')[0]);
+        int y = int.parse(location.split('_')[1]);
+        robotsList.add(RobotRequest(
+            id: doc.id,
+            x: x,
+            y: y,
+            batteryLevel: data['robotData']['battryLevel']));
+      }
+      log('fitched robots: ${robotsList.length}');
+      return Right(robotsList);
+    } catch (e) {
+      log("Error fetching robots: $e");
+      return Left(Failure(0, "Error fetching robots: $e"));
+    }
   }
 }

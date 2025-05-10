@@ -39,6 +39,9 @@ class AppStrings{
   static const configError = "Please enter valid number";
   static const summit = "summit";
   static const robotCollection = "robot";
+  static const appName = "Fork It";
+  static const welcome = "Fork lift app helps you to manage your store"; 
+
 
 
 }
