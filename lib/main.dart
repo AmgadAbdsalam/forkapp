@@ -14,7 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  var response = await getNearestRobot(3, 3);
+  var response = await getNearestRobot(2, 1);
   response.fold(
     (l) {
       print(l.message);

@@ -56,7 +56,16 @@ class HomeViewState extends ConsumerState<HomeView> {
                   color: Colors.white,
                   child: Stack(
                     children: [
-                      Positioned.fill(child: CustomPaint(painter: DottedLinePainter(nodes, spacing),)),
+                      Positioned.fill(child: CustomPaint(painter: DottedLinePainter(nodes,
+                          spacing,coloredConnections:[
+                            [
+                              Offset(0 * spacing + 25, 1 * spacing + 25),
+                            Offset(1 * spacing + 25, 1 * spacing + 25),],[
+                              Offset(0 * spacing + 25, 1 * spacing + 25),
+                            Offset(1 * spacing + 25, 1 * spacing + 25),]
+                          ]
+                      ),
+                      )),
                       ...nodes.map((node) =>
                           Positioned(
                               left: node.xAxis * spacing,
@@ -68,7 +77,7 @@ class HomeViewState extends ConsumerState<HomeView> {
                                 });
                               },
                                   icon:node.isFree ?
-                                  SvgPicture.asset(ImageAssets.freeImage,width: 50,height: 50,)  :node.isCharged ==  true? SvgPicture.asset(ImageAssets.chargedImage,width: 50,height: 50,):SvgPicture.asset(ImageAssets.blockedImage,width: 50,height: 50,)
+                                  const Icon(Icons.circle)  :node.isCharged ==  true? SvgPicture.asset(ImageAssets.chargedImage,width: 50,height: 50,):SvgPicture.asset(ImageAssets.blockedImage,width: 50,height: 50,)
                               )
                           ))
                     ],
@@ -116,16 +125,26 @@ class HomeViewState extends ConsumerState<HomeView> {
 
 
 /*icon:node.isFree ?  SvgPicture.asset(ImageAssets.freeImage)  :node.isCharged ==  true? SvgPicture.asset(ImageAssets.chargedImage):SvgPicture.asset(ImageAssets.blockedImage)*/
+
+
 class DottedLinePainter extends CustomPainter {
   final List<NodeModel> nodes;
   final double spacing;
 
-  DottedLinePainter(this.nodes, this.spacing);
+  /// List of colored connections: each pair contains two node coordinates (x, y)
+  final List<List<Offset>> coloredConnections;
+
+  DottedLinePainter(this.nodes, this.spacing, {this.coloredConnections = const []});
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
+    final Paint normalPaint = Paint()
       ..color = Colors.grey
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    final Paint coloredPaint = Paint()
+      ..color = Colors.red // 🎨 Fun color
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
@@ -136,31 +155,28 @@ class DottedLinePainter extends CustomPainter {
       for (var otherNode in nodes) {
         if ((node.xAxis - otherNode.xAxis).abs() == 1 &&
             node.yAxis == otherNode.yAxis) {
-          // رسم الخط الأفقي
-          drawDottedLine(
-              canvas,
-              Offset(node.xAxis * spacing + 25, node.yAxis * spacing + 25),
-              Offset(otherNode.xAxis * spacing + 25,
-                  otherNode.yAxis * spacing + 25),
-              paint,
-              dashWidth,
-              dashSpace);
+          Offset start = Offset(node.xAxis * spacing + 25, node.yAxis * spacing + 25);
+          Offset end = Offset(otherNode.xAxis * spacing + 25, otherNode.yAxis * spacing + 25);
+
+          bool isColored = _isColoredConnection(start, end);
+          drawDottedLine(canvas, start, end, isColored ? coloredPaint : normalPaint, dashWidth, dashSpace);
         }
 
         if ((node.yAxis - otherNode.yAxis).abs() == 1 &&
             node.xAxis == otherNode.xAxis) {
-          // رسم الخط العمودي
-          drawDottedLine(
-              canvas,
-              Offset(node.xAxis * spacing + 25, node.yAxis * spacing + 25),
-              Offset(otherNode.xAxis * spacing + 25,
-                  otherNode.yAxis * spacing + 25),
-              paint,
-              dashWidth,
-              dashSpace);
+          Offset start = Offset(node.xAxis * spacing + 25, node.yAxis * spacing + 25);
+          Offset end = Offset(otherNode.xAxis * spacing + 25, otherNode.yAxis * spacing + 25);
+
+          bool isColored = _isColoredConnection(start, end);
+          drawDottedLine(canvas, start, end, isColored ? coloredPaint : normalPaint, dashWidth, dashSpace);
         }
       }
     }
+  }
+
+  bool _isColoredConnection(Offset a, Offset b) {
+    return coloredConnections.any((pair) =>
+    (pair[0] == a && pair[1] == b) || (pair[0] == b && pair[1] == a));
   }
 
   void drawDottedLine(Canvas canvas, Offset start, Offset end, Paint paint,
@@ -185,4 +201,5 @@ class DottedLinePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
+
 

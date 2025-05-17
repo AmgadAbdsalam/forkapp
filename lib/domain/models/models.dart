@@ -164,12 +164,14 @@ class HomeState {
   final bool isLoading;
   final String errorMessage;
   final bool isEmpty;
+  final bool isTarget;
 
   HomeState({
     required this.nodes,
     required this.isLoading,
     required this.errorMessage,
     required this.isEmpty,
+    required this.isTarget
   });
 
   factory HomeState.initial() {
@@ -177,7 +179,7 @@ class HomeState {
       nodes: [],
       isLoading: false,
       errorMessage: '',
-      isEmpty: false,
+      isEmpty: false, isTarget: false,
     );
   }
 
@@ -186,7 +188,7 @@ class HomeState {
       nodes: [],
       isLoading: true,
       errorMessage: '',
-      isEmpty: false,
+      isEmpty: false, isTarget: false,
     );
   }
 
@@ -195,7 +197,7 @@ class HomeState {
       nodes: nodes,
       isLoading: false,
       errorMessage: '',
-      isEmpty: false,
+      isEmpty: false, isTarget: false,
     );
   }
 
@@ -204,7 +206,7 @@ class HomeState {
       nodes: [],
       isLoading: false,
       errorMessage: message,
-      isEmpty: false,
+      isEmpty: false, isTarget: false,
     );
   }
 
@@ -213,7 +215,7 @@ class HomeState {
       nodes: [],
       isLoading: false,
       errorMessage: '',
-      isEmpty: true,
+      isEmpty: true, isTarget: false,
     );
   }
 
@@ -227,7 +229,7 @@ class HomeState {
       nodes: nodes ?? this.nodes,
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
-      isEmpty: isEmpty ?? this.isEmpty,
+      isEmpty: isEmpty ?? this.isEmpty, isTarget: false,
     );
   }
 }
