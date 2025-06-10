@@ -4,6 +4,7 @@ import 'package:responsive/presntation/home/home_view/home_view.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
 import '../../app/di.dart';
+import '../add_mission/add_mission_view.dart';
 import '../add_robot/add_robot_view/add_robot_view.dart';
 
 class MainView extends ConsumerStatefulWidget {
@@ -26,11 +27,13 @@ class MainViewState extends ConsumerState<MainView> {
     HomeView(),
     SettingView(),
     AddRobotView(),
+    AddMissionView(),
   ];
   static const List<String> appBarText = [
     'Home',
     'Setting',
     'Add Robot',
+    'Add Mission'
   ];
 
   @override
@@ -51,9 +54,12 @@ class MainViewState extends ConsumerState<MainView> {
       //         centerTitle: false,
       //       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
         onTap: (index) {
-          setState(() {});
-          _currentIndex = index;
+          setState(() {
+            _currentIndex = index;
+          });
         },
         items: const [
           BottomNavigationBarItem(
@@ -65,8 +71,9 @@ class MainViewState extends ConsumerState<MainView> {
               icon: Icon(Icons.settings), label: 'Settings'),
           BottomNavigationBarItem(
               icon: Icon(Icons.control_point), label: 'Add Robot'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cabin), label: 'Add Mission'),
         ],
-        currentIndex: _currentIndex,
       ),
       body: _screens[_currentIndex],
     );

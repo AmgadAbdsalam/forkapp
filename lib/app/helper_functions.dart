@@ -12,7 +12,7 @@ Future<Either<Failure, GetNearestRobotResponse>> getNearestRobot(
   String robotId = '';
   RobotRequest? selectedRobot;
   double cost = double.maxFinite;
-  List<List<int>> grid = List.generate(7, (index) => List.filled(7, 0));
+  List<List<int>> grid = List.generate(100, (index) => List.filled(100, 0));
   List<RobotRequest> robots = [];
   var response = await MapDataUseCase(instance()).execute(null);
   response.fold((falure) {

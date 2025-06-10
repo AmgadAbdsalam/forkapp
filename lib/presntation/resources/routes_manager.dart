@@ -7,6 +7,7 @@ import 'package:responsive/presntation/resources/strings_manager.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
 import '../../app/di.dart';
+import '../add_mission/add_mission_view.dart';
 import '../configration/config_view/config_view.dart';
 import '../login/view/login_view.dart';
 import '../main/main_view.dart';
@@ -27,6 +28,7 @@ class Routes {
   static const String settingRoute = "/setting";
   static const String configuration = "/configuration";
   static const String addRobot = "/addRobot";
+  static const String addMission = "/addMission";
 }
 
 class RouteGenerator {
@@ -52,6 +54,8 @@ class RouteGenerator {
       case Routes.configuration:
         initUpdateMapModule();
         return MaterialPageRoute(builder: (_) => const ConfigView());
+      case Routes.addMission:
+        return MaterialPageRoute(builder: (_)=> const AddMissionView());
       case Routes.addRobot:
         return MaterialPageRoute(builder: (_) {
           return BlocProvider(
