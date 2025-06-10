@@ -7,7 +7,7 @@ import 'package:responsive/presntation/resources/strings_manager.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
 import '../../app/di.dart';
-import '../add_mission/add_mission_view.dart';
+import '../current_missions/current_missions_view/add_mission_view.dart';
 import '../configration/config_view/config_view.dart';
 import '../login/view/login_view.dart';
 import '../main/main_view.dart';

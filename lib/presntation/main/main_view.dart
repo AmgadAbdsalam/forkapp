@@ -4,7 +4,7 @@ import 'package:responsive/presntation/home/home_view/home_view.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
 import '../../app/di.dart';
-import '../add_mission/add_mission_view.dart';
+import '../current_missions/current_missions_view/add_mission_view.dart';
 import '../add_robot/add_robot_view/add_robot_view.dart';
 
 class MainView extends ConsumerStatefulWidget {
