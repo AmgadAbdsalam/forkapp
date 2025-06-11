@@ -1,4 +1,8 @@
-
+/* 
+To get the list of available robots we can add to our system
+This use case will be used to fetch the robots from the database
+The available robots send their data to the real-time database
+*/
 
 import 'package:dartz/dartz.dart';
 

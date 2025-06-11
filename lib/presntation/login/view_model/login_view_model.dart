@@ -1,5 +1,6 @@
 
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/di.dart';
 import 'package:responsive/domain/models/models.dart';
@@ -41,7 +42,9 @@ class LoginViewModel extends StateNotifier<LoginStateModel> implements BaseViewM
 
   @override
   login() async {
-    print('loding state');
+    if (kDebugMode) {
+      print('loding state');
+    }
     ref.read(flowStateMangerProvider.notifier).setLoading();
     (await _loginUseCase.execute(
         LoginUseCaseInput(loginObject.useName, loginObject.password)))
@@ -56,7 +59,9 @@ class LoginViewModel extends StateNotifier<LoginStateModel> implements BaseViewM
 
       ref.read(flowStateMangerProvider.notifier).setContent();
       state= state.copyWith(isUserSuccessfulLogin: true,);
-      print(state.isUserSuccessfulLogin);
+      if (kDebugMode) {
+        print(state.isUserSuccessfulLogin);
+      }
 
     // userLogin.add(true);
 

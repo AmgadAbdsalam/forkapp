@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AddMissionView extends StatelessWidget {
-  const AddMissionView({super.key});
+class CurrentMissionView extends StatelessWidget {
+  const CurrentMissionView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Container();
+    return Container();
   }
 }

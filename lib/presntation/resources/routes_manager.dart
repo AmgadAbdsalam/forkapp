@@ -43,7 +43,7 @@ class RouteGenerator {
       case Routes.loginRoute:
         initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
-      case Routes.mainRoute: 
+      case Routes.mainRoute:
         return MaterialPageRoute(builder: (_) => const MainView());
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeView());
@@ -55,7 +55,7 @@ class RouteGenerator {
         initUpdateMapModule();
         return MaterialPageRoute(builder: (_) => const ConfigView());
       case Routes.addMission:
-        return MaterialPageRoute(builder: (_)=> const AddMissionView());
+        return MaterialPageRoute(builder: (_) => const CurrentMissionView());
       case Routes.addRobot:
         return MaterialPageRoute(builder: (_) {
           return BlocProvider(

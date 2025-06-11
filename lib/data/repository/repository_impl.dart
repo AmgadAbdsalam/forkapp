@@ -208,7 +208,7 @@ class RepositoryImpl implements Repository {
     try {
       int targetIndex = -1;
       List<NodeModel> nodes = await _fetchMapData();
-      targetIndex = _findTargetNode(nodes, target, targetIndex);
+      targetIndex = _findTargetNode(nodes, target);
       List<NodeModel> editedMap = _editNodeList(nodes, target, targetIndex);
       await updateMap(editedMap);
       return const Right(Constant.success);
@@ -228,8 +228,8 @@ class RepositoryImpl implements Repository {
     return editedMap;
   }
 
-  int _findTargetNode(
-      List<NodeModel> nodes, NodeModel target, int targetIndex) {
+  int _findTargetNode(List<NodeModel> nodes, NodeModel target) {
+    int targetIndex = -1;
     for (int i = 0; i < nodes.length; i++) {
       if (nodes[i].xAxis == target.xAxis && nodes[i].yAxis == target.yAxis) {
         targetIndex = i;

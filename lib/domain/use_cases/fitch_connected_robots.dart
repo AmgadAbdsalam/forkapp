@@ -1,3 +1,5 @@
+/* This use case will be used to fetch the list of  all connected robots*/
+
 import 'package:dartz/dartz.dart';
 import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/domain/repository/repository.dart';

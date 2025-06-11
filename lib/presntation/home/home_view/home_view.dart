@@ -21,8 +21,8 @@ class HomeViewState extends ConsumerState<HomeView> {
   TransformationController();
 
   // User-defined number of icons in X and Y axes
-  int numIconsX = 5; // Number of columns
-  int numIconsY = 5; // Number of rows
+  int numIconsX = 5; // Number of columns //TODO: Make this dynamic based on the data
+  int numIconsY = 5; // Number of rows //TODO: Make this dynamic based on the data
 
   // Spacing and icon size
   double spacing = 150.0;

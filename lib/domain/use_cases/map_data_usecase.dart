@@ -1,3 +1,6 @@
+/* This use case will be used to fetch the map data from the database
+It will fetch all nodes and return them as a list of NodeModel */
+
 import 'package:dartz/dartz.dart';
 import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/domain/models/models.dart';

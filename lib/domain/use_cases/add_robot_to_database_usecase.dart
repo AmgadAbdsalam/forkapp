@@ -1,4 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+/* 
+This use case will be used to add a new robot to the database
+The robot data will be sent to the database for storage
+Once the robot is added, it can be accessed by other use cases
+*/
+
 import 'package:dartz/dartz.dart';
 
 import 'package:responsive/data/network/failure.dart';

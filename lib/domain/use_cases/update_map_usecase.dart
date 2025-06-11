@@ -1,3 +1,6 @@
+/* This use case used to update the map data in the database
+the new map will replace the old one */
+
 import 'package:dartz/dartz.dart';
 import 'package:responsive/data/network/failure.dart';
 import 'package:responsive/domain/models/models.dart';

@@ -22,24 +22,24 @@ class MainViewState extends ConsumerState<MainView> {
     initUpdateMapModule();
     super.initState();
   }
+
   int _currentIndex = 0;
   final List<Widget> _screens = const [
     HomeView(),
     SettingView(),
     AddRobotView(),
-    AddMissionView(),
+    CurrentMissionView(),
   ];
   static const List<String> appBarText = [
     'Home',
     'Setting',
     'Add Robot',
-    'Add Mission'
+    'Current Mission'
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       // appBar: _currentIndex == 0
       //     ? AppBar(
       //         title: Text(appBarText[_currentIndex]),
