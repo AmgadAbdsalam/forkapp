@@ -9,13 +9,34 @@ class MissionInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(robot.robotData.id,
-          style: Theme.of(context).textTheme.displayMedium),
-      leading: SvgPicture.asset(ImageAssets.robotImage, width: 40, height: 40),
-      subtitle: Text(
-        'Destination: ${robot.destination}',
-        style: Theme.of(context).textTheme.bodyMedium,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      clipBehavior: Clip.antiAlias,
+      elevation: 4.0,
+      child: ListTile(
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .displayMedium
+            ?.copyWith(color: Colors.white),
+        subtitleTextStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: Colors.white),
+        tileColor: Theme.of(context).colorScheme.primaryContainer,
+        title: Text(
+          'Robot ID: ${robot.robotData.id}',
+        ),
+        leading:
+            SvgPicture.asset(ImageAssets.robotImage, width: 40, height: 40),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Destination: ${robot.destination}'),
+            Text('Current location: ${robot.location}'),
+          ],
+        ),
       ),
     );
   }

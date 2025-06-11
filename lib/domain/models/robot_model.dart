@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Robot {
   String destination;
   bool hasError;
@@ -52,6 +53,11 @@ class Robot {
       'robotData': robotData.toJson(),
     };
   }
+
+  @override
+  String toString() {
+    return 'Robot(destination: $destination, hasError: $hasError, isAvailable: $isAvailable, isCarry: $isCarry, isCharging: $isCharging, location: $location)';
+  }
 }
 
 class RobotData {
@@ -71,7 +77,7 @@ class RobotData {
     return RobotData(
       batteryLevel: json['battryLevel'] ?? 0,
       dimensions: Dimensions.fromJson(json['dimensions'] ?? {}),
-      id: json['mac_address'] ?? '',
+      id: json['id'] ?? '',
       maxWeight: json['maxWeight'] ?? 0,
     );
   }
@@ -83,6 +89,11 @@ class RobotData {
       'mac_address': id,
       'maxWeight': maxWeight,
     };
+  }
+
+  @override
+  String toString() {
+    return 'RobotData(batteryLevel: $batteryLevel, dimensions: $dimensions, id: $id, maxWeight: $maxWeight)';
   }
 }
 

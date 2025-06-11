@@ -11,7 +11,9 @@ class MissionsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => const SizedBox(height: 8.0),
+      padding: const EdgeInsets.all(8.0),
       itemCount: robots.length,
       itemBuilder: (context, index) {
         final robot = robots[index];

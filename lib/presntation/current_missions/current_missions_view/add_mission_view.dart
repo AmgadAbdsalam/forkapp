@@ -21,17 +21,24 @@ class _CurrentMissionViewState extends State<CurrentMissionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<CurrentMissionsCubit, CurrentMissionsState>(
-        builder: (context, state) {
-          if (state is CurrentMissionsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is CurrentMissionsSuccess) {
-            return MissionsListView(robots: state.missions);
-          } else if (state is CurrentMissionsFailure) {
-            return Center(child: Text(state.error));
-          }
-          return const Center(child: Text('No missions available'));
-        },
+      body: SafeArea(
+        child: BlocBuilder<CurrentMissionsCubit, CurrentMissionsState>(
+          builder: (context, state) {
+            if (state is CurrentMissionsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is CurrentMissionsSuccess) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  BlocProvider.of<CurrentMissionsCubit>(context).loadMissions();
+                },
+                child: MissionsListView(robots: state.missions),
+              );
+            } else if (state is CurrentMissionsFailure) {
+              return Center(child: Text(state.error));
+            }
+            return const Center(child: Text('No missions available'));
+          },
+        ),
       ),
     );
   }
