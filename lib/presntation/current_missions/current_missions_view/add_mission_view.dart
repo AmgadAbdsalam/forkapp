@@ -52,7 +52,6 @@ class _CurrentMissionViewState extends State<CurrentMissionView> {
                               labelText: 'Enter Place ID',
                               border: OutlineInputBorder(),
                             ),
-                            // Add controller and logic as needed
                           ),
                           const Text('ID of destination',
                               style: TextStyle(fontSize: 16)),
@@ -61,7 +60,6 @@ class _CurrentMissionViewState extends State<CurrentMissionView> {
                               labelText: 'Enter Destination ID',
                               border: OutlineInputBorder(),
                             ),
-                            // Add controller and logic as needed
                           ),
                           const SizedBox(height: 16),
                           Align(
@@ -98,26 +96,5 @@ class _CurrentMissionViewState extends State<CurrentMissionView> {
       },
     );
 
-    /*  return Scaffold(
-      body: SafeArea(
-        child: BlocBuilder<CurrentMissionsCubit, CurrentMissionsState>(
-          builder: (context, state) {
-            if (state is CurrentMissionsLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is CurrentMissionsSuccess) {
-              return RefreshIndicator(
-                onRefresh: () async {
-                  BlocProvider.of<CurrentMissionsCubit>(context).loadMissions();
-                },
-                child: MissionsListView(robots: state.missions),
-              );
-            } else if (state is CurrentMissionsFailure) {
-              return Center(child: Text(state.error));
-            }
-            return const Center(child: Text('No missions available'));
-          },
-        ),
-      ),
-    ); */
   }
 }
