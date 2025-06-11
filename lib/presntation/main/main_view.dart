@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:responsive/presntation/current_missions/cubit/current_missions_cubit.dart';
 import 'package:responsive/presntation/home/home_view/home_view.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
 
@@ -24,11 +26,14 @@ class MainViewState extends ConsumerState<MainView> {
   }
 
   int _currentIndex = 0;
-  final List<Widget> _screens = const [
-    HomeView(),
-    SettingView(),
-    AddRobotView(),
-    CurrentMissionView(),
+  final List<Widget> _screens = [
+    const HomeView(),
+    const SettingView(),
+    const AddRobotView(),
+    BlocProvider(
+      create: (context) => CurrentMissionsCubit(),
+      child: const CurrentMissionView(),
+    ),
   ];
   static const List<String> appBarText = [
     'Home',

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:responsive/domain/use_cases/access_robots_usecase.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive/presntation/current_missions/cubit/current_missions_cubit.dart';
+import 'package:responsive/presntation/current_missions/cubit/current_missions_state.dart';
+import 'package:responsive/presntation/current_missions/widgets/missions_list_view.dart';
 
 class CurrentMissionView extends StatefulWidget {
   const CurrentMissionView({super.key});
@@ -11,20 +13,26 @@ class CurrentMissionView extends StatefulWidget {
 
 class _CurrentMissionViewState extends State<CurrentMissionView> {
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  void initState() {
+    BlocProvider.of<CurrentMissionsCubit>(context).loadMissions();
+    super.initState();
   }
-}
-
-class MissionInfo extends StatelessWidget {
-  final RobotRequest robot;
-  const MissionInfo({super.key, required this.robot});
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(robot.id),
-      leading: SvgPicture.asset('assets/images/robot.svg', width: 40, height: 40),
+    return Scaffold(
+      body: BlocBuilder<CurrentMissionsCubit, CurrentMissionsState>(
+        builder: (context, state) {
+          if (state is CurrentMissionsLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is CurrentMissionsSuccess) {
+            return MissionsListView(robots: state.missions);
+          } else if (state is CurrentMissionsFailure) {
+            return Center(child: Text(state.error));
+          }
+          return const Center(child: Text('No missions available'));
+        },
+      ),
     );
   }
 }

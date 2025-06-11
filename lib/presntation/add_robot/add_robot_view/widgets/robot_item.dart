@@ -13,7 +13,6 @@ class RobotItem extends StatelessWidget {
     super.key,
   });
 
-
   final RobotRequest robot;
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class RobotItem extends StatelessWidget {
       ),
       subtitle: Text('Battery Level: ${robot.batteryLevel}'),
       leading: SvgPicture.asset(
-        ImageAssets.robotImmage,
+        ImageAssets.robotImage,
         semanticsLabel: 'robot',
       ),
     );
