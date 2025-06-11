@@ -7,6 +7,7 @@ The available robots send their data to the real-time database
 import 'package:dartz/dartz.dart';
 
 import 'package:responsive/data/network/failure.dart';
+import 'package:responsive/domain/models/robot_model.dart';
 import 'package:responsive/domain/repository/repository.dart';
 import 'package:responsive/domain/use_cases/base_usecase.dart';
 import 'package:collection/collection.dart';
@@ -23,6 +24,7 @@ class AccessRobotUsecase implements BaseUseCase<void, List<RobotRequest>> {
 }
 
 class RobotRequest {
+
   String id;
   int x;
   int y;
@@ -168,7 +170,15 @@ List<Point> _reconstructPath(Map<Point, Point> cameFrom, Point current) {
   }
   return path.reversed.toList();
 }
+  factory RobotRequest.fromRobot(Robot robot) {
 
+    return RobotRequest(
+      id: robot.robotData.id,
+      x: int.parse(robot.location.split('_')[0]),
+      y: int.parse(robot.location.split('_')[1]),
+      batteryLevel: robot.robotData.batteryLevel,
+    );
+  }
   factory RobotRequest.fromJson(Map<String, dynamic> json) {
     return RobotRequest(
       batteryLevel: json['batteryLevel'] ?? 0,

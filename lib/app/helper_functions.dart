@@ -30,7 +30,7 @@ Future<Either<Failure, GetNearestRobotResponse>> getNearestRobot(
     },
     (r) {
       for (var e in r) {
-        robots.add(e);
+        robots.add(RobotRequest.fromRobot(e));
       }
     },
   );

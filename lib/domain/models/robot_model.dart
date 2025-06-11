@@ -29,6 +29,18 @@ class Robot {
     );
   }
 
+  factory Robot.fromMap(Map<String, dynamic> map) {
+    return Robot(
+      destination: map['destination'] ?? '',
+      hasError: map['hasError'] ?? false,
+      isAvailable: map['isAvailable'] ?? false,
+      isCarry: map['isCarry'] ?? false,
+      isCharging: map['isCharging'] ?? false,
+      location: map['location'] ?? '',
+      robotData: RobotData.fromJson(map['robotData'] ?? {}),
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'destination': destination,
