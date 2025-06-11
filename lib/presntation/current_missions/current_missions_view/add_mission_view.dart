@@ -20,7 +20,85 @@ class _CurrentMissionViewState extends State<CurrentMissionView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocBuilder<CurrentMissionsCubit, CurrentMissionsState>(
+      builder: (context, state) {
+        if (state is CurrentMissionsLoading) {
+          return const Scaffold(
+              body: Center(child: CircularProgressIndicator()));
+        } else if (state is CurrentMissionsSuccess) {
+          return Scaffold(
+            floatingActionButton: FloatingActionButton(
+              
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Align(
+                            alignment: Alignment.center,
+                            child: Text('Add New Mission',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
+                          ),
+                          const SizedBox(height: 16),
+                          const Text('ID of place of product',
+                              style: TextStyle(fontSize: 16)),
+                          const TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Enter Place ID',
+                              border: OutlineInputBorder(),
+                            ),
+                            // Add controller and logic as needed
+                          ),
+                          const Text('ID of destination',
+                              style: TextStyle(fontSize: 16)),
+                          const TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Enter Destination ID',
+                              border: OutlineInputBorder(),
+                            ),
+                            // Add controller and logic as needed
+                          ),
+                          const SizedBox(height: 16),
+                          Align(
+                            alignment: Alignment.center,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Add mission logic here
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Add'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: const Icon(Icons.add),
+            ),
+            body: SafeArea(
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  BlocProvider.of<CurrentMissionsCubit>(context).loadMissions();
+                },
+                child: MissionsListView(robots: state.missions),
+              ),
+            ),
+          );
+        } else if (state is CurrentMissionsFailure) {
+          return Scaffold(body: Center(child: Text(state.error)));
+        }
+        return const Center(child: Text('No missions available'));
+      },
+    );
+
+    /*  return Scaffold(
       body: SafeArea(
         child: BlocBuilder<CurrentMissionsCubit, CurrentMissionsState>(
           builder: (context, state) {
@@ -40,6 +118,6 @@ class _CurrentMissionViewState extends State<CurrentMissionView> {
           },
         ),
       ),
-    );
+    ); */
   }
 }
