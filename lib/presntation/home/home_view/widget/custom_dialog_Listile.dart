@@ -21,7 +21,8 @@ class CustomDialogLisTile extends ConsumerWidget {
         trailing: (nodeModel.isFree == true && textNodeType == 'free') ||
                 (nodeModel.isCharged == true && textNodeType == 'charged') ||
                 (nodeModel.isBlocked == true && textNodeType == 'blocked')
+
             ? const Icon(Icons.check)
-            : const SizedBox());
+            :  textNodeType == 'product' &&  nodeModel.isFree ==false && nodeModel.isCharged==false && nodeModel.isBlocked==false ?const Icon(Icons.check):const SizedBox());
   }
 }

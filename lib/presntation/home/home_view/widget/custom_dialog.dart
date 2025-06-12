@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/domain/models/models.dart';
-import 'package:responsive/presntation/home/home_view_model/home_view_model.dart';
 
 import '../../../resources/color_manager.dart';
 import '../../../resources/values_manager.dart';
@@ -12,7 +11,7 @@ class CustomDialog extends ConsumerWidget {
   final NodeModel nodeModel;
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-      List<String> dialogText=['free','charged','blocked','robot target'];
+      List<String> dialogText=['free','charged','blocked','product'];
     return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s14)),
@@ -32,10 +31,11 @@ class CustomDialog extends ConsumerWidget {
             CustomDialogLisTile(dialogText[0],nodeModel),
             CustomDialogLisTile(dialogText[1],nodeModel),
             CustomDialogLisTile(dialogText[2],nodeModel),
+            CustomDialogLisTile(dialogText[3],nodeModel),
 
-            Center(child: ElevatedButton(onPressed: (){
-              ref.read(homeProvider.notifier).getRobotAndPath(nodeModel,context);
-            }, child: const Text('target'))),
+            // Center(child: ElevatedButton(onPressed: (){
+            //   ref.read(homeProvider.notifier).getRobotAndPath(nodeModel,context);
+            // }, child: const Text('target'))),
           ],
         ),
       ),

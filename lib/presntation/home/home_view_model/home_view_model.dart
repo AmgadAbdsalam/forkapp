@@ -36,6 +36,10 @@ class HomeViewModel extends StateNotifier<HomeState>
         {
         node= node.copyWith(isFree: false, isBlocked: true, isCharged: false);
         }
+        case ('product'):
+        {
+        node= node.copyWith(isFree: false, isBlocked: false, isCharged: false);
+        }
     }
     state=HomeState.loading();
     Navigator.of(context).pop();

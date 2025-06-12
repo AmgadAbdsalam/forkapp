@@ -84,6 +84,7 @@ class ConfigViewState extends ConsumerState<ConfigView>{
   Widget build(BuildContext context ){
 
     return Scaffold(
+      appBar: AppBar(),
       body: ref.watch(flowStateMangerProvider).getScreenWidget(context, _getContentWidget(), () {
         ref.read(configProvider.notifier).summit(context, ref);
       })

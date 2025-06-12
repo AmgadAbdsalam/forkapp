@@ -1,4 +1,3 @@
-// ignore_for_file: unused_local_variable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/di.dart';
 import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/domain/use_cases/update_map_usecase.dart';
-import 'package:responsive/presntation/resources/routes_manager.dart';
 import '../../base/base_view_model.dart';
 import '../../common/freezed_data_classes.dart';
 
@@ -15,7 +13,7 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
   ConfigViewModel(
     this._updateMapUseCase,
   ) : super(ConfigStateModel(true, true, false));
-  var configObject = ConfigObject('', '');
+   var configObject = ConfigObject('', '');
   HomeStateFinalResult homeStateFinalResult =
       HomeStateFinalResult(width: 0, length: 0);
   final UpdateMapUsecase _updateMapUseCase;
@@ -62,9 +60,11 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
     (await _updateMapUseCase.execute(nodes)).fold((failure) {
       ref.read(flowStateMangerProvider.notifier).setError(failure.message);
     }, (data) {
+
       ref.read(flowStateMangerProvider.notifier).setContent();
       WidgetsBinding.instance.addPostFrameCallback(
-          (_) => Navigator.of(context).pop(Routes.mainRoute));
+          (_) => Navigator.of(context).pop(true));
+      dismissDialog(context);
     });
   }
 
@@ -107,6 +107,13 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
     return result;
   }
 }
+_isCurrentDialogShowing(BuildContext context) =>
+    ModalRoute.of(context)?.isCurrent != true;
+dismissDialog(BuildContext context) {
+  if (_isCurrentDialogShowing(context)) {
+    Navigator.of(context, rootNavigator: true).pop(true);
+  }
+}
 
 abstract class ConfigViewModelInputs {
   setMapWidth(String? mapWidth);
@@ -118,5 +125,6 @@ abstract class ConfigViewModelInputs {
 
 final configProvider = StateNotifierProvider<ConfigViewModel, ConfigStateModel>(
     (ref) => ConfigViewModel(instance<UpdateMapUsecase>()));
+
 
 //  provider used to send data to  homeScreen from configScreen
