@@ -143,7 +143,7 @@ class HomeViewState extends ConsumerState<HomeView> {
                                   child: Container(
                                     padding: const EdgeInsets.all(2),
                                     decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.7),
+                                      color: Colors.white.withAlpha(178),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(

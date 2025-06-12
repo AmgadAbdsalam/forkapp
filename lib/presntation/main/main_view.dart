@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:responsive/presntation/add_robot/cubit/add_robot_cubit.dart';
 import 'package:responsive/presntation/current_missions/cubit/current_missions_cubit.dart';
 import 'package:responsive/presntation/home/home_view/home_view.dart';
 import 'package:responsive/presntation/setting/view/setting_view.dart';
@@ -29,7 +30,10 @@ class MainViewState extends ConsumerState<MainView> {
   final List<Widget> _screens = [
     const HomeView(),
     const SettingView(),
-    const AddRobotView(),
+    BlocProvider(
+      create: (context) =>  AddRobotCubit(),
+      child: const AddRobotView(),
+    ),
     BlocProvider(
       create: (context) => CurrentMissionsCubit(),
       child: const CurrentMissionView(),
