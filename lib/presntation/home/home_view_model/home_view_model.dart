@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:responsive/app/helper_functions.dart';
 import 'package:responsive/domain/use_cases/edit_node_usecase.dart';
 import 'package:responsive/domain/use_cases/map_data_usecase.dart';
 
@@ -72,33 +71,13 @@ class HomeViewModel extends StateNotifier<HomeState>
       },
     );
   }
-
-  @override
-  getRobotAndPath(NodeModel node,BuildContext context) async{
-    state = HomeState.loading();
-    Navigator.of(context).pop();
-    final result = await getNearestRobot(node.xAxis, node.yAxis);
-    result.fold(
-            (failure){
-              state = HomeState.error(failure.message);
-
-            },
-
-            (data){
-              getNodesFromFireBase();
-            });
-  }
-
-
-
- }
+}
 
   abstract class HomeViewInputs {
   void start(int numIconsX, int numIconsY);
 
   getNodesFromFireBase();
   updateIcon(NodeModel node,String text,BuildContext context);
-getRobotAndPath(NodeModel node,BuildContext context);
 
 }
 

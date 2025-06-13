@@ -13,7 +13,8 @@ class CurrentMissionsFailure extends CurrentMissionsState {
 }
 
 class CurrentMissionsSuccess extends CurrentMissionsState {
-  final List<Robot> missions;
+  final List<Robot> workingRobots;
+  final List<Robot> freeRobots;
 
-  CurrentMissionsSuccess(this.missions);
+  CurrentMissionsSuccess(this.workingRobots, this.freeRobots);
 }
