@@ -10,40 +10,45 @@ import 'package:responsive/presntation/resources/color_manager.dart';
 class RobotItem extends StatelessWidget {
   const RobotItem({
     required this.robot,
-    super.key,
+    super.key, required this.isConnected,
   });
 
   final RobotRequest robot;
+  final bool isConnected;
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      trailing: IconButton(
-        icon: const Icon(Icons.add),
-        onPressed: () {
-          BlocProvider.of<AddRobotCubit>(context).addRobotToDatabase(Robot(
-              destination: "",
-              hasError: false,
-              isAvailable: true,
-              isCarry: false,
-              isCharging: false,
-              location: '${robot.x}_${robot.y}',
-              robotData: RobotData(
-                  batteryLevel: robot.batteryLevel,
-                  dimensions: Dimensions(height: 100, width: 100),
-                  id: robot.id,
-                  maxWeight: 100)));
-        },
-      ),
-      tileColor: ColorManager.lightLightGrey,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      title: Text(
-        'Robot ID: ${robot.id}',
-        style: Theme.of(context).textTheme.displayMedium,
-      ),
-      subtitle: Text('Battery Level: ${robot.batteryLevel}'),
-      leading: SvgPicture.asset(
-        ImageAssets.robotImage,
-        semanticsLabel: 'robot',
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: ListTile(
+        
+        trailing: isConnected ? null : IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () {
+            BlocProvider.of<AddRobotCubit>(context).addRobotToDatabase(Robot(
+                destination: "",
+                hasError: false,
+                isAvailable: true,
+                isCarry: false,
+                isCharging: false,
+                location: '${robot.x}_${robot.y}',
+                robotData: RobotData(
+                    batteryLevel: robot.batteryLevel,
+                    dimensions: Dimensions(height: 100, width: 100),
+                    id: robot.id,
+                    maxWeight: 100)));
+          },
+        ),
+        tileColor: ColorManager.lightLightGrey,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          'Robot ID: ${robot.id}',
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+        subtitle: Text('Battery Level: ${robot.batteryLevel}'),
+        leading: SvgPicture.asset(
+          ImageAssets.robotImage,
+          semanticsLabel: 'robot',
+        ),
       ),
     );
   }
