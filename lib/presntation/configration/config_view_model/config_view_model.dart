@@ -11,16 +11,19 @@ import '../../common/freezed_data_classes.dart';
 class ConfigViewModel extends StateNotifier<ConfigStateModel>
     implements ConfigViewModelInputs, BaseViewModel {
   ConfigViewModel(
-    this._updateMapUseCase,
+    this._updateMapUseCase, this.ref,
   ) : super(ConfigStateModel(true, true, false));
    var configObject = ConfigObject('', '');
   HomeStateFinalResult homeStateFinalResult =
       HomeStateFinalResult(width: 0, length: 0);
   final UpdateMapUsecase _updateMapUseCase;
+  final Ref ref;
 
   @override
   void start() {
     state = state.copyWith(isWidthAndLengthValid: false);
+    ref.read(flowStateMangerProvider.notifier).setContentHome();
+
   }
 
   @override
@@ -61,10 +64,9 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
       ref.read(flowStateMangerProvider.notifier).setError(failure.message);
     }, (data) {
 
-      ref.read(flowStateMangerProvider.notifier).setContent();
+      ref.read(flowStateMangerProvider.notifier).setContentHome();
       WidgetsBinding.instance.addPostFrameCallback(
-          (_) => Navigator.of(context).pop(true));
-      dismissDialog(context);
+          (_) => Navigator.of(context).pop());
     });
   }
 
@@ -124,7 +126,7 @@ abstract class ConfigViewModelInputs {
 }
 
 final configProvider = StateNotifierProvider<ConfigViewModel, ConfigStateModel>(
-    (ref) => ConfigViewModel(instance<UpdateMapUsecase>()));
+    (ref) => ConfigViewModel(instance<UpdateMapUsecase>(),ref));
 
 
 //  provider used to send data to  homeScreen from configScreen

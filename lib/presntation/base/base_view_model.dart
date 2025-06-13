@@ -16,7 +16,7 @@ abstract class BaseViewModelInputs {
 /////////////////////////////////////////////
  //  flow state manger
  class FlowStateManger extends StateNotifier<FlowState>{
-  FlowStateManger():super(ContentState());
+  FlowStateManger():super(ContentHomeState());
   void setLoading(){
     state= LoadingState(stateRendererType: StateRendererType.popupLoadingState);
   }
@@ -25,6 +25,9 @@ abstract class BaseViewModelInputs {
   }
   void setContent(){
     state= ContentState();
+  }
+  void setContentHome(){
+    state= ContentHomeState();
   }
   void setEmpty(String message){
     state= EmptyState(message);
