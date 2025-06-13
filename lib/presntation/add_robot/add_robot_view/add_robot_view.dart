@@ -38,57 +38,52 @@ class _AddRobotViewState extends State<AddRobotView> {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (
-                    state is AccessRobotFailure) {
-                  
+                } else if (state is AccessRobotFailure) {
                   return Center(
                     child: Text(state.message),
                   );
-                }
-                else if (state is AccessRobotSuccess) {
-                 return RefreshIndicator(
-                  triggerMode: RefreshIndicatorTriggerMode.anywhere,
-                  onRefresh: () async {
-                    await getRobots();
-                  },
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                } else if (state is AccessRobotSuccess) {
+                  return RefreshIndicator(
+                    triggerMode: RefreshIndicatorTriggerMode.anywhere,
+                    onRefresh: () async {
+                      await getRobots();
+                    },
+                    child: ListView(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: AppPadding.p8),
                       children: [
+                        const SizedBox(height: AppPadding.p16),
                         Text(
                           'Connected Robot',
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
-                        for (var robot
-                            in BlocProvider.of<AddRobotCubit>(context)
-                                .connectedRobots)
-                          RobotItem(
-                              robot: RobotRequest.fromRobot(robot),
-                              isConnected: true),
-                        const SizedBox(
-                          height: AppSize.s16,
-                        ),
+                        ...BlocProvider.of<AddRobotCubit>(context)
+                            .connectedRobots
+                            .map((robot) => RobotItem(
+                                  robot: RobotRequest.fromRobot(robot),
+                                  isConnected: true,
+                                )),
+                        const SizedBox(height: AppSize.s16),
                         const Divider(),
-                        const SizedBox(
-                          height: AppSize.s16,
-                        ),
+                        const SizedBox(height: AppSize.s16),
                         Text(
                           'Available Robots',
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        for (var robot
-                            in BlocProvider.of<AddRobotCubit>(context).robots)
-                          RobotItem(robot: robot, isConnected: false),
+                        ...BlocProvider.of<AddRobotCubit>(context)
+                            .robots
+                            .map((robot) => RobotItem(
+                                  robot: robot,
+                                  isConnected: false,
+                                )),
                       ],
                     ),
-                  ),
-                );
+                  );
                 } else {
                   return const Center(
                     child: Text('No robots found'),
                   );
                 }
-                
               },
             ));
       },
