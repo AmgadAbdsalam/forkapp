@@ -32,8 +32,7 @@ class AddMissionCubit extends Cubit<AddMissionState> {
           DatabaseReference ref = FirebaseDatabase.instance
               .ref('tasks/${getNearestRobotResponse.robotRequest.id}');
           await ref.set({
-            "id": getNearestRobotResponse.robotRequest.id,
-            "path": getNearestRobotResponse.pathToTarget.toString()
+            "path": getNearestRobotResponse.pathToTarget.map((e) => {'x': e.x, 'y': e.y}).toList(),
           });
         } catch (e) {
           emit(AddMissionFailure('Error while adding mission: $e'));
