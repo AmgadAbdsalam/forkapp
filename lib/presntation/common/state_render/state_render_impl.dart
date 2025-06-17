@@ -1,6 +1,7 @@
 // ignore_for_file: type_literal_in_constant_pattern
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/presntation/common/state_render/state_render.dart';
 
 import '../../../app/constant.dart';
@@ -11,7 +12,17 @@ abstract class FlowState{
   StateRendererType getStateRendererType();
 }
 // loading state (POPUP,FULL SCREEN)
+class ContentHomeState extends FlowState{
 
+  ContentHomeState();
+
+  @override
+  String getMessage() => Constant.empty;
+
+  @override
+  StateRendererType getStateRendererType() => StateRendererType.contentState;
+
+}
 class LoadingState implements FlowState {
   StateRendererType stateRendererType;
   String message;
@@ -72,6 +83,7 @@ extension FlowStateExtension on FlowState {
     switch (runtimeType) {
       case LoadingState :
         {
+          print('loding a7aaaaaaa');
           dismissDialog(context);
          if(getStateRendererType() == StateRendererType.popupLoadingState){
            showPopup(context, getStateRendererType(), getMessage(),(){});
@@ -94,9 +106,15 @@ extension FlowStateExtension on FlowState {
         {
        return StateRenderer(stateRendererType: getStateRendererType(), retryActionFunction: (){},message: getMessage(),) ;
         }
+      case ContentHomeState :
+
+        {
+          return contentScreenWidget;
+        }
       case ContentState :
         {
-         // dismissDialog(context);
+          print('a7aaaaaaaa');
+        dismissDialog(context);
          return contentScreenWidget;
         }
       default:
@@ -110,7 +128,7 @@ extension FlowStateExtension on FlowState {
       ModalRoute.of(context)?.isCurrent != true;
   dismissDialog(BuildContext context) {
     if (_isCurrentDialogShowing(context)) {
-      Navigator.of(context, rootNavigator: true).pop(true);
+      Navigator.of(context, rootNavigator: true).pop();
     }
   }
   showPopup(BuildContext context, StateRendererType stateRendererType,

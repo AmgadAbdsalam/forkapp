@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:responsive/presntation/configration/config_view_model/config_view_model.dart'; // No longer needed for configState
+import 'package:responsive/presntation/configration/config_view_model/config_view_model.dart';
 
 import 'package:responsive/presntation/home/home_view/widget/custom_dialog.dart';
 import 'package:responsive/presntation/home/home_view_model/home_view_model.dart';
@@ -177,13 +177,14 @@ class HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     final homeState = ref.watch(homeProvider); // Watch the state from the home provider
-
+    final configValue=ref.watch(reload);
     return CustomScrollView(
       slivers: [
         SliverAppBar(
           actions: [
             IconButton(
               onPressed: () {
+
                 // Navigate to configuration screen
                 Navigator.of(context).pushNamed(Routes.configuration);
               },
@@ -191,7 +192,7 @@ class HomeViewState extends ConsumerState<HomeView> {
             )
           ],
           pinned: true,
-          title: const Text(
+          title:  const Text(
             'Home',
           ),
           centerTitle: false,

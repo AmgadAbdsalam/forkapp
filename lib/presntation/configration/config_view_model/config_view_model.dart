@@ -5,22 +5,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/di.dart';
 import 'package:responsive/domain/models/models.dart';
 import 'package:responsive/domain/use_cases/update_map_usecase.dart';
+import 'package:responsive/presntation/home/home_view_model/home_view_model.dart';
 import '../../base/base_view_model.dart';
 import '../../common/freezed_data_classes.dart';
 
 class ConfigViewModel extends StateNotifier<ConfigStateModel>
     implements ConfigViewModelInputs, BaseViewModel {
   ConfigViewModel(
-    this._updateMapUseCase,
+    this._updateMapUseCase, this.ref,
   ) : super(ConfigStateModel(true, true, false));
    var configObject = ConfigObject('', '');
   HomeStateFinalResult homeStateFinalResult =
       HomeStateFinalResult(width: 0, length: 0);
   final UpdateMapUsecase _updateMapUseCase;
+  final Ref ref;
 
   @override
   void start() {
     state = state.copyWith(isWidthAndLengthValid: false);
+    ref.read(flowStateMangerProvider.notifier).setContentHome();
+
   }
 
   @override
@@ -60,11 +64,13 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
     (await _updateMapUseCase.execute(nodes)).fold((failure) {
       ref.read(flowStateMangerProvider.notifier).setError(failure.message);
     }, (data) {
-
-      ref.read(flowStateMangerProvider.notifier).setContent();
-      WidgetsBinding.instance.addPostFrameCallback(
-          (_) => Navigator.of(context).pop(true));
+      ref.read(flowStateMangerProvider.notifier).setContentHome();
+      ref.read(reload.notifier).state++;
       dismissDialog(context);
+      WidgetsBinding.instance.addPostFrameCallback(
+          (_) => Navigator.of(context).pop());
+      ref.read(homeProvider.notifier).getNodesFromFireBase();
+
     });
   }
 
@@ -124,7 +130,7 @@ abstract class ConfigViewModelInputs {
 }
 
 final configProvider = StateNotifierProvider<ConfigViewModel, ConfigStateModel>(
-    (ref) => ConfigViewModel(instance<UpdateMapUsecase>()));
+    (ref) => ConfigViewModel(instance<UpdateMapUsecase>(),ref));
 
 
-//  provider used to send data to  homeScreen from configScreen
+final reload=StateProvider<int>((ref)=>0);
