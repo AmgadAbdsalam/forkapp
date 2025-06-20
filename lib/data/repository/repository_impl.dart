@@ -162,14 +162,16 @@ class RepositoryImpl implements Repository {
       Map<String, dynamic> data = Map<String, dynamic>.from(
           snapshot.value as LinkedHashMap<Object?, Object?>);
       List<String> robots = data.keys.toList();
+
       for (var robot in robots) {
+        print(robot);
         robotsList.add(RobotRequest(
             id: robot,
             x: data[robot]['x'],
             y: data[robot]['y'],
             batteryLevel: data[robot]['batteryLevel']));
       }
-
+      
       return Right(robotsList);
     } catch (e) {
       return Left(
@@ -250,7 +252,7 @@ class RepositoryImpl implements Repository {
 
       for (var doc in snapshot.docs) {
         Map<String, dynamic> data = doc.data();
-      
+
         robotsList.add(Robot.fromMap(data));
       }
       log('fitched robots: ${robotsList.length}');
