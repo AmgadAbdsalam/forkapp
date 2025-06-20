@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:responsive/presntation/configration/config_view_model/config_view_model.dart';
 
 import 'package:responsive/presntation/home/home_view/widget/custom_dialog.dart';
 import 'package:responsive/presntation/home/home_view_model/home_view_model.dart';
@@ -80,7 +79,7 @@ class HomeViewState extends ConsumerState<HomeView> {
               child: Container(
                 width: containerWidth,
                 height: containerHeight,
-                color: Colors.white, // Background color for the grid area
+                color: Theme.of(context).scaffoldBackgroundColor, // Background color for the grid area
                 child: Stack(
                   children: [
                     // Custom painter for dotted lines
@@ -126,18 +125,20 @@ class HomeViewState extends ConsumerState<HomeView> {
                               children: [
                                 if (node.isCharged)
                                   SvgPicture.asset(
+                                    colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),
                                     ImageAssets.chargedImage,
                                     width: 50,
                                     height: 50,
                                   )
                                 else if (node.isBlocked)
                                   SvgPicture.asset(
+                                    colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),
                                     ImageAssets.blockedImage,
                                     width: 50,
                                     height: 50,
                                   )
                                 else
-                                  const Icon(Icons.circle, size: 50,color: Colors.black,),// Changed default color for visibility
+                                   const Icon(Icons.circle, size: 50,),// Changed default color for visibility
                                 // Coordinate text overlay
                                 Center(
                                   child: Container(
@@ -146,15 +147,15 @@ class HomeViewState extends ConsumerState<HomeView> {
                                       color: Colors.white.withAlpha(178),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
-                                    child: Text(
-                                      // Display coordinates only if not free, blocked, or charged
-                                      node.isFree || node.isBlocked || node.isCharged ? '' : '${node.xAxis}${node.yAxis}',
+                                  //  node.isFree || node.isBlocked || node.isCharged ?
+                                    child:node.isFree || node.isBlocked || node.isCharged ?const SizedBox(): Text(
+                                            '${node.xAxis}${node.yAxis}',
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12,
                                       ),
-                                    ),
+                                    )
                                   ),
                                 ),
                               ],
@@ -177,7 +178,6 @@ class HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     final homeState = ref.watch(homeProvider); // Watch the state from the home provider
-    final configValue=ref.watch(reload);
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -192,8 +192,9 @@ class HomeViewState extends ConsumerState<HomeView> {
             )
           ],
           pinned: true,
-          title:  const Text(
+          title:   Text(
             'Home',
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           centerTitle: false,
         ),

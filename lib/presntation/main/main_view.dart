@@ -39,12 +39,7 @@ class MainViewState extends ConsumerState<MainView> {
       child: const CurrentMissionView(),
     ),
   ];
-  static const List<String> appBarText = [
-    'Home',
-    'Setting',
-    'Add Robot',
-    'Current Mission'
-  ];
+
 
   @override
   Widget build(BuildContext context) {

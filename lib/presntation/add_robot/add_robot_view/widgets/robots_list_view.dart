@@ -11,6 +11,7 @@ class RobotsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
       children: [
         const SizedBox(height: AppPadding.p16),

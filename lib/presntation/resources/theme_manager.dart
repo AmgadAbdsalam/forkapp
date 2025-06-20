@@ -71,6 +71,10 @@ ThemeData getApplicationTheme(BuildContext context) {
         borderRadius: BorderRadius.circular(AppSize.s8),
       ),
     ),
+    iconTheme: IconThemeData(
+      color: primary,
+    ),
+
     appBarTheme: AppBarTheme(
       centerTitle: true,
       color: primary,
@@ -96,6 +100,9 @@ ThemeData getApplicationTheme(BuildContext context) {
           fontSize: FontSize.s17,
           fontStyle: FontStyle.italic),
     ),
+    listTileTheme: ListTileThemeData(
+      selectedColor: primary,),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         textStyle: getRegularStyle(color: onPrimary, fontSize: FontSize.s17),

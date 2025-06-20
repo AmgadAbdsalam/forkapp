@@ -20,7 +20,11 @@ class RobotItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: ListTile(
-        
+
+        selected: true,
+
+
+        //style: ListTileStyle.list,
         trailing: isConnected ? null : IconButton(
           icon: const Icon(Icons.add),
           onPressed: () {

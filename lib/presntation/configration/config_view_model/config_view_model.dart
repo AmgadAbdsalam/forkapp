@@ -65,7 +65,6 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
       ref.read(flowStateMangerProvider.notifier).setError(failure.message);
     }, (data) {
       ref.read(flowStateMangerProvider.notifier).setContentHome();
-      ref.read(reload.notifier).state++;
       dismissDialog(context);
       WidgetsBinding.instance.addPostFrameCallback(
           (_) => Navigator.of(context).pop());
@@ -107,8 +106,8 @@ class ConfigViewModel extends StateNotifier<ConfigStateModel>
   }
 
   bool _isMapLengthAndMapWidthValid() {
-    bool result = _isMapWidthValid(configObject.mapWidth) &&
-        _isMapLengthValid(configObject.mapLength);
+    bool result = (_isMapWidthValid(configObject.mapWidth) &&
+        _isMapLengthValid(configObject.mapLength));
     state = state.copyWith(isWidthAndLengthValid: result);
     return result;
   }
@@ -133,4 +132,3 @@ final configProvider = StateNotifierProvider<ConfigViewModel, ConfigStateModel>(
     (ref) => ConfigViewModel(instance<UpdateMapUsecase>(),ref));
 
 
-final reload=StateProvider<int>((ref)=>0);
