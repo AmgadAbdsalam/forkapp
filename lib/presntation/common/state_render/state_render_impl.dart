@@ -1,7 +1,6 @@
 // ignore_for_file: type_literal_in_constant_pattern
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/presntation/common/state_render/state_render.dart';
 
 import '../../../app/constant.dart';
@@ -83,7 +82,6 @@ extension FlowStateExtension on FlowState {
     switch (runtimeType) {
       case LoadingState :
         {
-          print('loding a7aaaaaaa');
           dismissDialog(context);
          if(getStateRendererType() == StateRendererType.popupLoadingState){
            showPopup(context, getStateRendererType(), getMessage(),(){});
@@ -113,7 +111,6 @@ extension FlowStateExtension on FlowState {
         }
       case ContentState :
         {
-          print('a7aaaaaaaa');
         dismissDialog(context);
          return contentScreenWidget;
         }
