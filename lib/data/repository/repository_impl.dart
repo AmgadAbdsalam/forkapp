@@ -164,7 +164,6 @@ class RepositoryImpl implements Repository {
       List<String> robots = data.keys.toList();
 
       for (var robot in robots) {
-        print(robot);
         robotsList.add(RobotRequest(
             id: robot,
             x: data[robot]['x'],
@@ -178,7 +177,19 @@ class RepositoryImpl implements Repository {
           Failure(1, 'there wase an error in cathing robots requests: $e'));
     }
   }
+  @override
+Future<Either<Failure, void>> deleteRobot(String robotId) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('robot')
+        .doc(robotId)
+        .delete();
 
+    return const Right(null);
+  } catch (e) {
+    return Left(Failure(0, "Error deleting robot: $e"));
+  }
+}
   @override
   Future<Either<Failure, String>> addRobotToDatabase(Robot robot) async {
     String customID = robot.robotData.id;
@@ -195,10 +206,10 @@ class RepositoryImpl implements Repository {
                   robotData: RobotData(
                       batteryLevel: robot.robotData.batteryLevel,
                       dimensions: Dimensions(height: 100, width: 100),
-                      id: 'macAddress',
+                      id: customID,
                       maxWeight: 100))
               .toJson());
-      await FirebaseDatabase.instance.ref("/robots").remove();
+      await FirebaseDatabase.instance.ref("/robots/$customID").remove();
       return const Right(Constant.success);
     } catch (e) {
       return Left(Failure(0, e.toString()));

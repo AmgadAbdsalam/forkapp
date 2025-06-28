@@ -86,7 +86,7 @@ class RobotData {
     return {
       'battryLevel': batteryLevel,
       'dimensions': dimensions.toJson(),
-      'mac_address': id,
+      'id': id,
       'maxWeight': maxWeight,
     };
   }
