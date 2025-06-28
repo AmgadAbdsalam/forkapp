@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:responsive/app/app_prefs.dart';
+import 'package:responsive/app/di.dart';
 import 'package:responsive/presntation/resources/color_manager.dart';
 import 'package:responsive/presntation/resources/strings_manager.dart';
 import 'package:responsive/presntation/resources/values_manager.dart';
 import 'package:responsive/presntation/setting/cubit/setting_cubit.dart';
 
 class SettingSelection extends StatelessWidget {
-  const SettingSelection({
+  final AppPreferences appPreferences=instance<AppPreferences>();
+   SettingSelection({
     super.key,
   });
 
@@ -70,7 +74,9 @@ class SettingSelection extends StatelessWidget {
                         ),
                       ],
                       onChanged: (value) {
-                        settingCubit.languageIndex = value ?? 0;
+                      //  settingCubit.languageIndex = value ?? 0;
+                        appPreferences.changeAppLanguage();
+                        Phoenix.rebirth(context);
                       },
                     ),
                   ),
