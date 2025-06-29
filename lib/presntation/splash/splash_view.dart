@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive/app/app_prefs.dart';
 import 'package:responsive/app/di.dart';
 import 'package:responsive/presntation/resources/assets_manager.dart';
+import 'package:responsive/presntation/resources/color_manager.dart';
 import 'package:responsive/presntation/resources/routes_manager.dart';
 
 import '../resources/constant_manager.dart';
@@ -69,8 +70,12 @@ class SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Image(image: AssetImage(ImageAssets.splashLogo))),
+    return Scaffold(
+      backgroundColor: ColorManager.lightPrimary,
+      body: const Center(
+          child: SizedBox(
+              width: 190,
+              child: Image(image: AssetImage(ImageAssets.splashLogo)))),
     );
   }
 }

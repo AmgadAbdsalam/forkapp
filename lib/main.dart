@@ -17,7 +17,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( EasyLocalization(supportedLocales: [ARABIC_LOCAL,ENGLISH_LOCAL],
+  runApp(EasyLocalization(
+      supportedLocales: const [ARABIC_LOCAL, ENGLISH_LOCAL],
       path: ASSET_PATH_LOCALISATIONS,
       child: ProviderScope(
         child: Phoenix(

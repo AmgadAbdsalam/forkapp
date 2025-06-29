@@ -63,7 +63,7 @@ ThemeData getApplicationTheme(BuildContext context) {
     ),
     scaffoldBackgroundColor: background,
     disabledColor: grey,
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: surface,
       shadowColor: darkGrey,
       elevation: AppSize.s4,

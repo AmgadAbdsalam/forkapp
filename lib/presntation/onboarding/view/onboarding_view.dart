@@ -9,7 +9,6 @@ import '../../common/adaptive_layout.dart';
 import '../../resources/constant_manager.dart';
 import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class OnBoardingView extends ConsumerStatefulWidget {
   const OnBoardingView({super.key});
@@ -133,8 +132,11 @@ class DeskTopOnBoardingPage extends ConsumerWidget {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      SvgPicture.asset(
-        onBoardingHelper.onBoardingWatchState().sliderObject.image,
+      Padding(
+        padding: const EdgeInsets.all(AppPadding.p16),
+        child: Image.asset(
+          onBoardingHelper.onBoardingWatchState().sliderObject.image,
+        ),
       ),
       Text(
         textAlign: TextAlign.center,
