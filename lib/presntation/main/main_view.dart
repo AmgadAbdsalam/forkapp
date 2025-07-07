@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,7 @@ import 'package:responsive/presntation/setting/view/setting_view.dart';
 import '../../app/di.dart';
 import '../current_missions/current_missions_view/add_mission_view.dart';
 import '../add_robot/add_robot_view/add_robot_view.dart';
+import '../resources/strings_manager.dart';
 
 class MainView extends ConsumerStatefulWidget {
   const MainView({super.key});
@@ -44,19 +46,7 @@ class MainViewState extends ConsumerState<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: _currentIndex == 0
-      //     ? AppBar(
-      //         title: Text(appBarText[_currentIndex]),
-      //         centerTitle: false,
-      //         actions: [
-      //           IconButton(onPressed: (){}, icon: const Icon(Icons.add)),
-      //           IconButton(onPressed: (){}, icon: const Icon(Icons.remove)),
-      //         ],
-      //       )
-      //     : AppBar(
-      //         title: Text(appBarText[_currentIndex]),
-      //         centerTitle: false,
-      //       ),
+
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
@@ -65,18 +55,18 @@ class MainViewState extends ConsumerState<MainView> {
             _currentIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(
+        items:  [
+           BottomNavigationBarItem(
+              icon: const Icon(
                 Icons.home,
               ),
-              label: 'Home'),
+              label: AppStrings.home.tr()),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Settings'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.control_point), label: 'Add Robot'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.cabin), label: 'Add Mission'),
+              icon: const Icon(Icons.settings), label: AppStrings.setting.tr()),
+           BottomNavigationBarItem(
+              icon: const Icon(Icons.control_point), label: AppStrings.addRobot.tr()),
+           BottomNavigationBarItem(
+              icon: const Icon(Icons.cabin), label: AppStrings.addMission.tr()),
         ],
       ),
       body: _screens[_currentIndex],

@@ -1,18 +1,18 @@
-class AppStrings{
+class AppStrings {
   static const noRouteFound = "No Route Found";
-  static const onBoardingTitle1 = "We Hope You Will Enjoy";
-  static const onBoardingTitle2 = "We Hope You Will Enjoy";
-  static const onBoardingTitle3 = "We Hope You Will Enjoy";
-  static const onBoardingTitle4 = "We Hope You Will Enjoy";
+  static const onBoardingTitle1 = "Welcome to SmartFork 🤖";
+  static const onBoardingTitle2 = " All in one app";
+  static const onBoardingTitle3 = "Control from anyware";
+  static const onBoardingTitle4 = "Let's lift!";
 
   static const onBoardingSubTitle1 =
-      "Tut app is an awesome flutter application using clean architecture #1";
+      "Your warehouse assistant just got smarter.";
   static const onBoardingSubTitle2 =
-      "Tut app is an awesome flutter application using clean architecture #2";
+      "Plan paths. Move loads. Track progress. 📦📍";
   static const onBoardingSubTitle3 =
-      "Tut app is an awesome flutter application using clean architecture #3";
+      "Seamless control over your forklift robot — from anywhere. 🌐";
   static const onBoardingSubTitle4 =
-      "Tut app is an awesome flutter application using clean architecture #4";
+      "Real-time updates, safe handling, smart movement.🔧🛻";
 
   static const skip = "Skip";
   static const id = "id";
@@ -40,8 +40,5 @@ class AppStrings{
   static const summit = "summit";
   static const robotCollection = "robot";
   static const appName = "Fork It";
-  static const welcome = "Fork lift app helps you to manage your store"; 
-
-
-
+  static const welcome = "Fork lift app helps you to manage your store";
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +9,7 @@ import 'package:responsive/presntation/resources/assets_manager.dart';
 import 'package:responsive/presntation/resources/routes_manager.dart';
 
 import '../../../domain/models/models.dart';
+import '../../resources/strings_manager.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
@@ -193,7 +195,7 @@ class HomeViewState extends ConsumerState<HomeView> {
           ],
           pinned: true,
           title:   Text(
-            'Home',
+            AppStrings.home.tr(),
             style: Theme.of(context).textTheme.displayMedium,
           ),
           centerTitle: false,
@@ -206,7 +208,7 @@ class HomeViewState extends ConsumerState<HomeView> {
         homeState.isLoading
             ? const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()))
             : homeState.isEmpty
-            ? const SliverToBoxAdapter(child: Text('No data available'))
+            ?  SliverToBoxAdapter(child: Text(AppStrings.noDataAvailable.tr()))
             : homeState.errorMessage.isNotEmpty
             ? SliverToBoxAdapter(child: Center(child: Text(homeState.errorMessage)))
             : _contentHomeWidget(homeState.nodes) // Render the grid if data is available

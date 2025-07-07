@@ -43,8 +43,8 @@ class ConfigViewState extends ConsumerState<ConfigView>{
                 keyboardType: TextInputType.text,
                 controller: yLine,
                 decoration: InputDecoration(
-                    hintText: AppStrings.mapLength,
-                    labelText: AppStrings.configError,
+                   // hintText: AppStrings.mapLengthHint,
+                    labelText: AppStrings.mapLengthLabel,
                     errorText: (result.isLengthValid) ? null : AppStrings.configError),
               ),
             ),
@@ -54,7 +54,7 @@ class ConfigViewState extends ConsumerState<ConfigView>{
                   keyboardType: TextInputType.text,
                   controller: xLine,
                   decoration: InputDecoration(
-                      hintText: AppStrings.mapWidth,
+                     // hintText: AppStrings.mapWidth,
                       labelText: AppStrings.configError,
                       errorText: (result.isWidthValid)
                           ? null :

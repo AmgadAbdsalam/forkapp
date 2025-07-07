@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorManager {
   // Light Theme Colors
-  static Color lightPrimary = const Color(0xff6200EE); // Vibrant purple
+  static Color lightPrimary = const Color(0xff4F378A); // Vibrant purple
   static Color lightPrimaryVariant = const Color(0xff3700B3); // Darker purple
   static Color lightSecondary = const Color(0xff03DAC6); // Teal
   static Color lightSecondaryVariant = const Color(0xff018786); // Darker teal

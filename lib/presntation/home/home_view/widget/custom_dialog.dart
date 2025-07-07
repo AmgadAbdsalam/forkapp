@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/domain/models/models.dart';
+import 'package:responsive/presntation/resources/strings_manager.dart';
 
 import '../../../resources/color_manager.dart';
 import '../../../resources/values_manager.dart';
@@ -11,7 +13,7 @@ class CustomDialog extends ConsumerWidget {
   final NodeModel nodeModel;
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-      List<String> dialogText=['free','charged','blocked','product'];
+      List<String> dialogText=[AppStrings.free.tr(),AppStrings.charged.tr(),AppStrings.blocked.tr(),AppStrings.product.tr()];
     return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s14)),
