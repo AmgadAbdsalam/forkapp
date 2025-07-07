@@ -46,7 +46,6 @@ class LoginViewState extends ConsumerState<LoginView> {
   @override
   void initState() {
     super.initState();
-    debugPrint('initstate called');
     bind();
   }
 

@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:responsive/app/constant.dart';
@@ -195,7 +196,7 @@ Future<Either<Failure, void>> deleteRobot(String robotId) async {
     String customID = robot.robotData.id;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     try {
-      await firestore.collection(AppStrings.robotCollection).doc(customID).set(
+      await firestore.collection(AppStrings.robotCollection.tr()).doc(customID).set(
           Robot(
                   destination: '',
                   hasError: false,

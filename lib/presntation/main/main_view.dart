@@ -62,7 +62,7 @@ class MainViewState extends ConsumerState<MainView> {
               ),
               label: AppStrings.home.tr()),
           BottomNavigationBarItem(
-              icon: const Icon(Icons.settings), label: AppStrings.setting.tr()),
+              icon: const Icon(Icons.settings), label: AppStrings.settings.tr()),
            BottomNavigationBarItem(
               icon: const Icon(Icons.control_point), label: AppStrings.addRobot.tr()),
            BottomNavigationBarItem(

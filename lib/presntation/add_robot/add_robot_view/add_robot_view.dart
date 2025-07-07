@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive/presntation/add_robot/add_robot_view/widgets/robots_list_view.dart';
 import 'package:responsive/presntation/add_robot/cubit/add_robot_cubit.dart';
 import 'package:responsive/presntation/resources/values_manager.dart';
+
+import '../../resources/strings_manager.dart';
 
 class AddRobotView extends StatefulWidget {
   const AddRobotView({super.key});
@@ -46,8 +49,8 @@ class _AddRobotViewState extends State<AddRobotView> {
                     child: const RobotsListView(),
                   );
                 } else {
-                  return const Center(
-                    child: Text('No robots found'),
+                  return  Center(
+                    child: Text(AppStrings.noRobotsFound.tr()),
                   );
                 }
               },

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -30,7 +31,7 @@ class SettingSelection extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * .05,
               ),
               Text(
-                AppStrings.setting,
+                AppStrings.setting.tr(),
                 style: Theme.of(context).textTheme.displayLarge,
               ),
               SizedBox(
@@ -40,7 +41,7 @@ class SettingSelection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppStrings.language,
+                    AppStrings.language.tr(),
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   SizedBox(
@@ -57,19 +58,19 @@ class SettingSelection extends StatelessWidget {
                         ),
                       ),
                       value: settingCubit.languageIndex,
-                      items: const [
+                      items:  [
                         DropdownMenuItem(
                           value: 0,
                           child: Padding(
-                            padding: EdgeInsets.all(AppSize.s8),
-                            child: Text(AppStrings.english),
+                            padding: const EdgeInsets.all(AppSize.s8),
+                            child: Text(AppStrings.english.tr()),
                           ),
                         ),
                         DropdownMenuItem(
                           value: 1,
                           child: Padding(
                             padding: EdgeInsets.all(AppSize.s8),
-                            child: Text(AppStrings.arabic),
+                            child: Text(AppStrings.arabic.tr()),
                           ),
                         ),
                       ],
@@ -86,7 +87,7 @@ class SettingSelection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppStrings.darkTheme,
+                    AppStrings.darkTheme.tr(),
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Switch(
@@ -101,7 +102,7 @@ class SettingSelection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppStrings.showNotifications,
+                    AppStrings.showNotifications.tr(),
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Switch(
@@ -116,7 +117,7 @@ class SettingSelection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppStrings.sounds,
+                    AppStrings.sounds.tr(),
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Switch(
@@ -131,7 +132,7 @@ class SettingSelection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppStrings.vibrations,
+                    AppStrings.vibrations.tr(),
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Switch(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
  import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/app/app_prefs.dart';
@@ -115,7 +116,7 @@ class DeskTopOnBoardingPage extends ConsumerWidget {
                         .pushReplacementNamed(Routes.loginRoute);
                   },
                   child: Text(
-                    AppStrings.skip,
+                    AppStrings.skip.tr(),
                     style: Theme.of(context).textTheme.bodySmall,
                   )),
             ),
@@ -140,12 +141,12 @@ class DeskTopOnBoardingPage extends ConsumerWidget {
       ),
       Text(
         textAlign: TextAlign.center,
-        onBoardingHelper.onBoardingWatchState().sliderObject.title,
+        onBoardingHelper.onBoardingWatchState().sliderObject.title.tr(),
         style: Theme.of(context).textTheme.displayLarge,
       ),
       Text(
         textAlign: TextAlign.center,
-        onBoardingHelper.onBoardingWatchState().sliderObject.subTitle,
+        onBoardingHelper.onBoardingWatchState().sliderObject.subTitle.tr(),
         style: Theme.of(context).textTheme.displayMedium,
       ),
       // Flexible(child: SizedBox(height: height* 1/4,),),

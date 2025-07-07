@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/presntation/common/state_render/state_render_impl.dart';
@@ -43,9 +44,8 @@ class ConfigViewState extends ConsumerState<ConfigView>{
                 keyboardType: TextInputType.text,
                 controller: yLine,
                 decoration: InputDecoration(
-                   // hintText: AppStrings.mapLengthHint,
-                    labelText: AppStrings.mapLengthLabel,
-                    errorText: (result.isLengthValid) ? null : AppStrings.configError),
+                    labelText: AppStrings.mapLengthLabel.tr(),
+                    errorText: (result.isLengthValid) ? null : AppStrings.configError.tr()),
               ),
             ),
             Padding(
@@ -54,11 +54,10 @@ class ConfigViewState extends ConsumerState<ConfigView>{
                   keyboardType: TextInputType.text,
                   controller: xLine,
                   decoration: InputDecoration(
-                     // hintText: AppStrings.mapWidth,
-                      labelText: AppStrings.configError,
+                      labelText: AppStrings.mapWidthLabel.tr(),
                       errorText: (result.isWidthValid)
                           ? null :
-                      AppStrings.configError),
+                      AppStrings.configError.tr()),
                 )),
             //   customTextFormFiled(
             //       textEditingController: xLine,
@@ -72,7 +71,7 @@ class ConfigViewState extends ConsumerState<ConfigView>{
                 ref.read(configProvider.notifier).summit(context,ref);
               }
                   : null,
-              child: const Text(AppStrings.summit),
+              child:  Text(AppStrings.summit.tr()),
             )
           ],
         ),
@@ -103,7 +102,7 @@ class ConfigViewState extends ConsumerState<ConfigView>{
       decoration: InputDecoration(
           hintText: hintText,
           labelText: hintText,
-          errorText: (isValid) ? null : AppStrings.configError),
+          errorText: (isValid) ? null : AppStrings.configError.tr()),
     );
   }
 

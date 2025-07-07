@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive/presntation/resources/color_manager.dart';
 import 'package:responsive/presntation/resources/font_manager.dart';
@@ -18,7 +19,7 @@ class WelcomeWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppStrings.appName.toUpperCase(),
+            AppStrings.appName.tr().toUpperCase(),
             style: TextStyle(
                 fontSize: AppSize.s64,
                 fontStyle: FontStyle.normal,
@@ -27,7 +28,7 @@ class WelcomeWidget extends StatelessWidget {
                 color: ColorManager.lightPrimaryVariant),
           ),
           Text(
-            AppStrings.welcome.toUpperCase(),
+            AppStrings.welcome.tr().toUpperCase(),
             style: TextStyle(
                 fontFamily: FontConstant.fontFamily,
                 fontSize: AppSize.s28,

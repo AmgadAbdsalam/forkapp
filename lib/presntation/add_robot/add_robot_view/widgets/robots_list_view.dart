@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive/domain/use_cases/access_robots_usecase.dart';
 import 'package:responsive/presntation/add_robot/add_robot_view/widgets/robot_item.dart';
 import 'package:responsive/presntation/add_robot/cubit/add_robot_cubit.dart';
+import 'package:responsive/presntation/resources/strings_manager.dart';
 import 'package:responsive/presntation/resources/values_manager.dart';
 
 class RobotsListView extends StatelessWidget {
@@ -14,9 +16,9 @@ class RobotsListView extends StatelessWidget {
 
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
       children: [
-        const SizedBox(height: AppPadding.p16),
+         const SizedBox(height: AppPadding.p16),
         Text(
-          'Connected Robot',
+         AppStrings.connectedRobot.tr() ,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         ...BlocProvider.of<AddRobotCubit>(context)
@@ -28,7 +30,7 @@ class RobotsListView extends StatelessWidget {
         const Divider(),
         const SizedBox(height: AppSize.s8),
         Text(
-          'Available Robots',
+          AppStrings.availableRobots.tr(),
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         ...BlocProvider.of<AddRobotCubit>(context)

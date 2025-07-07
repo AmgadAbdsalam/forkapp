@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive/domain/models/models.dart';
@@ -56,11 +57,11 @@ class LoginMobileLayout extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                         controller: userNameController,
                         decoration: InputDecoration(
-                            hintText: AppStrings.id,
-                            labelText: AppStrings.id,
+                            hintText: AppStrings.id.tr(),
+                            labelText: AppStrings.id.tr(),
                             errorText: (result.isUsernameValid)
                                 ? null
-                                : AppStrings.usernameError),
+                                : AppStrings.usernameError.tr()),
                       ),
                     ),
                   ),
@@ -76,11 +77,11 @@ class LoginMobileLayout extends StatelessWidget {
                         keyboardType: TextInputType.visiblePassword,
                         controller: uerPasswordController,
                         decoration: InputDecoration(
-                            hintText: AppStrings.password,
-                            labelText: AppStrings.password,
+                            hintText: AppStrings.password.tr(),
+                            labelText: AppStrings.password.tr(),
                             errorText: result.isPasswordValid
                                 ? null
-                                : AppStrings.passwordError),
+                                : AppStrings.passwordError.tr()),
                       ),
                     ),
                   ),
@@ -91,7 +92,7 @@ class LoginMobileLayout extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        child: const Text(AppStrings.forgetPassword),
+                        child:  Text(AppStrings.forgetPassword.tr()),
                         onPressed: () {},
                       ),
                       textFormFiled < 840
@@ -119,8 +120,8 @@ class LoginMobileLayout extends StatelessWidget {
                                     .login();
                               }
                             : null,
-                        child: const Text(
-                          AppStrings.login,
+                        child:  Text(
+                          AppStrings.login.tr(),
                         ),
                       ),
                     ),

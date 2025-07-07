@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive/presntation/resources/color_manager.dart';
 import 'package:responsive/presntation/resources/strings_manager.dart';
@@ -20,6 +21,6 @@ class SaveButton extends StatelessWidget {
                 Size(MediaQuery.sizeOf(context).width, 92)),
             foregroundColor: WidgetStateProperty.all(ColorManager.lightOnPrimary)),
         onPressed: () {},
-        child: const Text(AppStrings.save));
+        child:  Text(AppStrings.save.tr()));
   }
 }
